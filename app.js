@@ -1,7 +1,7 @@
 /* ============================================================
    NOMADX — Red social del deporte, la aventura y la adrenalina
    app.js — Lógica completa + Datos simulados
-   by Diego David Extremo | Nómada Extremo | Águilas, Murcia
+   Concepto creado por Diego David Extremo
    ============================================================ */
 
 'use strict';
@@ -38,7 +38,7 @@ const CATEGORIES = [
 ];
 
 /* ═══════════════════════════════════════════════════════════
-   DATOS: DEPORTES (+400 entradas por categorías)
+   DATOS: DEPORTES (600+ entradas desde catálogo maestro)
    ═══════════════════════════════════════════════════════════ */
 const SPORTS_DATA = [
   // MARINO Y ACUÁTICO
@@ -321,9 +321,9 @@ const MATCH_CARDS = [
    ═══════════════════════════════════════════════════════════ */
 const FEED_POSTS = [
   {
-    id: 'p1', user: 'Diego David Extremo', role: 'Fundador · Gu ía Outdoor', emoji: '🧭',
+    id: 'p1', user: 'Usuario NOMADX Demo', role: 'Perfil demo · Plataforma', emoji: '🧭',
     time: 'hace 2h', mediaEmoji: '🌅', mediaBg: 'linear-gradient(135deg,#ff5e1a22,#00d4ff22)',
-    location: '📍 Cala Cerrada, Águilas', type: 'aventura',
+    location: '📍 Spot costero demo', type: 'aventura',
     text: 'Salida de amanecer en la Cala Cerrada. Aguas completamente planas, visibilidad excepcional. 3 horas de apnea y después cliff jumping desde el Rincón del Fraile. Esto es lo que busco cada mañana. 🌊',
     sports: ['Apnea','Cliff Jumping'], likes: 287, comments: 34
   },
@@ -453,11 +453,11 @@ const TRIBUS = [
     nextEvent: 'Swell Cantábrico · 5 mayo'
   },
   {
-    id: 't11', name: 'Nómadas Extremo', icon: '🧭', bgColor: '#ff5e1a18',
-    desc: 'La tribu original de Diego David Extremo. Multiactividad, aventura integral, naturalismo y vida extrema.',
+    id: 't11', name: 'Multiaventura Global', icon: '🧭', bgColor: '#ff5e1a18',
+    desc: 'Comunidad demo para deportistas multiactividad: mar, roca, montaña, aire y exploración responsable.',
     sports: ['Multiaventura','Cliff Jumping','Apnea','Parapente','Espeleología'],
     members: 567, level: 'Todos bienvenidos',
-    nextEvent: 'Expedición Multiaventura Águilas · 22 mayo'
+    nextEvent: 'Expedición multiaventura demo · 22 mayo'
   },
   {
     id: 't12', name: 'Escalada en Hielo', icon: '🧊', bgColor: '#00d4ff10',
@@ -477,7 +477,7 @@ const SPOTS = [
     sports: ['Cliff Jumping','Apnea','Coasteering','Snorkel'],
     level: 'Avanzado', risk: 'rojo', season: 'Mayo–Octubre',
     requirements: 'Conocimiento del spot, buen nado, evaluar condiciones',
-    desc: 'Acantilados de hasta 12m con aguas cristalinas. Varias zonas de salto. Cuevas marinas accesibles a pie en bajamar. Ubicada en Águilas, Murcia.'
+    desc: 'Acantilados demo con zonas de salto, cuevas marinas y acceso variable según condiciones. Requiere evaluación del spot y respeto ambiental.'
   },
   {
     id: 'sp2', name: 'Barranco del Poqueira', icon: '💧', env: 'Montaña · Cañón',
@@ -540,7 +540,7 @@ const SPOTS = [
     sports: ['Apnea','Snorkel','Pesca Submarina','Natación Aguas Abiertas'],
     level: 'Todos', risk: 'verde', season: 'Abril–Octubre',
     requirements: 'Buen nado básico',
-    desc: 'Costa rocosa de aguas cristalinas entre Cartagena y Águilas. Rica fauna marina, profundidades de 5-20m. Ideal para apneístas y buceadores recreativos.'
+    desc: 'Costa rocosa demo con aguas claras, fauna marina y profundidades variables. Ideal como ejemplo de spot para apnea y buceo recreativo.'
   },
   {
     id: 'sp11', name: 'Cataratas de Ordesa', icon: '🌊', env: 'Río · Cañón',
@@ -564,10 +564,10 @@ const SPOTS = [
 const EVENTS = [
   {
     id: 'e1', title: 'Salida Cliff Jumping · Cala Cerrada',
-    type: 'aventura', date: '4 Mayo · 9:00', location: 'Águilas, Murcia',
+    type: 'aventura', date: '4 Mayo · 9:00', location: 'Spot costero demo',
     sports: ['Cliff Jumping','Apnea','Coasteering'],
     level: 'Avanzado', cupo: '8 personas · 3 libres',
-    price: 'Gratis', organizer: 'Diego David Extremo',
+    price: 'Gratis', organizer: 'Comunidad NOMADX',
     verified: true, semaforo: 'verde'
   },
   {
@@ -609,7 +609,7 @@ const EVENTS = [
   {
     id: 'e6', title: 'Clínica de Apnea Estática y Dinámica',
     type: 'clinica', date: '25 Mayo · 9:00',
-    location: 'Club Náutico de Águilas',
+    location: 'Centro acuático demo',
     sports: ['Apnea','Freediving'],
     level: 'Básico-Intermedio', cupo: '10 personas · 6 libres',
     price: '65€', organizer: 'Tomás Profundidad',
@@ -618,10 +618,10 @@ const EVENTS = [
   {
     id: 'e7', title: 'Multi-Aventura Integral · 2 días',
     type: 'expedicion', date: '31 Mayo–1 Junio',
-    location: 'Águilas y Sierra Espuña, Murcia',
+    location: 'Costa y montaña · demo',
     sports: ['Cliff Jumping','Barranquismo','Escalada','Trail Running'],
     level: 'Avanzado', cupo: '10 personas · 3 libres',
-    price: '95€', organizer: 'Nómada Extremo',
+    price: '95€', organizer: 'Comunidad NOMADX',
     verified: true, semaforo: 'amarillo'
   },
   {
@@ -652,7 +652,7 @@ const VERIFICACIONES = [
 ];
 
 const BADGES_DATA = [
-  { cat: 'rol', icon: '🧭', name: 'Nómada Original', desc: 'Fundador de la comunidad' },
+  { cat: 'rol', icon: '🧭', name: 'Explorador Original', desc: 'Miembro impulsor de la comunidad' },
   { cat: 'rol', icon: '🏆', name: 'Fundador', desc: 'Miembro fundador NOMADX' },
   { cat: 'rol', icon: '🎬', name: 'Creador Extremo', desc: 'Creador de contenido activo' },
   { cat: 'rol', icon: '📋', name: 'Instructor Activo', desc: 'Más de 50 formaciones impartidas' },
@@ -700,7 +700,7 @@ const PRO_TYPES = [
    ═══════════════════════════════════════════════════════════ */
 const STATE = {
   currentMatchIdx: 0,
-  counters: { vistos: 0, matches: 0, guardados: 0 },
+  counters: { vistos: 24, matches: 8, guardados: 5 },
   savedMatchIds: new Set(JSON.parse(localStorage.getItem('nmx_matches_saved') || '[]')),
   savedSports: new Set(JSON.parse(localStorage.getItem('nmx_sports_saved') || '[]')),
   joinedTribus: new Set(JSON.parse(localStorage.getItem('nmx_tribus_joined') || '[]')),
@@ -708,6 +708,12 @@ const STATE = {
   feedFilter: 'all',
   catalogFilter: 'all',
   catalogSearch: '',
+  catalogEnvironment: 'all',
+  catalogRisk: 'all',
+  catalogType: 'all',
+  catalogCapability: 'all',
+  catalogVisible: 36,
+  catalogFull: false,
   currentSpot: null,
 };
 
@@ -730,6 +736,204 @@ function closeSportModal() {
 
 function saveState(key, set) {
   localStorage.setItem(key, JSON.stringify([...set]));
+}
+
+function slugify(value) {
+  return value.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function normalizeText(value = '') {
+  return String(value).toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function buildMasterCatalog() {
+  const categoryMeta = {
+    agua: { name: 'Agua y costa', emoji: '🌊', env: ['mar','costa','agua'], material: 'neopreno o ropa técnica, elemento de flotación cuando proceda, conocimiento del spot', type: ['deporte','actividad','experiencia'] },
+    montana: { name: 'Montaña y senderismo', emoji: '🏔️', env: ['montaña','sendero','naturaleza'], material: 'calzado de montaña, agua, navegación, ropa por capas', type: ['deporte','actividad'] },
+    roca: { name: 'Roca y vertical', emoji: '🧗', env: ['roca','vertical','montaña'], material: 'casco, arnés, cuerda o crash pad según modalidad, material homologado', type: ['deporte','actividad','experiencia'] },
+    aire: { name: 'Aire', emoji: '🪂', env: ['aire','montaña','costa'], material: 'equipo certificado, formación específica, meteorología favorable', type: ['deporte','experiencia'] },
+    nieve: { name: 'Nieve y hielo', emoji: '❄️', env: ['nieve','hielo','montaña'], material: 'ropa térmica, equipo técnico, ARVA cuando proceda, formación invernal', type: ['deporte','actividad','experiencia'] },
+    ruedas: { name: 'Ruedas', emoji: '🚵', env: ['ruedas','montaña','urbano'], material: 'casco, protecciones, bicicleta o tabla revisada', type: ['deporte','actividad'] },
+    fitness: { name: 'Fitness y entrenamiento', emoji: '💪', env: ['gimnasio','urbano','outdoor'], material: 'ropa deportiva, hidratación, técnica adaptada al nivel', type: ['deporte','actividad'] },
+    urbano: { name: 'Urbano', emoji: '🏙️', env: ['urbano','park','calle'], material: 'protecciones, calzado técnico, espacio permitido', type: ['deporte','actividad'] },
+    motor: { name: 'Motor y velocidad', emoji: '🏎️', env: ['motor','tierra','agua'], material: 'casco, protecciones, licencia o circuito cuando proceda', type: ['deporte','experiencia'] },
+    expedicion: { name: 'Expedición y supervivencia', emoji: '🧭', env: ['expedición','naturaleza','montaña'], material: 'mochila, navegación, refugio, botiquín, autonomía', type: ['actividad','experiencia'] },
+    multiaventura: { name: 'Multiaventura', emoji: '⚡', env: ['multiaventura','naturaleza','agua'], material: 'material específico por actividad, guía o briefing si procede', type: ['actividad','experiencia'] },
+    naturaleza: { name: 'Naturaleza y exploración', emoji: '🌿', env: ['naturaleza','exploración','sendero'], material: 'calzado cómodo, prismáticos o cámara, respeto ambiental', type: ['actividad','experiencia'] },
+    tecnicos: { name: 'Técnicos y extremos', emoji: '🔴', env: ['técnico','alto riesgo','vertical'], material: 'formación avanzada, equipo certificado, plan de emergencia', type: ['deporte','experiencia'] },
+    familia: { name: 'Familia y recreativo', emoji: '👥', env: ['familia','naturaleza','urbano'], material: 'material básico, hidratación, protección solar, ruta adaptada', type: ['actividad','experiencia'] },
+    profesional: { name: 'Profesional / formación', emoji: '📋', env: ['formación','profesional','outdoor'], material: 'documentación, equipo homologado, seguro y requisitos del curso', type: ['actividad','experiencia'] }
+  };
+
+  const seeds = {
+    agua: ['Surf','Bodyboard','Paddle surf','SUP race','Kayak de mar','Kayak de río','Kayak touring','Kayak polo','Kayak fishing','Rafting','Hidrospeed','Snorkel','Apnea','Freediving','Apnea estática','Apnea dinámica','Apnea peso constante','Buceo recreativo','Buceo técnico','Buceo profundo','Buceo en pecios','Cave diving','Night diving','Sidemount diving','Fotografía submarina','Pesca deportiva','Pesca submarina','Coasteering','Cliff Jumping','Psicobloc','Natación en aguas abiertas','Travesía a nado','Windsurf','Kitesurf','Kitesurf freestyle','Wingfoil','E-foil','Vela ligera','Catamarán deportivo','Skimboard','Wakeboard','Wakesurf','Esquí acuático','Motos de agua','Big wave surfing','Longboard surf','Surfskate','Foil surf','Ocean swimming','Packrafting costero'],
+    montana: ['Senderismo','Trekking','Fast hiking','High mountain trekking','Montañismo','Alpinismo','Orientación','Orientación nocturna','Rogaining','Marcha nórdica','Trail running','Trail nocturno','Ultra trail','Skyrunning','Carreras por montaña','Vertical kilometer','Fastpacking','Vivac','Bushcraft','Supervivencia','Expedición autosuficiente','Expedición alpina','Raquetas de nieve','Nordic walking trail','Travesía de crestas','Trekking glaciar','Senderismo interpretativo','Ruta circular de montaña','Ascenso a cumbre','Travesía de refugios','Marcha de resistencia','Trekking de desierto','Trekking tropical','Ruta de volcanes','Senderismo invernal','Orientación con brújula'],
+    roca: ['Escalada deportiva','Escalada clásica','Escalada tradicional','Escalada artificial','Escalada alpina','Escalada en bloque','Boulder','Boulder psicobloc','Escalada indoor','Escalada multipitch','Big wall','Vía ferrata','Rápel','Rápel técnico','Barranquismo','Barranquismo seco','Barranquismo acuático','Canyoning técnico','Barranquismo invernal','Espeleología','Espeleo vertical','Espeleología acuática','Highline','Slackline','Dry tooling','Urban climbing','Escalada de fisura','Escalada de adherencia','Escalada de velocidad','Escalada de competición','Deep water soloing','Descenso de cañones','Técnicas de cuerda','Progresión vertical'],
+    aire: ['Parapente','Paramotor','Paratrike','Ala delta','Paracaidismo','Salto tándem','AFF','Wingsuit','Speedflying','Speedriding','Globo aerostático','Parasailing','Rope jumping','Bungee jumping','Puenting','BASE jump','Túnel de viento','Parapente biplaza','Acrobacia en parapente','Vuelo de ladera','Cross country parapente','Wingwalking','Paracaidismo precisión','Canopy piloting','Vuelo ultraligero','Paramotor travesía','Dron racing outdoor','Cometa de tracción'],
+    nieve: ['Snowboard','Freeride snowboard','Freestyle snowboard','Splitboard','Splitboard touring','Esquí alpino','Esquí de travesía','Skimo','Freeride ski','Freestyle ski','Esquí de fondo','Esquí nórdico','Snowkite','Escalada en hielo','Ice climbing','Alpinismo invernal','Dry tooling invernal','Trineo','Mushing','Raquetas de nieve','Snowshoe running','Telemark','Ski cross','Boardercross','Curling outdoor','Ice swimming','Escalada mixta','Expedición polar','Construcción de iglú','Rescate en nieve'],
+    ruedas: ['MTB','BTT','Enduro MTB','Downhill MTB','MTB cross country','MTB maratón','Bikepacking','Gravel','Ciclismo de carretera','Cicloturismo','BMX','BMX race','BMX freestyle','Skate','Skate street','Skate bowl','Longboard','Longboard downhill','Roller','Patinaje','Patinaje agresivo','Scooter freestyle','Pump track','Dirt jump','Bikejoring','Canicross bike','Fixed gear','Ciclismo urbano','Trial bike','E-bike mountain','Monopatín eléctrico','Inline downhill'],
+    fitness: ['Crossfit','Calistenia','Entrenamiento funcional','OCR','OCR endurance','Spartan Race','Hyrox','Parkour','Freerunning','Gimnasio','Halterofilia','Powerlifting','Strongman','Yoga','Pilates','Movilidad','HIIT','TRX','Kettlebell training','Entrenamiento de fuerza','Entrenamiento de resistencia','Animal flow','Bootcamp outdoor','Running urbano','Natación fitness','Core training','Entrenamiento militar','Preparación física outdoor','Stretching activo','Mobility flow'],
+    urbano: ['Parkour speed','Freerunning urbano','Street workout','Skate urbano','Roller urbano','BMX street','Scooter park','Calistenia urbana','Escalada urbana controlada','Orientación urbana','Carrera urbana','Rooftop training seguro','Slackline urbano','Tricking','Breakletics','Baloncesto 3x3','Fútbol freestyle','Street handball','Urban hiking','Carrera de obstáculos urbana','Patinaje nocturno','Ruta fotográfica urbana','Geocaching urbano','Pump track urbano','Skim urbano'],
+    motor: ['Motocross','Enduro moto','Trial moto','Karting','Rally amateur','4x4','Buggy','Quad','Jet ski','Moto de agua touring','Moto trail','Moto aventura','Off-road 4x4','Sand buggy','Drift amateur','Sim racing físico','Minimoto','Supermotard','Raid amateur','Ruta overland 4x4','Conducción en circuito','Karting endurance','Moto nieve','ATV trail','UTV aventura'],
+    expedicion: ['Expedición polar','Expedición desértica','Expedición selvática','Expedición autosuficiente','Travesía de varios días','Travesía en kayak','Travesía en bicicleta','Travesía a pie','Bikepacking remoto','Packrafting','Campamento outdoor','Vivac técnico','Orientación avanzada','Supervivencia básica','Supervivencia avanzada','Bushcraft avanzado','Construcción de refugio','Fuego primitivo','Navegación con mapa','Navegación GPS','Rogaining 24h','Expedición fotográfica','Expedición científica ciudadana','Cruce de cordillera','Ruta de larga distancia','Backpacking','Thru-hiking','Microexpedición','Overlanding'],
+    multiaventura: ['Coasteering combinado','Multiaventura familiar','Raid de aventura','Circuito de cuerdas','Tirolina','Puente tibetano','Orientación multiaventura','Kayak + trekking','MTB + trail','Escalada + rappel','Barranco + vía ferrata','Gymkhana outdoor','Reto de supervivencia','Adventure race','Team building outdoor','Campamento aventura','Ruta anfibia','Descenso de barranco recreativo','Aventura nocturna','Aventura con brújula','Expedición multiaventura','Ruta costa y montaña','Outdoor challenge','Circuito de aventura','Puente mono','Vía cordata'],
+    naturaleza: ['Fotografía de naturaleza','Fotografía de aventura','Observación de aves','Birdwatching','Geocaching','Interpretación ambiental','Rutas geológicas','Astronomía outdoor','Astrofotografía','Exploración de cuevas','Rutas familiares','Camping','Acampada controlada','Bivouac recreativo','Observación de fauna','Rastreo de huellas','Baños de bosque','Forest bathing','Botánica de campo','Micología responsable','Ruta de cascadas','Ruta de miradores','Ruta de estrellas','Observación marina','Limpieza de playa comunitaria','Voluntariado ambiental','Fotografía submarina recreativa','Ruta paleontológica','Naturalismo urbano','Exploración costera'],
+    tecnicos: ['BASE jump','Free solo','Cave diving técnico','Wingsuit proximity','Big wave surfing','Alpinismo técnico','Escalada en hielo extrema','Barranquismo técnico','Canyoning avanzado','Buceo de descompresión','Buceo con trimix','Espeleobuceo','Highline larga distancia','Rope access deportivo','Rescate vertical deportivo','Descenso técnico de cañones','Expedición de alta altitud','Snowboard big mountain','Ski freeride extremo','Speedriding técnico','Rope jumping técnico','Puenting técnico','Dry canyoning','Ultra distancia autosuficiente','Ocean crossing kayak'],
+    familia: ['Senderismo familiar','Ruta costera familiar','Snorkel familiar','Kayak recreativo','Paddle surf recreativo','Camping familiar','Geocaching familiar','Orientación familiar','Ruta de naturaleza infantil','Bici familiar','Vía verde en bicicleta','Patinaje recreativo','Juegos outdoor','Gymkhana familiar','Observación de estrellas','Fotografía familiar de naturaleza','Ruta de miradores fácil','Marcha nórdica suave','Yoga outdoor familiar','Aventura escolar','Campamento juvenil','Multiaventura infantil','Ruta interpretativa','Día de playa activo','Mini trekking'],
+    profesional: ['Curso de primeros auxilios','Curso de orientación','Curso de seguridad en montaña','Curso de autorrescate','Curso de nudos','Curso de rápel','Curso de escalada deportiva','Curso de vía ferrata','Curso de barranquismo','Curso de apnea básica','Curso de buceo open water','Curso de navegación marina','Curso de meteorología outdoor','Curso de avalanchas','Formación ARVA','Curso de guía outdoor','Clínic de técnica MTB','Clínic de trail running','Taller de movilidad','Taller de fuerza outdoor','Curso de rescate acuático','Curso de fotografía outdoor','Curso de Leave No Trace','Formación de organizador de planes','Certificación de instructor','Evaluación de nivel deportivo','Jornada de seguridad comunitaria','Seminario de reputación deportiva']
+  };
+
+  const riskByName = (name, cat) => {
+    const n = name.toLowerCase();
+    if (/(base|free solo|wingsuit|big wave|trimix|cave diving|espeleobuceo|proximity|alta altitud|ice climbing|escalada en hielo extrema|ocean crossing)/.test(n)) return 'negro';
+    if (/(técnic|tecnico|avanzad|barranquismo|coasteering|cliff|multipitch|big wall|highline|rope|puenting|freeride|speed|alpinismo|buceo|apnea|paracaidismo|motocross|rally|quad|jet ski|downhill|enduro)/.test(n) || ['aire','tecnicos'].includes(cat)) return 'rojo';
+    if (/(familiar|recreativo|suave|infantil|interpretativa|observación|fotografía|camping|yoga|pilates|movilidad|geocaching)/.test(n) || cat === 'familia') return 'verde';
+    return 'amarillo';
+  };
+  const intensityByRisk = { verde: 'baja', amarillo: 'media', rojo: 'alta', negro: 'extrema' };
+  const catalog = [];
+  const used = new Set();
+
+  Object.entries(seeds).forEach(([cat, names]) => {
+    const meta = categoryMeta[cat];
+    names.forEach((name) => {
+      const id = slugify(name);
+      if (used.has(id)) return;
+      used.add(id);
+      const riskLevel = riskByName(name, cat);
+      catalog.push({
+        id,
+        name,
+        category: meta.name,
+        cat,
+        environment: meta.env,
+        riskLevel,
+        risk: riskLevel === 'verde' ? 'low' : riskLevel === 'amarillo' ? 'medium' : riskLevel === 'rojo' ? 'high' : 'extreme',
+        type: meta.type,
+        intensity: intensityByRisk[riskLevel],
+        material: meta.material,
+        matchable: true,
+        logbook: true,
+        plans: !['negro'].includes(riskLevel),
+        emoji: meta.emoji,
+        desc: `${name} dentro del catálogo NOMADX, clasificado por entorno, riesgo y tipo de práctica para matching, planes y Logbook.`,
+        related: names.filter(other => other !== name).slice(0, 3)
+      });
+    });
+  });
+
+  return catalog.sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
+}
+
+function normalizeNomadxDemoData() {
+  CATEGORIES.splice(0, CATEGORIES.length,
+    { id: 'all', name: 'Todas', emoji: '🌐' },
+    { id: 'agua', name: 'Agua y costa', emoji: '🌊' },
+    { id: 'montana', name: 'Montaña y senderismo', emoji: '🏔️' },
+    { id: 'roca', name: 'Roca y vertical', emoji: '🧗' },
+    { id: 'aire', name: 'Aire', emoji: '🪂' },
+    { id: 'nieve', name: 'Nieve y hielo', emoji: '❄️' },
+    { id: 'ruedas', name: 'Ruedas', emoji: '🚵' },
+    { id: 'fitness', name: 'Fitness y entrenamiento', emoji: '💪' },
+    { id: 'urbano', name: 'Urbano', emoji: '🏙️' },
+    { id: 'motor', name: 'Motor y velocidad', emoji: '🏎️' },
+    { id: 'expedicion', name: 'Expedición y supervivencia', emoji: '🧭' },
+    { id: 'multiaventura', name: 'Multiaventura', emoji: '⚡' },
+    { id: 'naturaleza', name: 'Naturaleza y exploración', emoji: '🌿' },
+    { id: 'tecnicos', name: 'Técnicos y extremos', emoji: '🔴' },
+    { id: 'familia', name: 'Familia y recreativo', emoji: '👥' },
+    { id: 'profesional', name: 'Profesional / formación', emoji: '📋' }
+  );
+
+  if (Array.isArray(window.SPORTS_CATALOG_CATEGORIES) && window.SPORTS_CATALOG_CATEGORIES.length) {
+    CATEGORIES.splice(0, CATEGORIES.length, ...window.SPORTS_CATALOG_CATEGORIES);
+  }
+
+  const catalogSource = Array.isArray(window.SPORTS_CATALOG) && window.SPORTS_CATALOG.length
+    ? window.SPORTS_CATALOG
+    : buildMasterCatalog();
+  SPORTS_DATA.splice(0, SPORTS_DATA.length, ...catalogSource);
+
+  MATCH_CARDS.splice(0, MATCH_CARDS.length,
+    { id: 'm1', name: 'Marina Trail', role: 'Trail & costa · Demo NOMADX', emoji: '🌊', gradient: 'linear-gradient(135deg,#0d1f3c,#1a0d2e)', sports: ['Trail Running','Coasteering','Apnea'], level: 'Avanzado', env: 'Costa y montaña', dist: '12 km', objective: 'Planes de fin de semana', badges: ['Safety First','Logbook activo','Sea Tribe'], compat: 94 },
+    { id: 'm2', name: 'Vertical Crew', role: 'Grupo de escalada · Comunidad', emoji: '🧗', gradient: 'linear-gradient(135deg,#201010,#1a0d20)', sports: ['Escalada','Boulder','Vía Ferrata'], level: 'Medio-alto', env: 'Roca y rocódromo', dist: '28 km', objective: 'Compañeros de cordada', badges: ['Spotter responsable','Comunidad positiva'], compat: 91 },
+    { id: 'm3', name: 'MTB Flow', role: 'Riders enduro · Demo interactiva', emoji: '🚵', gradient: 'linear-gradient(135deg,#0d1f10,#101d0d)', sports: ['MTB Enduro','Gravel','Bikepacking'], level: 'Medio', env: 'Senderos y bike park', dist: '35 km', objective: 'Rutas técnicas', badges: ['Perfil activo','Logbook completo'], compat: 88 },
+    { id: 'm4', name: 'Outdoor Runner', role: 'Running & montaña', emoji: '🏃', gradient: 'linear-gradient(135deg,#152414,#0d1828)', sports: ['Trail Running','Skyrunning','Funcional'], level: 'Intermedio', env: 'Montaña y urbano', dist: '8 km', objective: 'Entrenar en grupo', badges: ['Comunidad positiva','Perfil activo'], compat: 86 },
+    { id: 'm5', name: 'Freedive Club', role: 'Club de apnea recreativa', emoji: '🤿', gradient: 'linear-gradient(135deg,#071830,#0d1025)', sports: ['Apnea','Buceo recreativo','Snorkel'], level: 'Medio', env: 'Agua y costa', dist: '42 km', objective: 'Sesiones seguras', badges: ['Instructor','Safety First'], compat: 93 },
+    { id: 'm6', name: 'Climbing Partner', role: 'Compañero técnico', emoji: '🪨', gradient: 'linear-gradient(135deg,#24120c,#111827)', sports: ['Escalada Deportiva','Multipitch','Rappel'], level: 'Alto', env: 'Roca', dist: '55 km', objective: 'Proyectos de vía', badges: ['Identidad verificada','Verticalista'], compat: 89 },
+    { id: 'm7', name: 'Adventure Family', role: 'Planes outdoor familiares', emoji: '👥', gradient: 'linear-gradient(135deg,#13251d,#0d1525)', sports: ['Senderismo','Kayak','Orientación'], level: 'Iniciación', env: 'Naturaleza accesible', dist: '18 km', objective: 'Planes seguros', badges: ['Comunidad positiva','Safety First'], compat: 82 },
+    { id: 'm8', name: 'Pro Guide Verified', role: 'Guía verificado · NOMADX Pro', emoji: '✅', gradient: 'linear-gradient(135deg,#1d1a0d,#0d1f3c)', sports: ['Barranquismo','Escalada','Trekking'], level: 'Profesional', env: 'Montaña y roca', dist: '64 km', objective: 'Eventos y formación', badges: ['Guía verificado','Primeros auxilios','Pro'], compat: 97 }
+  );
+
+  FEED_POSTS.splice(0, FEED_POSTS.length,
+    { id: 'p1', user: 'Marina Trail', role: 'Sea Tribe', emoji: '🌊', time: 'hace 2h', mediaEmoji: '📓', mediaBg: 'linear-gradient(135deg,#00d4ff22,#ff5e1a22)', location: 'Spot costero · demo', type: 'aventura', text: 'Nueva entrada de Logbook: ruta costera con revisión de condiciones, material y compañeros. Cada registro suma contexto real al ADN deportivo.', sports: ['Trail','Coasteering'], likes: 287, comments: 34 },
+    { id: 'p2', user: 'Vertical Crew', role: 'Climbing Zone', emoji: '🧗', time: 'hace 4h', mediaEmoji: '🪨', mediaBg: 'linear-gradient(135deg,#201010,#1a0d20)', location: 'Zona de escalada · demo', type: 'tecnica', text: 'Consejo de seguridad: revisión cruzada de nudo, casco y comunicación antes de cada pegue. La técnica empieza antes de tocar la roca.', sports: ['Escalada','Safety'], likes: 412, comments: 89 },
+    { id: 'p3', user: 'MTB Flow', role: 'MTB Riders', emoji: '🚵', time: 'hace 6h', mediaEmoji: '🚵', mediaBg: 'linear-gradient(135deg,#0d1f10,#101d0d)', location: 'Bike park · demo', type: 'spot', text: 'Spot recomendado por la comunidad: sendero con variantes verde, amarilla y roja. Buen ejemplo de mapa con niveles y reportes de estado.', sports: ['MTB','Spot'], likes: 156, comments: 21 },
+    { id: 'p4', user: 'Outdoor Runner', role: 'Trail & Mountain', emoji: '🏃', time: 'hace 8h', mediaEmoji: '⛰️', mediaBg: 'linear-gradient(135deg,#1a2830,#0d1f1a)', location: 'Sendero de montaña · demo', type: 'reto', text: 'Reto deportivo desbloqueado: 30 días de entrenamientos outdoor registrados. Progresión saludable, no competición vacía.', sports: ['Trail','Funcional'], likes: 334, comments: 67 },
+    { id: 'p5', user: 'Freedive Club', role: 'Agua', emoji: '🤿', time: 'hace 12h', mediaEmoji: '🛡️', mediaBg: 'linear-gradient(135deg,#071830,#040d20)', location: 'Playa deportiva · demo', type: 'seguridad', text: 'Safety Radar activado: compañero mínimo, boya visible, comunicación externa y salida marcada antes de entrar al agua.', sports: ['Apnea','Safety Radar'], likes: 198, comments: 43 },
+    { id: 'p6', user: 'Pro Guide Verified', role: 'NOMADX Pro', emoji: '✅', time: 'hace 1d', mediaEmoji: '📅', mediaBg: 'linear-gradient(135deg,#1d1a0d,#0d1f3c)', location: 'Evento demo', type: 'evento', text: 'Quedada publicada con cupos, nivel, requisitos y semáforo de seguridad. NOMADX Pro como capa profesional, no como catálogo de servicios.', sports: ['Evento','Pro'], likes: 189, comments: 56 }
+  );
+
+  TRIBUS.splice(0, TRIBUS.length,
+    { id: 't1', name: 'Trail & Mountain', icon: '🏔️', bgColor: '#1aff8c18', desc: 'Comunidad para trail, trekking, skyrunning y montaña responsable.', sports: ['Trail','Trekking','Skyrunning'], members: 2847, level: 'Todos los niveles', nextEvent: 'Plan activo · amanecer de montaña' },
+    { id: 't2', name: 'Sea Tribe', icon: '🌊', bgColor: '#00d4ff20', desc: 'Agua, costa, apnea, snorkel, surf y coasteering con cultura de seguridad.', sports: ['Apnea','Surf','Coasteering'], members: 1923, level: 'Iniciación a avanzado', nextEvent: 'Spot reportado · condiciones favorables' },
+    { id: 't3', name: 'Climbing Zone', icon: '🧗', bgColor: '#ff5e1a20', desc: 'Escalada, boulder, vía ferrata y entrenamiento vertical.', sports: ['Escalada','Boulder','Vía Ferrata'], members: 1650, level: 'Medio', nextEvent: 'Sesión técnica · rocódromo' },
+    { id: 't4', name: 'MTB Riders', icon: '🚵', bgColor: '#ff5e1a15', desc: 'Enduro, gravel, XC, DH y bikepacking.', sports: ['MTB','Gravel','Bikepacking'], members: 2156, level: 'Todos los niveles', nextEvent: 'Ruta flow · plazas abiertas' },
+    { id: 't5', name: 'Air Sports', icon: '🪂', bgColor: '#7c3aed20', desc: 'Vuelo libre, parapente, paramotor y deportes aéreos con criterio técnico.', sports: ['Parapente','Paramotor','Ala Delta'], members: 934, level: 'Verificado', nextEvent: 'Ventana meteorológica · revisión' },
+    { id: 't6', name: 'Cave Explorers', icon: '🕳️', bgColor: '#1aff8c15', desc: 'Espeleología, cuevas, orientación y exploración subterránea.', sports: ['Espeleología','Rappel','Orientación'], members: 768, level: 'Técnico', nextEvent: 'Acceso solo con formación' },
+    { id: 't7', name: 'Outdoor Creators', icon: '🎬', bgColor: '#00d4ff15', desc: 'Creadores outdoor que documentan deporte, aprendizaje y seguridad.', sports: ['Fotografía','Vídeo','Aventura'], members: 1234, level: 'Comunidad', nextEvent: 'Reto de Logbook visual' },
+    { id: 't8', name: 'Functional Athletes', icon: '💪', bgColor: '#1aff8c20', desc: 'Entrenamiento funcional, movilidad y preparación física para deportes outdoor.', sports: ['Cross training','Movilidad','Resistencia'], members: 3421, level: 'Todos', nextEvent: 'Entreno base · domingo' },
+    { id: 't9', name: 'Adventure Families', icon: '👥', bgColor: '#00d4ff18', desc: 'Planes outdoor familiares, progresivos y con seguridad clara.', sports: ['Senderismo','Kayak','Orientación'], members: 1120, level: 'Iniciación', nextEvent: 'Plan familiar · ruta verde' },
+    { id: 't10', name: 'Extreme Sports', icon: '⚡', bgColor: '#ef444420', desc: 'Disciplinas de alto compromiso con acceso responsable y verificación.', sports: ['BASE','Free Solo','Big Wave'], members: 234, level: 'Solo expertos verificados', nextEvent: 'Contenido educativo · sin quedada abierta' }
+  );
+
+  SPOTS.splice(0, SPOTS.length,
+    { id: 'sp1', name: 'Acantilado costero', icon: '🌊', env: 'Costa · Agua', sports: ['Coasteering','Apnea'], level: 'Avanzado', risk: 'rojo', season: 'Primavera-Verano', requirements: 'Formación, buen nado, revisión de mar y salidas', desc: 'Spot demo para evaluar acceso, profundidad, corrientes, salidas y respeto ambiental.' },
+    { id: 'sp2', name: 'Zona de escalada', icon: '🧗', env: 'Roca · Vertical', sports: ['Escalada','Boulder'], level: 'Todos', risk: 'amarillo', season: 'Todo el año', requirements: 'Material homologado y técnica adecuada', desc: 'Sector demo con vías por nivel, reportes de estado y recomendaciones de comunidad.' },
+    { id: 'sp3', name: 'Sendero de montaña', icon: '⛰️', env: 'Montaña', sports: ['Trail','Trekking'], level: 'Medio', risk: 'amarillo', season: 'Todo el año', requirements: 'Orientación, agua y meteorología revisada', desc: 'Ruta demo para planes, entrenamientos y entradas de Logbook.' },
+    { id: 'sp4', name: 'Playa deportiva', icon: '🏄', env: 'Agua · Viento', sports: ['Surf','Kitesurf','SUP'], level: 'Todos', risk: 'verde', season: 'Todo el año', requirements: 'Respeto de zonas y condiciones', desc: 'Playa demo con filtros por viento, oleaje, temporada y comunidad.' },
+    { id: 'sp5', name: 'Cueva visitable', icon: '🕳️', env: 'Subterráneo', sports: ['Espeleología','Orientación'], level: 'Técnico', risk: 'rojo', season: 'Todo el año', requirements: 'Permisos si procede, guía o formación', desc: 'Spot demo para diferenciar visita recreativa de actividad técnica.' },
+    { id: 'sp6', name: 'Bike park', icon: '🚵', env: 'Ruedas', sports: ['MTB','DH','Enduro'], level: 'Medio', risk: 'amarillo', season: 'Todo el año', requirements: 'Casco, protecciones y lectura de línea', desc: 'Zona demo con líneas por nivel, estado y actividad reciente.' },
+    { id: 'sp7', name: 'Lago / pantano', icon: '🛶', env: 'Agua interior', sports: ['Kayak','SUP','Natación'], level: 'Iniciación', risk: 'verde', season: 'Primavera-Verano', requirements: 'Chaleco y normativa local', desc: 'Spot demo para deportes acuáticos no motorizados.' },
+    { id: 'sp8', name: 'Zona de despegue', icon: '🪂', env: 'Aire', sports: ['Parapente','Paramotor'], level: 'Verificado', risk: 'rojo', season: 'Según viento', requirements: 'Licencia, meteo y zona autorizada', desc: 'Punto demo para deportes aéreos con fuerte dependencia de condiciones.' }
+  );
+
+  EVENTS.splice(0, EVENTS.length,
+    { id: 'e1', title: 'Salida coasteering nivel medio', type: 'aventura', date: 'Mayo 2026 · demo', location: 'Spot costero genérico', sports: ['Coasteering','Apnea'], level: 'Medio', cupo: '8 plazas · 3 libres', price: 'Plan comunitario', organizer: 'Sea Tribe', verified: true, semaforo: 'amarillo' },
+    { id: 'e2', title: 'Ruta MTB técnica', type: 'aventura', date: 'Mayo 2026 · demo', location: 'Bike park demo', sports: ['MTB','Enduro'], level: 'Medio-alto', cupo: '10 plazas · 4 libres', price: 'Plan comunitario', organizer: 'MTB Flow', verified: true, semaforo: 'amarillo' },
+    { id: 'e3', title: 'Entrenamiento outdoor', type: 'taller', date: 'Mayo 2026 · demo', location: 'Parque urbano', sports: ['Funcional','Trail'], level: 'Todos', cupo: '20 plazas · 12 libres', price: 'Gratis', organizer: 'Functional Athletes', verified: true, semaforo: 'verde' },
+    { id: 'e4', title: 'Quedada de apnea recreativa', type: 'clinica', date: 'Mayo 2026 · demo', location: 'Playa deportiva', sports: ['Apnea','Snorkel'], level: 'Básico-intermedio', cupo: '6 plazas · 2 libres', price: 'Plan comunitario', organizer: 'Freedive Club', verified: true, semaforo: 'amarillo' },
+    { id: 'e5', title: 'Jornada de escalada', type: 'formacion', date: 'Junio 2026 · demo', location: 'Zona de escalada', sports: ['Escalada','Boulder'], level: 'Medio', cupo: '12 plazas · 5 libres', price: 'Según organizador', organizer: 'Vertical Crew', verified: true, semaforo: 'rojo' },
+    { id: 'e6', title: 'Expedición multiaventura', type: 'expedicion', date: 'Junio 2026 · demo', location: 'Entorno natural', sports: ['Trail','Kayak','Orientación'], level: 'Avanzado', cupo: '8 plazas · 1 libre', price: 'Según organizador', organizer: 'Pro Guide Verified', verified: true, semaforo: 'rojo' }
+  );
+
+  BADGES_DATA.splice(0, BADGES_DATA.length,
+    { cat: 'rol', icon: '✅', name: 'Identidad verificada', desc: 'Perfil confirmado dentro de la plataforma' },
+    { cat: 'rol', icon: '📡', name: 'Perfil activo', desc: 'Actividad reciente y participación real' },
+    { cat: 'seguridad', icon: '🛡️', name: 'Safety First', desc: 'Cultura de seguridad demostrada' },
+    { cat: 'experiencia', icon: '🧭', name: 'Explorador', desc: 'Spots y rutas registradas con criterio' },
+    { cat: 'rol', icon: '🎬', name: 'Creador outdoor', desc: 'Contenido útil para la comunidad' },
+    { cat: 'rol', icon: '🌟', name: 'Guía verificado', desc: 'Perfil profesional validado' },
+    { cat: 'rol', icon: '📋', name: 'Instructor', desc: 'Formación acreditada en su disciplina' },
+    { cat: 'experiencia', icon: '📅', name: 'Organizador de planes', desc: 'Crea eventos con requisitos claros' },
+    { cat: 'seguridad', icon: '📍', name: 'Spotter responsable', desc: 'Reporta spots con información útil y prudente' },
+    { cat: 'progresion', icon: '📓', name: 'Logbook completo', desc: 'Registros detallados de experiencia deportiva' },
+    { cat: 'hitos', icon: '🤝', name: 'Comunidad positiva', desc: 'Buenas valoraciones de otros usuarios' },
+    { cat: 'rol', icon: '💼', name: 'Pro verificado', desc: 'Profesional, club, centro o marca validada' }
+  );
+
+  PRO_TYPES.splice(0, PRO_TYPES.length,
+    { icon: '🧭', name: 'Guías e instructores', desc: 'Perfil profesional verificado, calendario, eventos, documentación y reputación visible.' },
+    { icon: '🏋️', name: 'Entrenadores', desc: 'Programas, grupos, seguimiento y planes de preparación para deportes outdoor.' },
+    { icon: '🏢', name: 'Clubs y escuelas', desc: 'Gestión de grupos, cursos, cupos, requisitos y comunidad propia dentro de NOMADX.' },
+    { icon: '🎬', name: 'Creadores outdoor', desc: 'Publicaciones, Logbook visual, colaboraciones y reputación saludable.' },
+    { icon: '🛒', name: 'Marcas outdoor', desc: 'Marketplace futuro, partners, campañas y visibilidad basada en actividad y confianza.' },
+    { icon: '📊', name: 'Centros deportivos', desc: 'Analíticas, eventos, reservas futuras y perfiles verificados para comunidades activas.' }
+  );
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -766,18 +970,50 @@ function initHeader() {
    ═══════════════════════════════════════════════════════════ */
 function initCatalog() {
   renderCatalogCategories();
+  renderCatalogFilters();
   renderCatalog();
 
   const searchInput = document.getElementById('catalog-search');
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
-      STATE.catalogSearch = e.target.value.toLowerCase();
+      STATE.catalogSearch = normalizeText(e.target.value);
       STATE.catalogFilter = 'all';
+      STATE.catalogVisible = 36;
+      STATE.catalogFull = false;
       document.querySelectorAll('.cat-filter').forEach(b => b.classList.remove('active'));
       document.querySelector('.cat-filter[data-cat="all"]')?.classList.add('active');
       renderCatalog();
     });
   }
+
+  document.getElementById('catalog-more-btn')?.addEventListener('click', () => {
+    STATE.catalogVisible += 36;
+    renderCatalog();
+  });
+  document.getElementById('catalog-all-btn')?.addEventListener('click', () => {
+    STATE.catalogFull = !STATE.catalogFull;
+    renderCatalog();
+  });
+  document.getElementById('catalog-clear-btn')?.addEventListener('click', () => {
+    resetCatalogFilters();
+  });
+}
+
+function resetCatalogFilters() {
+  STATE.catalogFilter = 'all';
+  STATE.catalogSearch = '';
+  STATE.catalogEnvironment = 'all';
+  STATE.catalogRisk = 'all';
+  STATE.catalogType = 'all';
+  STATE.catalogCapability = 'all';
+  STATE.catalogVisible = 36;
+  STATE.catalogFull = false;
+  const searchInput = document.getElementById('catalog-search');
+  if (searchInput) searchInput.value = '';
+  document.querySelectorAll('.cat-filter,.catalog-pill').forEach(btn => btn.classList.remove('active'));
+  document.querySelector('.cat-filter[data-cat="all"]')?.classList.add('active');
+  document.querySelectorAll('.catalog-pill[data-value="all"]').forEach(btn => btn.classList.add('active'));
+  renderCatalog();
 }
 
 function renderCatalogCategories() {
@@ -793,11 +1029,90 @@ function renderCatalogCategories() {
     btn.addEventListener('click', () => {
       STATE.catalogFilter = btn.dataset.cat;
       STATE.catalogSearch = '';
+      STATE.catalogVisible = 36;
+      STATE.catalogFull = false;
       const searchInput = document.getElementById('catalog-search');
       if (searchInput) searchInput.value = '';
       el.querySelectorAll('.cat-filter').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderCatalog();
+    });
+  });
+}
+
+function renderCatalogFilters() {
+  const quickEl = document.getElementById('catalog-quick-filters');
+  if (quickEl) {
+    const quickFilters = [
+      ['catalogRisk', 'negro', 'Extremo'],
+      ['catalogEnvironment', 'agua', 'Agua'],
+      ['catalogEnvironment', 'aire', 'Aire'],
+      ['catalogEnvironment', 'montaña', 'Montaña'],
+      ['catalogCapability', 'matchable', 'Matching'],
+      ['catalogCapability', 'logbook', 'Logbook'],
+      ['catalogCapability', 'plans', 'Planes']
+    ];
+    quickEl.innerHTML = quickFilters.map(([state, value, label]) =>
+      `<button class="catalog-pill quick-pill" type="button" data-state="${state}" data-value="${value}">${label}</button>`
+    ).join('');
+    quickEl.querySelectorAll('.catalog-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        STATE[btn.dataset.state] = btn.dataset.value;
+        STATE.catalogVisible = 36;
+        STATE.catalogFull = false;
+        document.querySelectorAll(`.catalog-pill[data-state="${btn.dataset.state}"]`).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCatalog();
+      });
+    });
+  }
+
+  const filters = [
+    {
+      id: 'catalog-env-filters',
+      state: 'catalogEnvironment',
+      items: [
+        ['all','Todos'], ['mar','Mar'], ['costa','Costa'], ['montaña','Montaña'], ['roca','Roca'], ['aire','Aire'],
+        ['nieve','Nieve'], ['ruedas','Ruedas'], ['urbano','Urbano'], ['motor','Motor'], ['naturaleza','Naturaleza'], ['formación','Formación']
+      ]
+    },
+    {
+      id: 'catalog-risk-filters',
+      state: 'catalogRisk',
+      items: [['all','Todos'], ['verde','Verde'], ['amarillo','Amarillo'], ['rojo','Rojo'], ['negro','Negro']]
+    },
+    {
+      id: 'catalog-type-filters',
+      state: 'catalogType',
+      items: [['all','Todos'], ['deporte','Deporte'], ['actividad','Actividad'], ['experiencia','Experiencia']]
+    }
+  ];
+
+  filters[0].items = [
+    ['all','Todos'], ['agua','Agua'], ['mar','Mar'], ['costa','Costa'], ['océano','Océano'], ['río','Río'], ['subacuático','Subacuático'],
+    ['montaña','Montaña'], ['roca','Roca'], ['vertical','Vertical'], ['cueva','Cueva'], ['barranco','Barranco'], ['aire','Aire'],
+    ['nieve','Nieve'], ['hielo','Hielo'], ['urbano','Urbano'], ['motor','Motor'], ['fitness','Fitness'], ['naturaleza','Naturaleza']
+  ];
+  filters[2].items = [
+    ['all','Todos'], ['deporte','Deporte'], ['modalidad','Modalidad'], ['actividad','Actividad'], ['experiencia','Experiencia'],
+    ['vivencia','Vivencia'], ['competición','Competición'], ['técnica','Técnica'], ['híbrida','Híbrida'], ['bienestar','Bienestar'], ['extremo','Extremo']
+  ];
+
+  filters.forEach(group => {
+    const el = document.getElementById(group.id);
+    if (!el) return;
+    el.innerHTML = group.items.map(([value, label]) =>
+      `<button class="catalog-pill${value === 'all' ? ' active' : ''}" type="button" data-state="${group.state}" data-value="${value}">${label}</button>`
+    ).join('');
+    el.querySelectorAll('.catalog-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        STATE[btn.dataset.state] = btn.dataset.value;
+        STATE.catalogVisible = 36;
+        STATE.catalogFull = false;
+        el.querySelectorAll('.catalog-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCatalog();
+      });
     });
   });
 }
@@ -812,44 +1127,87 @@ function renderCatalog() {
     filtered = filtered.filter(s => s.cat === STATE.catalogFilter);
   }
   if (STATE.catalogSearch) {
-    filtered = filtered.filter(s => s.name.toLowerCase().includes(STATE.catalogSearch));
+    filtered = filtered.filter(s => {
+      const haystack = normalizeText([s.name, ...(s.aliases || []), s.category, ...(s.secondaryCategories || []), s.material, s.description || s.desc, ...(s.environment || []), ...(s.type || [])].join(' '));
+      return haystack.includes(STATE.catalogSearch);
+    });
+  }
+  if (STATE.catalogEnvironment !== 'all') {
+    filtered = filtered.filter(s => (s.environment || []).includes(STATE.catalogEnvironment));
+  }
+  if (STATE.catalogRisk !== 'all') {
+    filtered = filtered.filter(s => s.riskLevel === STATE.catalogRisk);
+  }
+  if (STATE.catalogType !== 'all') {
+    filtered = filtered.filter(s => (s.type || []).includes(STATE.catalogType));
+  }
+  if (STATE.catalogCapability !== 'all') {
+    filtered = filtered.filter(s => Boolean(s[STATE.catalogCapability]));
   }
 
-  if (countEl) countEl.textContent = `${filtered.length} actividades`;
+  const visibleLimit = STATE.catalogFull ? filtered.length : STATE.catalogVisible;
+  const shown = filtered.slice(0, visibleLimit);
+
+  document.querySelectorAll('[data-total-disciplines]').forEach(el => {
+    el.textContent = `${SPORTS_DATA.length}`;
+  });
+
+  if (countEl) countEl.textContent = `Mostrando ${shown.length} de ${filtered.length} disciplinas · Catálogo NOMADX: ${SPORTS_DATA.length}+ clasificadas por entorno, riesgo y tipo`;
+
+  if (countEl) {
+    countEl.textContent = `Mostrando ${shown.length} de ${filtered.length} disciplinas · Catálogo NOMADX: ${SPORTS_DATA.length} entradas reales desde lista maestra`;
+  }
 
   if (filtered.length === 0) {
-    container.innerHTML = `<div style="text-align:center;padding:3rem;color:var(--text-muted);font-family:var(--font-heading)">No se encontraron deportes para "${STATE.catalogSearch}"</div>`;
+    container.innerHTML = `<div class="catalog-empty">No se encontraron disciplinas para los filtros actuales. Ajusta búsqueda, entorno, riesgo o tipo.</div>`;
     return;
   }
 
-  // Agrupar por categoría
-  const groups = {};
-  filtered.forEach(sport => {
-    if (!groups[sport.cat]) groups[sport.cat] = [];
-    groups[sport.cat].push(sport);
+  container.innerHTML = `<div class="catalog-card-grid">${shown.map(renderDisciplineCard).join('')}</div>`;
+
+  container.querySelectorAll('[data-open-discipline]').forEach(btn => {
+    btn.addEventListener('click', () => openSportModal(btn.dataset.openDiscipline));
+  });
+  container.querySelectorAll('[data-save-discipline]').forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      toggleSaveSport(btn.dataset.saveDiscipline);
+    });
   });
 
-  container.innerHTML = Object.entries(groups).map(([catId, sports]) => {
-    const catInfo = CATEGORIES.find(c => c.id === catId) || { name: catId, emoji: '🏅' };
-    const chips = sports.map(s => {
-      const saved = STATE.savedSports.has(s.id);
-      return `<button class="sport-chip${saved ? ' saved' : ''}" data-id="${s.id}" aria-label="Ver ${s.name}">
-        <span class="risk-dot risk-${s.risk}"></span>
-        ${s.emoji || ''} ${s.name}
-      </button>`;
-    }).join('');
-    return `<div class="catalog-category-group">
-      <div class="catalog-cat-header">
-        <div class="catalog-cat-name">${catInfo.emoji} ${catInfo.name}</div>
-        <div class="catalog-cat-count">${sports.length} actividades</div>
+  const moreBtn = document.getElementById('catalog-more-btn');
+  const allBtn = document.getElementById('catalog-all-btn');
+  if (moreBtn) moreBtn.style.display = STATE.catalogFull || shown.length >= filtered.length ? 'none' : 'inline-flex';
+  if (allBtn) allBtn.textContent = STATE.catalogFull ? 'Volver a vista resumida' : 'Ver catálogo completo';
+}
+
+function renderDisciplineCard(s) {
+  const saved = STATE.savedSports.has(s.id);
+  const typeLabel = (s.type || []).map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(' · ');
+  return `
+    <article class="discipline-card" data-open-discipline="${s.id}">
+      <div class="discipline-head">
+        <div>
+          <div class="discipline-name">${s.name}</div>
+          <div class="discipline-meta" style="margin-top:.55rem">
+            <span>${s.emoji} ${s.category}</span>
+            <span><i class="risk-dot risk-${s.riskLevel}"></i> Riesgo ${s.riskLevel}</span>
+          </div>
+        </div>
+        <div class="discipline-icon">${s.emoji}</div>
       </div>
-      <div class="catalog-sport-grid">${chips}</div>
-    </div>`;
-  }).join('');
-
-  container.querySelectorAll('.sport-chip').forEach(btn => {
-    btn.addEventListener('click', () => openSportModal(btn.dataset.id));
-  });
+      <p class="discipline-desc">${s.environment.slice(0, 3).join(' · ')} · ${typeLabel}. Intensidad ${s.intensity}.</p>
+      <div class="discipline-capabilities">
+        ${s.matchable ? '<span>Matching</span>' : ''}
+        ${s.logbook ? '<span>Logbook</span>' : ''}
+        ${s.plans ? '<span>Planes</span>' : '<span>Solo expertos</span>'}
+      </div>
+      <div class="discipline-actions">
+        <button class="btn btn-ghost" type="button" data-save-discipline="${s.id}">${saved ? 'Guardado' : 'Guardar'}</button>
+        <button class="btn btn-secondary" type="button" data-open-discipline="${s.id}">Ver detalles</button>
+      </div>
+    </article>
+  `;
 }
 
 function openSportModal(sportId) {
@@ -857,25 +1215,59 @@ function openSportModal(sportId) {
   if (!sport) return;
 
   const saved = STATE.savedSports.has(sport.id);
-  const catInfo = CATEGORIES.find(c => c.id === sport.cat) || {};
+  const catInfo = CATEGORIES.find(c => c.id === sport.cat) || { name: sport.category, emoji: sport.emoji };
 
-  const riskLabels = { low: 'Bajo', medium: 'Medio', high: 'Alto', extreme: 'Extremo' };
-  const riskColors = { low: 'var(--green)', medium: 'var(--yellow)', high: 'var(--orange)', extreme: 'var(--red)' };
+  const riskLabels = { low: 'Bajo', medium: 'Medio', high: 'Alto', extreme: 'Extremo', verde: 'Verde', amarillo: 'Amarillo', rojo: 'Rojo', negro: 'Negro' };
+  const riskColors = { low: 'var(--green)', medium: 'var(--yellow)', high: 'var(--orange)', extreme: 'var(--red)', verde: 'var(--green)', amarillo: 'var(--yellow)', rojo: 'var(--orange)', negro: 'var(--red)' };
+  const riskKey = sport.riskLevel || sport.risk;
+  const riskBarClass = sport.risk || (riskKey === 'verde' ? 'low' : riskKey === 'amarillo' ? 'medium' : riskKey === 'rojo' ? 'high' : 'extreme');
+  const safetyNote = ['rojo','negro','high','extreme'].includes(riskKey)
+    ? `<div class="safety-notice-text" style="margin-top:1rem;color:var(--yellow)">Actividad técnica o de riesgo. Requiere formación, experiencia, material adecuado y condiciones favorables.</div>`
+    : '';
+
+  const safetyNoteFull = riskKey === 'negro' || riskKey === 'extreme'
+    ? `<div class="safety-notice-text" style="margin-top:1rem;color:var(--red)">Actividad extrema. No debe realizarse sin formación específica, autorización cuando proceda, planificación, supervisión y entorno controlado.</div>`
+    : (riskKey === 'rojo' || riskKey === 'high'
+      ? `<div class="safety-notice-text" style="margin-top:1rem;color:var(--yellow)">Actividad técnica o de riesgo. Requiere formación, experiencia, material adecuado, condiciones favorables y, cuando corresponda, profesionales cualificados.</div>`
+      : safetyNote);
+  const aliases = (sport.aliases || []).filter(Boolean);
+  const secondaryCategories = (sport.secondaryCategories || []).filter(Boolean);
+  const related = (sport.related || []).filter(Boolean);
+  const tribes = (sport.tribes || []).filter(Boolean);
 
   document.getElementById('modal-content').innerHTML = `
     <div class="modal-sport-name">${sport.emoji || ''} ${sport.name}</div>
     <div class="modal-badges">
       <span class="badge badge-white">${catInfo.emoji || ''} ${catInfo.name || ''}</span>
-      <span class="badge badge-${sport.risk === 'low' ? 'green' : sport.risk === 'medium' ? 'gold' : sport.risk === 'high' ? 'orange' : 'red'}">${riskLabels[sport.risk]}</span>
+      <span class="badge badge-${riskBarClass === 'low' ? 'green' : riskBarClass === 'medium' ? 'gold' : riskBarClass === 'high' ? 'orange' : 'red'}">Riesgo ${riskLabels[riskKey] || riskKey}</span>
     </div>
-    <p class="modal-desc">${sport.desc}</p>
+    <p class="modal-desc">${sport.description || sport.desc}</p>
+    ${aliases.length ? `<div class="modal-section-title">Aliases</div><div class="modal-related">${aliases.map(r => `<span>${r}</span>`).join('')}</div>` : ''}
+    <div class="modal-section-title">Ficha NOMADX</div>
+    <div class="sdp-grid" style="margin-bottom:1rem">
+      <div><div class="sdp-item-key">Categoría principal</div><div class="sdp-item-val">${sport.category}</div></div>
+      <div><div class="sdp-item-key">Categorías secundarias</div><div class="sdp-item-val">${secondaryCategories.length ? secondaryCategories.join(', ') : 'Sin secundarias'}</div></div>
+      <div><div class="sdp-item-key">Entorno</div><div class="sdp-item-val">${(sport.environment || []).join(', ')}</div></div>
+      <div><div class="sdp-item-key">Tipo</div><div class="sdp-item-val">${(sport.type || []).join(', ')}</div></div>
+      <div><div class="sdp-item-key">Intensidad</div><div class="sdp-item-val">${sport.intensity || 'media'}</div></div>
+      <div><div class="sdp-item-key">Nivel técnico</div><div class="sdp-item-val">${sport.technicalLevel || 'intermedio'}</div></div>
+      <div><div class="sdp-item-key">Material</div><div class="sdp-item-val">${sport.material || 'Material específico según modalidad'}</div></div>
+    </div>
+    <div class="discipline-capabilities" style="margin-bottom:1rem">
+      ${sport.matchable ? '<span>Matching</span>' : ''}
+      ${sport.logbook ? '<span>Logbook</span>' : ''}
+      ${sport.plans ? '<span>Planes</span>' : '<span>Plan solo con verificación</span>'}
+    </div>
     <div class="modal-section-title">Deportes relacionados</div>
-    <div class="modal-related">${sport.related.map(r => `<span>${r}</span>`).join('')}</div>
+    <div class="modal-related">${related.map(r => `<span>${r}</span>`).join('')}</div>
+    <div class="modal-section-title">Tribus recomendadas</div>
+    <div class="modal-related">${tribes.map(r => `<span>${r}</span>`).join('') || '<span>Multiaventura NOMADX</span>'}</div>
     <div class="modal-section-title">Nivel de riesgo</div>
     <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.5rem">
-      <span style="font-family:var(--font-heading);font-size:.9rem;font-weight:700;color:${riskColors[sport.risk]}">${riskLabels[sport.risk]}</span>
+      <span style="font-family:var(--font-heading);font-size:.9rem;font-weight:700;color:${riskColors[riskKey]}">${riskLabels[riskKey] || riskKey}</span>
     </div>
-    <div class="risk-bar-track"><div class="risk-bar-fill ${sport.risk}"></div></div>
+    <div class="risk-bar-track"><div class="risk-bar-fill ${riskBarClass}"></div></div>
+    ${safetyNoteFull}
     <div style="margin-top:1.5rem;display:flex;gap:.75rem">
       <button class="btn btn-${saved ? 'primary' : 'secondary'}" style="flex:1" id="modal-save-btn" onclick="toggleSaveSport('${sport.id}')">
         ${saved ? '★ Guardado' : '☆ Guardar en mi ADN'}
@@ -911,6 +1303,7 @@ function toggleSaveSport(sportId) {
    ═══════════════════════════════════════════════════════════ */
 function initMatching() {
   renderMatchCard();
+  updateCounters();
   renderSavedMatches();
 }
 
@@ -1019,7 +1412,16 @@ function renderSavedMatches() {
   if (!el) return;
   const saved = MATCH_CARDS.filter(m => STATE.savedMatchIds.has(m.id));
   if (saved.length === 0) {
-    el.innerHTML = `<p style="font-size:.82rem;color:var(--text-muted)">Aún no tienes matches guardados. ¡Empieza a conectar!</p>`;
+    el.innerHTML = MATCH_CARDS.slice(0, 2).map(m => `
+      <div class="saved-match-item">
+        <div class="smi-avatar" style="background:${m.gradient}">${m.emoji}</div>
+        <div>
+          <div class="smi-name">${m.name}</div>
+          <div style="font-size:.7rem;color:var(--text-muted)">Sugerido · demo</div>
+        </div>
+        <div class="smi-compat">${m.compat}%</div>
+      </div>
+    `).join('');
     return;
   }
   el.innerHTML = saved.map(m => `
@@ -1438,6 +1840,7 @@ function initModal() {
    INIT: ARRANQUE DE LA APP
    ═══════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+  normalizeNomadxDemoData();
   initHeader();
   initCatalog();
   initMatching();
@@ -1450,6 +1853,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initModal();
 
-  console.log('%c🧭 NOMADX — by Diego David Extremo | Nómada Extremo', 'font-size:14px;color:#ff5e1a;font-weight:bold;');
-  console.log('%cProotipo v1.0 · Águilas, Murcia, España', 'font-size:12px;color:#00d4ff;');
+  console.log('%c🧭 NOMADX — plataforma social deportiva independiente', 'font-size:14px;color:#ff5e1a;font-weight:bold;');
+  console.log('%cPrototipo avanzado 2026 · concepto creado por Diego David Extremo', 'font-size:12px;color:#00d4ff;');
 });
