@@ -267,7 +267,7 @@ const MATCH_CARDS = [
     compat: 87
   },
   {
-    id: 'm3', name: 'Lola Vuelo Libre', role: 'Piloto Parapente · Murcia',
+    id: 'm3', name: 'Lola Vuelo Libre', role: 'Piloto parapente · Air Sports Crew',
     emoji: '🪂', gradient: 'linear-gradient(135deg,#1a1030,#0d1828)',
     sports: ['Parapente','Parapente Motor','Speed Riding','Paracaidismo'],
     level: 'Avanzado', env: 'Cielo, Montaña, Costa',  dist: '30 km',
@@ -299,7 +299,7 @@ const MATCH_CARDS = [
     compat: 82
   },
   {
-    id: 'm7', name: 'Rafa Cueva', role: 'Espeleólogo · Región de Murcia',
+    id: 'm7', name: 'Rafa Cueva', role: 'Espeleólogo · Cave Explorers',
     emoji: '🕳️', gradient: 'linear-gradient(135deg,#0d0d1f,#100d20)',
     sports: ['Espeleología','Barranquismo','Cave Diving','Rappel'],
     level: 'Técnico', env: 'Cuevas, Subterráneo, Agua', dist: '40 km',
@@ -401,7 +401,7 @@ const TRIBUS = [
     desc: 'Comunidad del vuelo libre. Parapente, ala delta, speedriding, paramotoring. Del vuelo tranquilo al acrobático.',
     sports: ['Parapente','Parapente Motor','Ala Delta','Speed Riding'],
     members: 1156, level: 'Iniciación a Experto',
-    nextEvent: 'Weekend Vuelo Murcia · 17 mayo'
+    nextEvent: 'Weekend Air Sports · 17 mayo'
   },
   {
     id: 't4', name: 'Barrancos y Cuevas', icon: '🕳️', bgColor: '#1aff8c15',
@@ -508,11 +508,11 @@ const SPOTS = [
     desc: 'Más de 500 vías de escalada en tufas y conglomerado junto al río Turia. Destino europeo de referencia. Camping y alojamientos cercanos.'
   },
   {
-    id: 'sp6', name: 'Cueva del Agua, Cartagena', icon: '🕳️', env: 'Subterráneo · Mar',
+    id: 'sp6', name: 'Cueva marina técnica', icon: '🕳️', env: 'Subterráneo · Mar',
     sports: ['Espeleología','Buceo','Apnea'],
     level: 'Técnico', risk: 'negro', season: 'Todo el año',
     requirements: 'Formación espeleología acuática, certificado de buceo en cuevas',
-    desc: 'Sistema de cuevas inundadas de la costa de Cartagena. Acceso únicamente con certificación cave diving o espeleología subacuática.'
+    desc: 'Sistema de cuevas inundadas en costa rocosa. Acceso únicamente con certificación cave diving o espeleología subacuática.'
   },
   {
     id: 'sp7', name: 'Sierra de Gredos', icon: '⛰️', env: 'Alta Montaña',
@@ -598,9 +598,9 @@ const EVENTS = [
     verified: true, semaforo: 'amarillo'
   },
   {
-    id: 'e5', title: 'NOMADX Trail · Parque Natural Calblanque',
+    id: 'e5', title: 'NOMADX Trail · Costa natural demo',
     type: 'carrera', date: '22 Mayo · 7:30',
-    location: 'Cartagena, Murcia',
+    location: 'Costa rocosa verificada',
     sports: ['Trail Running','Senderismo'],
     level: 'Todos los niveles', cupo: '50 personas · 18 libres',
     price: '15€', organizer: 'Comunidad NOMADX',
