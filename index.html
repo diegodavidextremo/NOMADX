@@ -47,6 +47,7 @@
         <a href="#mapa" role="listitem">Mapa</a>
         <a href="#insignias" role="listitem">Insignias</a>
         <a href="#seguridad" role="listitem">Seguridad</a>
+        <a href="#intelligence" role="listitem">Intelligence</a>
         <a href="#pro" role="listitem">Pro</a>
       </div>
 
@@ -72,6 +73,7 @@
     <a href="#logbook">Logbook</a>
         <a href="#insignias">Insignias</a>
     <a href="#seguridad">Seguridad</a>
+    <a href="#intelligence">NOMADX Intelligence</a>
     <a href="#pro">NOMADX Pro</a>
     <a href="#pricing">Premium</a>
     <a class="btn btn-primary" href="#match">Entrar al prototipo</a>
@@ -501,6 +503,18 @@
               <div class="mc-num">94%</div>
               <div class="mc-label">Compat. media</div>
             </div>
+            <div class="match-counter">
+              <div class="mc-num">128</div>
+              <div class="mc-label">Compatibles</div>
+            </div>
+            <div class="match-counter">
+              <div class="mc-num">6</div>
+              <div class="mc-label">Tribus afines</div>
+            </div>
+            <div class="match-counter">
+              <div class="mc-num">12</div>
+              <div class="mc-label">Planes sugeridos</div>
+            </div>
           </div>
         </div>
         <div class="match-stat-card">
@@ -512,10 +526,19 @@
         <div class="match-stat-card">
           <div class="match-stat-title">Filtros activos</div>
           <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+            <span class="badge badge-purple">Disciplina</span>
             <span class="badge badge-orange">Mar y Costa</span>
             <span class="badge badge-cyan">Nivel avanzado</span>
             <span class="badge badge-green">Instructores</span>
-            <span class="badge badge-white">+3 más</span>
+            <span class="badge badge-white">Riesgo</span>
+            <span class="badge badge-white">Distancia</span>
+            <span class="badge badge-white">Disponibilidad</span>
+            <span class="badge badge-white">Certificaciones</span>
+            <span class="badge badge-white">Idioma</span>
+            <span class="badge badge-white">Plan activo</span>
+            <span class="badge badge-white">Tribu</span>
+            <span class="badge badge-white">Tipo de perfil</span>
+            <span class="badge badge-white">Solo verificados</span>
           </div>
         </div>
       </div>
@@ -562,6 +585,18 @@
       <h2 class="section-title" id="tribus-title">Las <span>tribus</span><br>NOMADX</h2>
       <p class="section-subtitle">No hay usuarios genéricos. Hay tribus. Comunidades de deportistas agrupados por entorno, disciplina y forma de vivir el deporte.</p>
     </div>
+    <div class="tribe-filter-panel reveal" aria-label="Filtros demo de tribus">
+      <span class="badge badge-orange">Entorno</span>
+      <span class="badge badge-cyan">Nivel</span>
+      <span class="badge badge-green">Deporte</span>
+      <span class="badge badge-red">Riesgo</span>
+      <span class="badge badge-purple">Actividad reciente</span>
+      <span class="badge badge-white">Tipo de comunidad</span>
+      <span class="badge badge-white">Principiantes</span>
+      <span class="badge badge-white">Profesionales</span>
+      <span class="badge badge-white">Familiar</span>
+      <span class="badge badge-white">Extremo</span>
+    </div>
     <div class="tribus-grid" id="tribus-container">
       <!-- Generado por JS -->
     </div>
@@ -580,6 +615,19 @@
       <h2 class="section-title" id="mapa-title">Mapa de<br><span>spots</span></h2>
       <p class="section-subtitle">Encuentra, documenta y comparte los mejores spots del planeta. Costa mediterránea, alta montaña, cuevas marinas, zonas de escalada y mucho más.</p>
     </div>
+    <div class="spot-filter-panel reveal" aria-label="Filtros demo de spots">
+      <span class="badge badge-orange">Deporte</span>
+      <span class="badge badge-red">Riesgo</span>
+      <span class="badge badge-cyan">Entorno</span>
+      <span class="badge badge-green">Temporada</span>
+      <span class="badge badge-white">Verificado</span>
+      <span class="badge badge-white">Comunidad</span>
+      <span class="badge badge-white">Nivel técnico</span>
+      <span class="badge badge-white">Acceso</span>
+      <span class="badge badge-white">Permisos</span>
+      <span class="badge badge-white">Guardados</span>
+    </div>
+    <p class="spot-global-note reveal">Los spots técnicos requieren formación, condiciones adecuadas, permisos cuando proceda y respeto ambiental.</p>
     <div class="spots-layout">
       <div>
         <div class="spots-list reveal" id="spots-list">
@@ -678,6 +726,76 @@
         <h3>Plan de coasteering</h3>
         <p>Evaluación previa de mar, salidas, material térmico y nivel mínimo del grupo.</p>
         <div class="log-meta"><span>Riesgo rojo</span><span>Requiere experiencia</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">🪂</div>
+        <div class="log-type">Aire · primera vez</div>
+        <h3>Primer salto tándem</h3>
+        <p>Altura registrada, instructor asignado, briefing recibido y aprendizaje emocional anotado.</p>
+        <div class="log-meta"><span>Riesgo rojo</span><span>Insignia: First Adventure</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">🛶</div>
+        <div class="log-type">Agua · travesía</div>
+        <h3>Travesía en kayak</h3>
+        <p>9 km · viento suave · chaleco, ruta, parada y comunicación externa documentadas.</p>
+        <div class="log-meta"><span>Riesgo amarillo</span><span>Insignia: Water Spirit</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">🏄</div>
+        <div class="log-type">Mar · sesión</div>
+        <h3>Día de surf</h3>
+        <p>Ola ordenada, tabla softboard, lectura de corrientes y respeto del pico registrado.</p>
+        <div class="log-meta"><span>Riesgo amarillo</span><span>Aprendizaje: lectura de ola</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">🧊</div>
+        <div class="log-type">Frío · bienestar</div>
+        <h3>Baño invernal</h3>
+        <p>Entrada breve, grupo presente, recuperación activa y sensación corporal anotada.</p>
+        <div class="log-meta"><span>Riesgo amarillo</span><span>Insignia: Cold Warrior</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">🧗</div>
+        <div class="log-type">Vertical · ruta</div>
+        <h3>Vía ferrata</h3>
+        <p>Altura, material homologado, progresión por tramos y puntos de descanso registrados.</p>
+        <div class="log-meta"><span>Riesgo rojo</span><span>Safety First</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">🤿</div>
+        <div class="log-type">Agua · técnica</div>
+        <h3>Sesión de apnea</h3>
+        <p>Profundidad demo, compañero mínimo, boya visible, descanso y sensaciones registradas.</p>
+        <div class="log-meta"><span>Riesgo rojo</span><span>Water Spirit</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">🌙</div>
+        <div class="log-type">Trail · nocturno</div>
+        <h3>Trail nocturno</h3>
+        <p>11 km · frontal · track revisado · punto de corte y comunicación externa definidos.</p>
+        <div class="log-meta"><span>Riesgo amarillo</span><span>Night Explorer</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">🚲</div>
+        <div class="log-type">Ruedas · resistencia</div>
+        <h3>Ruta gravel</h3>
+        <p>62 km · desnivel moderado · luces, kit de reparación, agua y track guardados.</p>
+        <div class="log-meta"><span>Riesgo amarillo</span><span>Endurance Beast</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">❄️</div>
+        <div class="log-type">Nieve · temporada</div>
+        <h3>Snow day</h3>
+        <p>Jornada de nieve con partes revisados, material térmico y nivel del grupo anotados.</p>
+        <div class="log-meta"><span>Riesgo amarillo</span><span>Cold Warrior</span></div>
+      </article>
+      <article class="log-entry-card reveal">
+        <div class="log-media">📷</div>
+        <div class="log-type">Naturaleza · creador</div>
+        <h3>Fotografía de naturaleza</h3>
+        <p>Ruta suave, observación de fauna, cero residuos y álbum vinculado al feed.</p>
+        <div class="log-meta"><span>Riesgo verde</span><span>Nature Respect</span></div>
       </article>
     </div>
   </div>
@@ -944,6 +1062,45 @@
 <div class="section-divider"></div>
 
 <!-- ═══════════════════════════════════════════════════════════════
+     S14 — NOMADX INTELLIGENCE
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="intelligence" class="section section-alt" aria-labelledby="intelligence-title">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Inteligencia de plataforma</span>
+      <h2 class="section-title" id="intelligence-title">NOMADX<br><span>Intelligence</span></h2>
+      <p class="section-subtitle">Tecnología para ayudarte a descubrir con quién entrenar, dónde moverte y qué aventura encaja con tu ADN deportivo.</p>
+    </div>
+    <div class="intelligence-layout reveal">
+      <div class="intelligence-main-card">
+        <div class="intelligence-kicker">Lectura demo de ADN deportivo</div>
+        <h3>Alta afinidad con coasteering, apnea y escalada costera.</h3>
+        <p>La plataforma cruza disciplinas favoritas, entorno, riesgo asumido, Logbook, tribus y planes activos. No vende magia: ordena señales deportivas para que tomes mejores decisiones.</p>
+        <div class="intelligence-balance" aria-label="Equilibrio deportivo demo">
+          <div><span>Mar</span><strong style="width:88%"></strong></div>
+          <div><span>Montaña</span><strong style="width:74%"></strong></div>
+          <div><span>Aire</span><strong style="width:46%"></strong></div>
+          <div><span>Fitness</span><strong style="width:62%"></strong></div>
+          <div><span>Recuperación</span><strong style="width:39%"></strong></div>
+        </div>
+      </div>
+      <div class="intelligence-grid">
+        <article class="int-card"><span>01</span><h3>Compañeros recomendados</h3><p>3 perfiles con compatibilidad superior al 90% por nivel, entorno y disponibilidad.</p></article>
+        <article class="int-card"><span>02</span><h3>Disciplinas por progresión</h3><p>De snorkel costero a apnea recreativa; de senderismo a fast hiking; de rocódromo a vía ferrata.</p></article>
+        <article class="int-card"><span>03</span><h3>Tribus sugeridas</h3><p>Sea Tribe, Coasteering World y Vertical Zone aparecen como comunidades afines.</p></article>
+        <article class="int-card"><span>04</span><h3>Planes compatibles</h3><p>Esta semana tienes 3 planes compatibles con tu nivel y uno marcado como técnico.</p></article>
+        <article class="int-card"><span>05</span><h3>Spots según entorno</h3><p>Prioriza costa y roca; oculta spots negros si tu Safety Radar no encaja.</p></article>
+        <article class="int-card"><span>06</span><h3>Alertas por riesgo</h3><p>Safety Radar recomienda revisar meteo, compañero mínimo, material y plan de comunicación.</p></article>
+        <article class="int-card"><span>07</span><h3>Resumen de Logbook</h3><p>Tu historial muestra más actividad de montaña que de agua este mes.</p></article>
+        <article class="int-card"><span>08</span><h3>Variedad deportiva</h3><p>Indicador equilibrado entre mar, montaña, fitness, aire y recuperación.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
      S14 — ROADMAP
      ═══════════════════════════════════════════════════════════════ -->
 <section id="roadmap" class="section section-alt" aria-labelledby="roadmap-title">
@@ -1045,26 +1202,36 @@
       <h2 class="section-title" id="faq-title">Preguntas<br><span>clave</span></h2>
     </div>
     <div class="faq-list reveal">
-      <details open>
-        <summary>¿Qué es NOMADX?</summary>
-        <p>Una plataforma social deportiva para conectar personas por deporte, nivel, entorno, planes, spots y reputación.</p>
-      </details>
-      <details>
-        <summary>¿NOMADX es Nómada Extremo?</summary>
-        <p>No exactamente. NOMADX es una plataforma digital independiente. Puede formar parte del ecosistema creativo de Diego David Extremo, pero no es la misma web ni cumple la misma función que Nómada Extremo.</p>
-      </details>
-      <details>
-        <summary>¿NOMADX organiza actividades directamente?</summary>
-        <p>No en esta fase. El prototipo está pensado como plataforma de conexión, comunidad, eventos, Logbook y reputación.</p>
-      </details>
-      <details>
-        <summary>¿Qué diferencia NOMADX de una red social normal?</summary>
-        <p>El ADN deportivo, el matching por actividad, los spots, las tribus, el Logbook y la reputación deportiva.</p>
-      </details>
-      <details>
-        <summary>¿Es una app real?</summary>
-        <p>Actualmente es un prototipo avanzado en fase conceptual, preparado como base para una futura plataforma funcional.</p>
-      </details>
+      <details open><summary>¿Qué es NOMADX?</summary><p>Una plataforma social deportiva para conectar personas por deporte, nivel, entorno, planes, spots y reputación.</p></details>
+      <details><summary>¿NOMADX es Nómada Extremo?</summary><p>No exactamente. NOMADX es una plataforma digital independiente. Puede formar parte del ecosistema creativo de Diego David Extremo, pero no es la misma web ni cumple la misma función que Nómada Extremo.</p></details>
+      <details><summary>¿NOMADX organiza actividades directamente?</summary><p>No en esta fase. El prototipo está pensado como plataforma de conexión, comunidad, eventos, Logbook, spots y reputación deportiva.</p></details>
+      <details><summary>¿Qué diferencia NOMADX de una red social normal?</summary><p>El ADN deportivo, el matching por actividad, el catálogo maestro, los spots, las tribus, el Logbook y la reputación deportiva hacen que el deporte sea la estructura central.</p></details>
+      <details><summary>¿Por qué hay deportes, actividades y experiencias?</summary><p>Porque NOMADX no se limita a deportes federados. También recoge modalidades, vivencias, prácticas outdoor, bienestar, retos, exploración y experiencias intensas.</p></details>
+      <details><summary>¿Qué es el ADN deportivo?</summary><p>Es el perfil de afinidad de cada persona: disciplinas favoritas, nivel, entornos, intensidad, riesgo asumido, disponibilidad, estilo social y objetivos.</p></details>
+      <details><summary>¿Cómo funciona el matching?</summary><p>El prototipo empareja por disciplinas, entorno, nivel, riesgo, disponibilidad, tribus comunes, idioma, plan activo y señales de reputación.</p></details>
+      <details><summary>¿Qué son las tribus?</summary><p>Comunidades temáticas organizadas por deporte, entorno o cultura deportiva: agua, aire, montaña, roca, fitness, familias, profesionales o perfiles extremos.</p></details>
+      <details><summary>¿Qué es el Logbook?</summary><p>Un historial deportivo donde registrar disciplina, fecha, lugar general, duración, distancia, desnivel, profundidad, material, condiciones, aprendizaje e insignias.</p></details>
+      <details><summary>¿Qué es Safety Radar?</summary><p>Una lectura visual de riesgo que ayuda a revisar nivel técnico, exposición, material, meteorología, comunicación, permisos, estado físico y plan de emergencia.</p></details>
+      <details><summary>¿Qué significa riesgo verde, amarillo, rojo y negro?</summary><p>Verde es bajo riesgo relativo; amarillo requiere técnica básica o control; rojo implica actividad técnica; negro es extrema y solo debe plantearse con formación, autorización y entorno controlado.</p></details>
+      <details><summary>¿Puedo crear planes con otras personas?</summary><p>Sí, el prototipo muestra planes comunitarios con cupos, nivel, requisitos generales, tribu asociada, spots y estado de seguridad.</p></details>
+      <details><summary>¿Puedo guardar spots?</summary><p>Sí. Los spots pueden guardarse, reportarse y conectarse con disciplinas, planes, Logbook y Safety Radar.</p></details>
+      <details><summary>¿NOMADX sirve para principiantes?</summary><p>Sí. Hay tribus beginner friendly, filtros por nivel, planes suaves y actividades de riesgo verde o amarillo pensadas para progresar sin presión.</p></details>
+      <details><summary>¿NOMADX sirve para deportistas avanzados?</summary><p>Sí. El catálogo diferencia modalidades técnicas, profesionales, extremas y de alto compromiso, siempre con cultura de seguridad.</p></details>
+      <details><summary>¿Qué es NOMADX Pro?</summary><p>Una capa profesional futura para guías, instructores, entrenadores, clubs, escuelas, centros deportivos, marcas outdoor y organizadores de eventos.</p></details>
+      <details><summary>¿Puede usarlo un guía o instructor?</summary><p>Sí. NOMADX Pro está planteado para perfiles profesionales verificados, calendario, cursos, requisitos, comunidad, reseñas y reputación profesional.</p></details>
+      <details><summary>¿El catálogo son deportes federados?</summary><p>No solo. Incluye deportes federados, modalidades, técnicas, actividades outdoor, experiencias, vivencias, bienestar y retos de resistencia.</p></details>
+      <details><summary>¿Por qué hay vivencias y experiencias en el catálogo?</summary><p>Porque la identidad deportiva también se construye con primeras veces, travesías, retos emocionales, exploración, naturaleza y aprendizaje.</p></details>
+      <details><summary>¿Es una app real?</summary><p>Actualmente es un prototipo avanzado en fase conceptual, preparado como base visual y funcional para una futura plataforma real.</p></details>
+      <details><summary>¿Habrá app móvil?</summary><p>La hoja de ruta contempla app móvil, perfiles reales, backend, inteligencia de plataforma, verificaciones y expansión internacional.</p></details>
+      <details><summary>¿Cómo se protege la seguridad?</summary><p>Con clasificación de riesgo, avisos, Safety Radar, reputación, verificaciones, requisitos generales y una cultura que prioriza formación y planificación.</p></details>
+      <details><summary>¿NOMADX da instrucciones para actividades peligrosas?</summary><p>No. NOMADX clasifica, contextualiza y fomenta seguridad, pero no ofrece pasos operativos peligrosos ni sustituye formación profesional.</p></details>
+      <details><summary>¿Puedo registrar aventuras pasadas?</summary><p>Sí. El Logbook está pensado para registrar experiencias recientes o pasadas y convertirlas en historial deportivo útil.</p></details>
+      <details><summary>¿Qué relación tiene con Diego David Extremo?</summary><p>NOMADX es un concepto creado por Diego David Extremo dentro de su ecosistema creativo de aventura y tecnología, pero funciona como plataforma independiente.</p></details>
+      <details><summary>¿Puedo usar NOMADX para encontrar gente de mi nivel?</summary><p>Sí. El matching combina nivel técnico, riesgo, entorno, disponibilidad y deportes concretos para sugerir personas compatibles.</p></details>
+      <details><summary>¿Puedo ocultar mi ubicación exacta?</summary><p>En una versión real, la plataforma debería trabajar con ubicación aproximada, privacidad por defecto y controles claros para no exponer spots sensibles.</p></details>
+      <details><summary>¿Qué diferencia hay entre plan, evento, tribu y spot?</summary><p>Un plan es una quedada concreta; un evento puede tener organización mayor; una tribu es comunidad; un spot es lugar o entorno asociado a disciplinas.</p></details>
+      <details><summary>¿Qué pasa si una actividad es de riesgo negro?</summary><p>Se muestra como actividad extrema y se refuerza el aviso de que no debe realizarse sin formación específica, permisos cuando proceda, planificación, supervisión y entorno controlado.</p></details>
+      <details><summary>¿Cómo se validan guías o profesionales en NOMADX Pro?</summary><p>La propuesta contempla verificación documental, titulaciones, experiencia, reseñas verificadas, reputación profesional y actividad dentro de la comunidad.</p></details>
     </div>
   </div>
 </section>
@@ -1112,6 +1279,7 @@
           <a href="#mapa">Mapa de Spots</a>
           <a href="#eventos">Planes y Eventos</a>
           <a href="#logbook">Logbook</a>
+          <a href="#intelligence">NOMADX Intelligence</a>
         </div>
       </div>
       <div class="footer-col">
@@ -1119,6 +1287,7 @@
         <div class="footer-links">
           <a href="#insignias">Insignias y Verificaciones</a>
           <a href="#seguridad">Seguridad y Responsabilidad</a>
+          <a href="#intelligence">Intelligence</a>
           <a href="#pro">NOMADX Pro</a>
           <a href="#pricing">Planes Premium</a>
           <a href="#roadmap">Roadmap</a>

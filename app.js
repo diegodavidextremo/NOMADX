@@ -934,6 +934,120 @@ function normalizeNomadxDemoData() {
     { icon: '🛒', name: 'Marcas outdoor', desc: 'Marketplace futuro, partners, campañas y visibilidad basada en actividad y confianza.' },
     { icon: '📊', name: 'Centros deportivos', desc: 'Analíticas, eventos, reservas futuras y perfiles verificados para comunidades activas.' }
   );
+
+  MATCH_CARDS.push(
+    { id: 'm9', name: 'Air Sports Crew', role: 'Crew aéreo · perfiles verificados', profileType: 'Crew deportivo', emoji: '🪂', gradient: 'linear-gradient(135deg,#1a1030,#0d1828)', sports: ['Paracaidismo','Wingsuit','Parapente'], secondary: ['Tracking','Ala delta'], level: 'Avanzado', env: 'Aire y montaña', dist: 'Modo global', objective: 'Vuelos y progresión', risk: 'rojo', availability: 'Fines de semana', locationMode: 'Zonas de vuelo verificadas', badges: ['Air Explorer','Safety First','Verificado'], tribes: ['Air Sports','Extreme Jumpers'], planActive: 'Ventana de vuelo demo', compat: 95 },
+    { id: 'm10', name: 'Sea Adventure Partner', role: 'Partner agua · Sea Tribe', profileType: 'Partner deportivo', emoji: '🌊', gradient: 'linear-gradient(135deg,#071830,#0d1025)', sports: ['Kayak de mar','Snorkel costero','SUP'], secondary: ['Apnea','Surf'], level: 'Medio', env: 'Mar y costa', dist: '18 km', objective: 'Planes de agua', risk: 'amarillo', availability: 'Tardes y domingos', locationMode: 'Costa cercana', badges: ['Sea Explorer','Comunidad positiva'], tribes: ['Sea Tribe','Kayak Explorers'], planActive: 'Kayak sunrise', compat: 90 },
+    { id: 'm11', name: 'Snow & Ice Rider', role: 'Nieve · riders de temporada', profileType: 'Tribu de temporada', emoji: '❄️', gradient: 'linear-gradient(135deg,#0d1f3c,#14243d)', sports: ['Snowboard','Esquí de montaña','Splitboard'], secondary: ['Raquetas de nieve','Freeride'], level: 'Medio-alto', env: 'Nieve y frío', dist: 'Modo global', objective: 'Snow trips', risk: 'rojo', availability: 'Puentes y temporada', locationMode: 'Estaciones y montaña', badges: ['Cold Warrior','Mountain Soul'], tribes: ['Snow & Ice'], planActive: 'Snow trip', compat: 87 },
+    { id: 'm12', name: 'Urban Parkour Team', role: 'Equipo urbano · acción', profileType: 'Equipo', emoji: '🏙️', gradient: 'linear-gradient(135deg,#101827,#1f1328)', sports: ['Parkour','Freerunning','Tricking'], secondary: ['Calistenia','Street workout'], level: 'Intermedio', env: 'Urbano', dist: '6 km', objective: 'Sesiones técnicas', risk: 'amarillo', availability: 'Entre semana', locationMode: 'Parques urbanos', badges: ['Urban Action','Perfil activo'], tribes: ['Urban Action'], planActive: 'Evento de parkour', compat: 84 },
+    { id: 'm13', name: 'Functional Athlete', role: 'Rendimiento · preparación física', profileType: 'Atleta individual', emoji: '💪', gradient: 'linear-gradient(135deg,#1f1a0d,#0d1f10)', sports: ['Crossfit','HYROX','Entrenamiento funcional'], secondary: ['Movilidad','OCR'], level: 'Medio', env: 'Fitness y resistencia', dist: '4 km', objective: 'Entrenar con constancia', risk: 'amarillo', availability: 'Mañanas', locationMode: 'Box y outdoor', badges: ['Technical Progress','Perfil activo'], tribes: ['Functional Athletes','OCR / HYROX Lab'], planActive: 'Reto HYROX', compat: 92 },
+    { id: 'm14', name: 'Cave Explorer', role: 'Exploración subterránea', profileType: 'Explorador técnico', emoji: '🕳️', gradient: 'linear-gradient(135deg,#0d0d1f,#100d20)', sports: ['Espeleología','Cave diving','Barranquismo'], secondary: ['Rápel','Orientación'], level: 'Técnico', env: 'Cueva y roca-agua', dist: 'Modo global', objective: 'Exploración responsable', risk: 'rojo', availability: 'Salidas planificadas', locationMode: 'Cuevas verificadas', badges: ['Safety First','Vertical Mind'], tribes: ['Cave Explorers','Vertical Rescue Mindset'], planActive: 'Salida técnica cerrada', compat: 89 },
+    { id: 'm15', name: 'Endurance Beast', role: 'Ultraresistencia · demo', profileType: 'Atleta endurance', emoji: '🔥', gradient: 'linear-gradient(135deg,#2a140d,#101d0d)', sports: ['Triatlón','Ultratrail','Everesting'], secondary: ['Ironman','Bikepacking'], level: 'Avanzado', env: 'Resistencia', dist: '30 km', objective: 'Retos largos', risk: 'amarillo', availability: 'Bloques de entrenamiento', locationMode: 'Global', badges: ['Endurance Beast','Logbook completo'], tribes: ['Trail & Mountain'], planActive: 'Salida de orientación', compat: 88 },
+    { id: 'm16', name: 'Kayak Explorer', role: 'Kayak · travesía', profileType: 'Partner acuático', emoji: '🛶', gradient: 'linear-gradient(135deg,#0d1f3c,#0a1520)', sports: ['Kayak de mar','Packraft','Travesías por calas'], secondary: ['SUP touring','Snorkel'], level: 'Medio', env: 'Mar, lago y río', dist: '22 km', objective: 'Travesías seguras', risk: 'amarillo', availability: 'Amaneceres', locationMode: 'Costa y pantanos', badges: ['Sea Explorer','Nature Respect'], tribes: ['Kayak Explorers','Sea Tribe'], planActive: 'Kayak sunrise', compat: 91 },
+    { id: 'm17', name: 'Paragliding Mate', role: 'Vuelo libre · compañero', profileType: 'Compañero', emoji: '🪂', gradient: 'linear-gradient(135deg,#1a1030,#071830)', sports: ['Parapente','Paramotor','Ala delta'], secondary: ['Speed flying','Vuelo de montaña'], level: 'Avanzado', env: 'Aire', dist: 'Modo global', objective: 'Compartir ventanas buenas', risk: 'rojo', availability: 'Según meteo', locationMode: 'Zonas de despegue', badges: ['Air Explorer','Safety First'], tribes: ['Paragliding Network','Air Sports'], planActive: 'Revisión meteo demo', compat: 93 },
+    { id: 'm18', name: 'Coasteering Squad', role: 'Costa, roca y agua', profileType: 'Squad', emoji: '🌊', gradient: 'linear-gradient(135deg,#0d1f3c,#201010)', sports: ['Coasteering','Cliff jumping','Psicobloc'], secondary: ['Snorkel','Kayak entre cuevas'], level: 'Avanzado', env: 'Costa y acantilado', dist: '26 km', objective: 'Planes con evaluación previa', risk: 'rojo', availability: 'Fines de semana', locationMode: 'Spots costeros', badges: ['Sea Explorer','Extreme Mindset'], tribes: ['Coasteering World','Cliff & Coast'], planActive: 'Plan de coasteering', compat: 94 },
+    { id: 'm19', name: 'Trail Night Runner', role: 'Trail nocturno · seguridad', profileType: 'Runner', emoji: '🌙', gradient: 'linear-gradient(135deg,#0b1020,#142414)', sports: ['Trail running','Orientación','Fast hiking'], secondary: ['Marcha nórdica','Fotografía de tormentas'], level: 'Intermedio', env: 'Montaña', dist: '14 km', objective: 'Nocturnas planificadas', risk: 'amarillo', availability: 'Noches entre semana', locationMode: 'Senderos cercanos', badges: ['Night Explorer','Safety First'], tribes: ['Trail Night Club'], planActive: 'Trail nocturno', compat: 86 },
+    { id: 'm20', name: 'Wild Photo Explorer', role: 'Creador outdoor · naturaleza', profileType: 'Creador', emoji: '📷', gradient: 'linear-gradient(135deg,#13251d,#0d1525)', sports: ['Fotografía de naturaleza','Senderismo','Expedición fotográfica'], secondary: ['Observación de fauna','Geocaching'], level: 'Todos', env: 'Naturaleza', dist: 'Modo global', objective: 'Documentar spots sin impacto', risk: 'verde', availability: 'Flexible', locationMode: 'Entornos naturales', badges: ['Nature Respect','Creador outdoor'], tribes: ['Nature Photographers','Outdoor Creators'], planActive: 'Quedada de fotografía', compat: 85 },
+    { id: 'm21', name: 'HYROX Partner', role: 'Fitness competición', profileType: 'Partner de entrenamiento', emoji: '🏋️', gradient: 'linear-gradient(135deg,#1d1a0d,#24120c)', sports: ['HYROX','OCR','Cross training'], secondary: ['Running','Fuerza funcional'], level: 'Medio-alto', env: 'Fitness y urbano', dist: '3 km', objective: 'Preparar evento', risk: 'amarillo', availability: 'Lunes y jueves', locationMode: 'Box local', badges: ['Functional Athlete','Team Builder'], tribes: ['OCR / HYROX Lab','Functional Athletes'], planActive: 'Reto HYROX', compat: 96 },
+    { id: 'm22', name: 'Rope Jump Crew', role: 'Saltos y cuerda · acceso responsable', profileType: 'Crew verificado', emoji: '⚡', gradient: 'linear-gradient(135deg,#2a0d0d,#100d20)', sports: ['Rope jumping','Puenting','Pendulum jump'], secondary: ['Highline','Rápel volado'], level: 'Solo expertos', env: 'Vacío y cuerda', dist: 'Modo global', objective: 'Cultura técnica y seguridad', risk: 'negro', availability: 'Eventos cerrados', locationMode: 'Entorno controlado', badges: ['Extreme Mindset','Safety First','Verificado'], tribes: ['Rope Jump Crew','Extreme Jumpers'], planActive: 'Contenido educativo', compat: 83 },
+    { id: 'm23', name: 'Surfari Nomad', role: 'Surfari · viaje deportivo', profileType: 'Viajero deportivo', emoji: '🏄', gradient: 'linear-gradient(135deg,#0d1f3c,#1f1a0d)', sports: ['Surf','Longboard surf','Surfari'], secondary: ['Downwind foil','Kitesurf'], level: 'Medio', env: 'Mar y océano', dist: 'Modo global', objective: 'Escapadas por swell', risk: 'amarillo', availability: 'Ventanas de oleaje', locationMode: 'Costa global', badges: ['Sea Explorer','Global Nomad'], tribes: ['Surfari Tribe','Sea Tribe'], planActive: 'Surfari weekend', compat: 87 },
+    { id: 'm24', name: 'Multiaventura Circle', role: 'Círculo multiaventura', profileType: 'Comunidad mixta', emoji: '🧭', gradient: 'linear-gradient(135deg,#0d1f10,#0d1f3c)', sports: ['Senderismo','Kayak','Escalada'], secondary: ['Orientación','Multiaventura familiar'], level: 'Iniciación a medio', env: 'Mixto', dist: '20 km', objective: 'Planes progresivos', risk: 'amarillo', availability: 'Domingos', locationMode: 'Entornos accesibles', badges: ['Multiaventura','Comunidad positiva'], tribes: ['Multiaventura NOMADX','Beginner Friendly Outdoor'], planActive: 'Multiaventura familiar', compat: 90 }
+  );
+
+  FEED_POSTS.push(
+    { id: 'p7', user: 'Adventure Family', role: 'Adventure Families', emoji: '👥', time: 'hace 1d', mediaEmoji: '🧭', mediaBg: 'linear-gradient(135deg,#13251d,#0d1525)', location: 'Ruta familiar · demo', type: 'evento', text: 'Plan de tribu publicado: multiaventura familiar con ruta corta, orientación básica y descanso largo. El objetivo es progresar sin prisa.', sports: ['Senderismo','Orientación'], likes: 142, comments: 18, saves: 39, risk: 'verde', tribe: 'Adventure Families' },
+    { id: 'p8', user: 'Air Sports Crew', role: 'Air Sports', emoji: '🪂', time: 'hace 1d', mediaEmoji: '🛡️', mediaBg: 'linear-gradient(135deg,#1a1030,#0d1828)', location: 'Zona de despegue · demo', type: 'seguridad', text: 'Reporte de condiciones: viento variable, plan aplazado. En deportes aéreos el mejor plan también puede ser no salir.', sports: ['Parapente','Safety Radar'], likes: 308, comments: 44, saves: 81, risk: 'rojo', tribe: 'Air Sports' },
+    { id: 'p9', user: 'HYROX Partner', role: 'OCR / HYROX Lab', emoji: '🏋️', time: 'hace 2d', mediaEmoji: '📈', mediaBg: 'linear-gradient(135deg,#1d1a0d,#24120c)', location: 'Box urbano · demo', type: 'reto', text: 'Progreso semanal: carrera, trineo, wall balls y movilidad. La plataforma cruza entrenamiento con objetivos reales.', sports: ['HYROX','Cross training'], likes: 221, comments: 31, saves: 54, risk: 'amarillo', tribe: 'OCR / HYROX Lab' },
+    { id: 'p10', user: 'Wild Photo Explorer', role: 'Outdoor Creators', emoji: '📷', time: 'hace 2d', mediaEmoji: '🌿', mediaBg: 'linear-gradient(135deg,#13251d,#0d1525)', location: 'Reserva natural · demo', type: 'aventura', text: 'Mini historia: 12 km, cero residuos, tres especies observadas y una entrada de Logbook centrada en respeto ambiental.', sports: ['Fotografía de naturaleza','Senderismo'], likes: 198, comments: 22, saves: 76, risk: 'verde', tribe: 'Nature Photographers' },
+    { id: 'p11', user: 'Rope Jump Crew', role: 'Extreme Jumpers', emoji: '⚡', time: 'hace 2d', mediaEmoji: '⚫', mediaBg: 'linear-gradient(135deg,#2a0d0d,#100d20)', location: 'Entorno controlado · demo', type: 'seguridad', text: 'Recordatorio cultural: las disciplinas negras no son retos virales. Son actividad técnica, autorización, equipo, formación y supervisión.', sports: ['Rope jumping','Safety'], likes: 512, comments: 96, saves: 144, risk: 'negro', tribe: 'Extreme Jumpers' },
+    { id: 'p12', user: 'Kayak Explorer', role: 'Kayak Explorers', emoji: '🛶', time: 'hace 3d', mediaEmoji: '🌅', mediaBg: 'linear-gradient(135deg,#0d1f3c,#0a1520)', location: 'Lago demo', type: 'aventura', text: 'Travesía sunrise registrada: 9 km, viento suave, chaleco, comunicación externa y parada de snorkel en zona segura.', sports: ['Kayak','Snorkel'], likes: 176, comments: 19, saves: 47, risk: 'amarillo', tribe: 'Kayak Explorers' },
+    { id: 'p13', user: 'Coasteering Squad', role: 'Coasteering World', emoji: '🌊', time: 'hace 3d', mediaEmoji: '🧩', mediaBg: 'linear-gradient(135deg,#0d1f3c,#201010)', location: 'Acantilado costero · demo', type: 'tecnica', text: 'Comparativa de material general: calzado adherente, protección térmica y casco cambian mucho la experiencia. Sin material adecuado, no hay plan.', sports: ['Coasteering','Material'], likes: 269, comments: 41, saves: 118, risk: 'rojo', tribe: 'Coasteering World' },
+    { id: 'p14', user: 'Surfari Nomad', role: 'Surfari Tribe', emoji: '🏄', time: 'hace 4d', mediaEmoji: '🌊', mediaBg: 'linear-gradient(135deg,#0d1f3c,#1f1a0d)', location: 'Costa atlántica · demo', type: 'spot', text: 'Reporte de condiciones: ola ordenada para nivel medio, viento lateral suave y dos planes compatibles para el fin de semana.', sports: ['Surf','Surfari'], likes: 303, comments: 52, saves: 91, risk: 'amarillo', tribe: 'Surfari Tribe' },
+    { id: 'p15', user: 'Cave Explorer', role: 'Cave Explorers', emoji: '🕳️', time: 'hace 4d', mediaEmoji: '📋', mediaBg: 'linear-gradient(135deg,#0d0d1f,#100d20)', location: 'Cueva visitable · demo', type: 'seguridad', text: 'Checklist comunitario antes de entrar: permisos, compañero mínimo, comunicación externa, hora límite y plan de salida.', sports: ['Espeleología','Safety'], likes: 244, comments: 37, saves: 102, risk: 'rojo', tribe: 'Cave Explorers' },
+    { id: 'p16', user: 'Trail Night Runner', role: 'Trail Night Club', emoji: '🌙', time: 'hace 5d', mediaEmoji: '🔦', mediaBg: 'linear-gradient(135deg,#0b1020,#142414)', location: 'Sendero nocturno · demo', type: 'evento', text: 'Invitación a plan: trail nocturno de 11 km, frontal obligatorio, ritmo conversacional y punto de corte definido.', sports: ['Trail running','Orientación'], likes: 167, comments: 24, saves: 58, risk: 'amarillo', tribe: 'Trail Night Club' },
+    { id: 'p17', user: 'Paragliding Mate', role: 'Paragliding Network', emoji: '🪂', time: 'hace 5d', mediaEmoji: '☁️', mediaBg: 'linear-gradient(135deg,#1a1030,#071830)', location: 'Zona de vuelo · demo', type: 'spot', text: 'Spot guardado con aviso: revisar normativa, viento, acceso, zona de aterrizaje y ventana de vuelo antes de proponer plan.', sports: ['Parapente','Spot'], likes: 187, comments: 29, saves: 83, risk: 'rojo', tribe: 'Paragliding Network' },
+    { id: 'p18', user: 'Snow & Ice Rider', role: 'Snow & Ice', emoji: '❄️', time: 'hace 6d', mediaEmoji: '🏔️', mediaBg: 'linear-gradient(135deg,#0d1f3c,#14243d)', location: 'Estación de nieve · demo', type: 'seguridad', text: 'Alerta de temporada: visibilidad irregular y fatiga acumulada. Safety Radar recomienda plan corto, comunicación y margen de retirada.', sports: ['Snowboard','Esquí de montaña'], likes: 216, comments: 35, saves: 72, risk: 'rojo', tribe: 'Snow & Ice' },
+    { id: 'p19', user: 'Multiaventura Circle', role: 'Multiaventura NOMADX', emoji: '🧭', time: 'hace 6d', mediaEmoji: '🎯', mediaBg: 'linear-gradient(135deg,#0d1f10,#0d1f3c)', location: 'Entorno natural · demo', type: 'reto', text: 'Reto de variedad: agua, montaña, fitness y recuperación en el mismo mes. No todo progreso es ir más fuerte.', sports: ['Multiaventura','Logbook'], likes: 253, comments: 33, saves: 69, risk: 'amarillo', tribe: 'Multiaventura NOMADX' },
+    { id: 'p20', user: 'Climbing Partner', role: 'Vertical Zone', emoji: '🪨', time: 'hace 1 sem', mediaEmoji: '🧗', mediaBg: 'linear-gradient(135deg,#24120c,#111827)', location: 'Rocódromo · demo', type: 'tecnica', text: 'Recomendación de disciplina: si vienes de fuerza funcional, el búlder puede ser una puerta brutal hacia la roca con progresión medible.', sports: ['Búlder','Escalada'], likes: 301, comments: 48, saves: 88, risk: 'amarillo', tribe: 'Vertical Zone' }
+  );
+
+  TRIBUS.push(
+    { id: 't11', name: 'Snow & Ice', icon: '❄️', bgColor: '#00d4ff18', desc: 'Esquí, snowboard, splitboard, frío y cultura de seguridad invernal.', sports: ['Snowboard','Esquí de montaña','Splitboard'], members: 1480, level: 'Medio-avanzado', risk: 'rojo', plans: 7, badges: ['Cold Warrior'], nextEvent: 'Snow trip · demo' },
+    { id: 't12', name: 'Motor Off-Road', icon: '🏍️', bgColor: '#ff5e1a18', desc: 'Enduro, motocross, 4x4 y conducción fuera de asfalto con respeto ambiental.', sports: ['Motocross','Enduro','4x4'], members: 930, level: 'Medio', risk: 'rojo', plans: 5, badges: ['Motor'], nextEvent: 'Circuito demo · cupos abiertos' },
+    { id: 't13', name: 'Urban Action', icon: '🏙️', bgColor: '#7c3aed20', desc: 'Parkour, freerunning, calistenia urbana y acción técnica en ciudad.', sports: ['Parkour','Freerunning','Street workout'], members: 2411, level: 'Todos', risk: 'amarillo', plans: 9, badges: ['Urban Action'], nextEvent: 'Evento de parkour · demo' },
+    { id: 't14', name: 'Extreme Jumpers', icon: '⚡', bgColor: '#ef444420', desc: 'Saltos, vacío y cuerda tratados como cultura técnica y no como espectáculo vacío.', sports: ['Rope jumping','Puenting','Bungee jumping'], members: 512, level: 'Expertos verificados', risk: 'negro', plans: 2, badges: ['Extreme Mindset','Safety First'], nextEvent: 'Acceso responsable · cerrado' },
+    { id: 't15', name: 'Freediving Circle', icon: '🤿', bgColor: '#071830cc', desc: 'Apnea, freediving, respiración, calma y progresión segura en agua.', sports: ['Apnea','Freediving','Snorkel'], members: 1740, level: 'Iniciación a técnico', risk: 'rojo', plans: 8, badges: ['Water Spirit'], nextEvent: 'Clinic de apnea · demo' },
+    { id: 't16', name: 'Multiaventura NOMADX', icon: '🧭', bgColor: '#1aff8c18', desc: 'Planes híbridos para quienes mezclan mar, montaña, roca, fitness y exploración.', sports: ['Multiaventura','Kayak','Senderismo'], members: 3020, level: 'Todos', risk: 'amarillo', plans: 12, badges: ['Multiaventura'], nextEvent: 'Multiaventura familiar · demo' },
+    { id: 't17', name: 'Rope Jump Crew', icon: '🪢', bgColor: '#ef444415', desc: 'Cuerda, péndulo, vacío y revisión técnica estricta.', sports: ['Rope jumping','Pendulum jump','Highline'], members: 420, level: 'Solo expertos', risk: 'negro', plans: 1, badges: ['Rope Mindset'], nextEvent: 'Contenido educativo' },
+    { id: 't18', name: 'Coasteering World', icon: '🌊', bgColor: '#00d4ff20', desc: 'Costa, roca, agua, saltos opcionales y lectura del mar.', sports: ['Coasteering','Cliff jumping','Psicobloc'], members: 1366, level: 'Medio-avanzado', risk: 'rojo', plans: 6, badges: ['Sea Explorer'], nextEvent: 'Plan de coasteering · demo' },
+    { id: 't19', name: 'Paragliding Network', icon: '🪂', bgColor: '#7c3aed18', desc: 'Vuelo libre, meteorología, progresión y comunidad aérea responsable.', sports: ['Parapente','Paramotor','Ala delta'], members: 1088, level: 'Verificado', risk: 'rojo', plans: 4, badges: ['Air Explorer'], nextEvent: 'Ventana de vuelo · demo' },
+    { id: 't20', name: 'Surfari Tribe', icon: '🏄', bgColor: '#00d4ff18', desc: 'Viajes de surf, olas, foil, viento y cultura de mar.', sports: ['Surf','Surfari','Wingfoil'], members: 2640, level: 'Todos', risk: 'amarillo', plans: 10, badges: ['Global Nomad'], nextEvent: 'Surfari weekend' },
+    { id: 't21', name: 'Kayak Explorers', icon: '🛶', bgColor: '#0ea5e920', desc: 'Travesía, packraft, kayak de mar y agua interior.', sports: ['Kayak de mar','Packraft','SUP touring'], members: 1560, level: 'Iniciación a medio', risk: 'amarillo', plans: 8, badges: ['Water Spirit'], nextEvent: 'Kayak sunrise' },
+    { id: 't22', name: 'Cliff & Coast', icon: '🪨', bgColor: '#ff5e1a16', desc: 'Acantilados, costa rocosa, fotografía y actividades híbridas mar-roca.', sports: ['Cliff diving','Psicobloc','Fotografía marina'], members: 990, level: 'Avanzado', risk: 'rojo', plans: 5, badges: ['Vertical Mind'], nextEvent: 'Reporte de spot' },
+    { id: 't23', name: 'OCR / HYROX Lab', icon: '🏋️', bgColor: '#1aff8c20', desc: 'Rendimiento funcional, OCR, HYROX y preparación física medible.', sports: ['HYROX','OCR','Cross training'], members: 3210, level: 'Todos', risk: 'amarillo', plans: 14, badges: ['Technical Progress'], nextEvent: 'Reto HYROX' },
+    { id: 't24', name: 'Wild Camping', icon: '🏕️', bgColor: '#1aff8c14', desc: 'Vivac, acampada, bushcraft y autosuficiencia responsable.', sports: ['Vivac','Bushcraft','Trekking'], members: 1180, level: 'Medio', risk: 'amarillo', plans: 6, badges: ['Nature Respect'], nextEvent: 'Retiro salvaje · demo' },
+    { id: 't25', name: 'Nature Photographers', icon: '📷', bgColor: '#00d4ff12', desc: 'Fotografía de naturaleza, tormentas, fauna y documentación de spots.', sports: ['Fotografía de naturaleza','Observación de fauna','Senderismo'], members: 1777, level: 'Todos', risk: 'verde', plans: 9, badges: ['Creador outdoor'], nextEvent: 'Quedada fotográfica' },
+    { id: 't26', name: 'Trail Night Club', icon: '🌙', bgColor: '#7c3aed14', desc: 'Trail nocturno, orientación, frontal, ritmo controlado y seguridad de grupo.', sports: ['Trail running','Orientación','Fast hiking'], members: 840, level: 'Intermedio', risk: 'amarillo', plans: 5, badges: ['Night Explorer'], nextEvent: 'Trail nocturno' },
+    { id: 't27', name: 'Vertical Rescue Mindset', icon: '🛟', bgColor: '#ef444418', desc: 'Cultura de rescate, cuerda, primeros auxilios y criterio técnico.', sports: ['Rescate vertical','Rápel','Espeleología'], members: 520, level: 'Profesional', risk: 'rojo', plans: 3, badges: ['Safety First'], nextEvent: 'Formación demo' },
+    { id: 't28', name: 'Women Outdoor Crew', icon: '✨', bgColor: '#7c3aed18', desc: 'Comunidad outdoor para mujeres con planes progresivos, seguros y acompañados.', sports: ['Trail','Escalada','Kayak'], members: 2050, level: 'Todos', risk: 'amarillo', plans: 11, badges: ['Team Builder'], nextEvent: 'Salida de iniciación' },
+    { id: 't29', name: 'Beginner Friendly Outdoor', icon: '🌱', bgColor: '#1aff8c18', desc: 'Primeras aventuras, progresión suave, lenguaje claro y cero presión.', sports: ['Senderismo','Yoga','Kayak'], members: 2860, level: 'Principiantes', risk: 'verde', plans: 16, badges: ['First Adventure'], nextEvent: 'Ruta verde · demo' },
+    { id: 't30', name: 'Pro Guides Network', icon: '✅', bgColor: '#1d1a0d', desc: 'Guías, instructores y perfiles profesionales verificados dentro de la plataforma.', sports: ['Formación','Eventos','Seguridad'], members: 680, level: 'Profesional', risk: 'variable', plans: 18, badges: ['Pro verificado'], nextEvent: 'Calendario Pro · demo' }
+  );
+
+  SPOTS.push(
+    { id: 'sp9', name: 'Rocódromo', icon: '🧗', env: 'Urbano · roca indoor', sports: ['Escalada','Búlder'], level: 'Todos', risk: 'verde', season: 'Todo el año', requirements: 'Normas del centro, compañero o autobelay', permissions: 'Centro autorizado', access: 'Fácil', plans: 6, conditions: 'Interior estable', desc: 'Spot demo para sesiones técnicas, progresión y matches de escalada sin depender de meteorología.' },
+    { id: 'sp10', name: 'Parque urbano', icon: '🏙️', env: 'Urbano · fitness', sports: ['Parkour','Calistenia','OCR urbana'], level: 'Todos', risk: 'amarillo', season: 'Todo el año', requirements: 'Calentamiento, progresión y respeto de uso público', permissions: 'Uso comunitario', access: 'Fácil', plans: 8, conditions: 'Revisar humedad y afluencia', desc: 'Zona demo para entrenamiento funcional, parkour progresivo y quedadas urbanas.' },
+    { id: 'sp11', name: 'Río de aguas bravas', icon: '💧', env: 'Río · agua', sports: ['Rafting','Kayak de río','Hydrospeed'], level: 'Medio', risk: 'rojo', season: 'Según caudal', requirements: 'Caudal revisado, chaleco, casco y guía si procede', permissions: 'Revisar normativa', access: 'Medio', plans: 4, conditions: 'Caudal demo estable', desc: 'Spot demo para actividades de río con fuerte dependencia de caudal y experiencia.' },
+    { id: 'sp12', name: 'Estación de nieve', icon: '❄️', env: 'Nieve · frío', sports: ['Snowboard','Esquí alpino','Splitboard'], level: 'Todos', risk: 'amarillo', season: 'Invierno', requirements: 'Equipo adecuado, estado físico y partes de nieve', permissions: 'Forfait o autorización', access: 'Medio', plans: 7, conditions: 'Visibilidad variable', desc: 'Spot demo de nieve con filtros por temporada, nivel, accesos y reporte de condiciones.' },
+    { id: 'sp13', name: 'Zona de buceo', icon: '🤿', env: 'Subacuático · mar', sports: ['Buceo recreativo','Snorkel','Apnea'], level: 'Medio', risk: 'rojo', season: 'Primavera-Verano', requirements: 'Certificación cuando proceda, compañero y plan de salida', permissions: 'Centro o normativa local', access: 'Medio', plans: 5, conditions: 'Visibilidad media', desc: 'Spot demo para diferenciar snorkeling, apnea, buceo recreativo y prácticas técnicas.' },
+    { id: 'sp14', name: 'Zona de parapente', icon: '🪂', env: 'Aire · montaña', sports: ['Parapente','Ala delta','Paramotor'], level: 'Verificado', risk: 'rojo', season: 'Según viento', requirements: 'Licencia, meteorología y zona autorizada', permissions: 'Zona regulada', access: 'Medio', plans: 3, conditions: 'Viento demo revisable', desc: 'Spot demo de deportes aéreos donde Safety Radar prioriza meteo, acceso y aterrizaje.' },
+    { id: 'sp15', name: 'Circuito de motor', icon: '🏁', env: 'Motor · velocidad', sports: ['Motocross','Karting','Track day'], level: 'Medio', risk: 'rojo', season: 'Todo el año', requirements: 'Protecciones, briefing y normas del circuito', permissions: 'Instalación autorizada', access: 'Fácil', plans: 5, conditions: 'Pista seca demo', desc: 'Spot demo para motor con control de acceso y requisitos visibles.' },
+    { id: 'sp16', name: 'Barranco técnico', icon: '🪢', env: 'Barranco · roca-agua', sports: ['Barranquismo','Rápel en cascada','Canyoning'], level: 'Técnico', risk: 'rojo', season: 'Según caudal', requirements: 'Formación, material técnico, caudal y grupo adecuado', permissions: 'Revisar permisos', access: 'Difícil', plans: 2, conditions: 'Caudal demo moderado', desc: 'Spot demo de barranco para explicar nivel técnico, exposición y permisos sin instrucciones operativas.' },
+    { id: 'sp17', name: 'Ruta gravel', icon: '🚲', env: 'Ruedas · resistencia', sports: ['Gravel','Bikepacking','Orientación'], level: 'Medio', risk: 'amarillo', season: 'Todo el año', requirements: 'Autonomía, agua, luces y track revisado', permissions: 'Vías permitidas', access: 'Fácil', plans: 8, conditions: 'Terreno seco', desc: 'Ruta demo para planes de resistencia, navegación y Logbook con distancia y desnivel.' },
+    { id: 'sp18', name: 'Sector de highline', icon: '🪢', env: 'Vacío · roca', sports: ['Highline','Slackline en altura','Rodeo line'], level: 'Solo expertos', risk: 'negro', season: 'Según viento', requirements: 'Equipo específico, autorización y equipo experto', permissions: 'Autorización necesaria', access: 'Difícil', plans: 1, conditions: 'Solo demo educativo', desc: 'Spot demo de alto compromiso para cultura de riesgo negro y acceso responsable.' },
+    { id: 'sp19', name: 'Spot de surf', icon: '🏄', env: 'Mar · océano', sports: ['Surf','Longboard surf','Bodyboard'], level: 'Todos', risk: 'amarillo', season: 'Según swell', requirements: 'Lectura de olas, corrientes y convivencia en el pico', permissions: 'Uso comunitario', access: 'Fácil', plans: 9, conditions: 'Swell demo ordenado', desc: 'Spot demo para filtrar por olas, viento, nivel y actividad de tribu.' },
+    { id: 'sp20', name: 'Zona de orientación', icon: '🧭', env: 'Naturaleza · exploración', sports: ['Orientación','Senderismo','Geocaching'], level: 'Iniciación', risk: 'verde', season: 'Todo el año', requirements: 'Mapa, brújula o dispositivo y límites del recorrido', permissions: 'Uso público responsable', access: 'Fácil', plans: 10, conditions: 'Terreno accesible', desc: 'Spot demo para planes beginner friendly, familias y retos de navegación.' }
+  );
+
+  EVENTS.push(
+    { id: 'e7', title: 'Salida trail costera', type: 'aventura', date: 'Junio 2026 · demo', location: 'Sendero costero', sports: ['Trail running'], level: 'Medio', cupo: '14 plazas · 6 libres', price: 'Plan comunitario', organizer: 'Trail & Mountain', tribe: 'Trail & Mountain', spot: 'Sendero de montaña', requirements: 'Agua, calzado adecuado y ritmo conversacional', material: 'Frontal opcional, móvil cargado', verified: true, semaforo: 'amarillo' },
+    { id: 'e8', title: 'Quedada MTB', type: 'aventura', date: 'Junio 2026 · demo', location: 'Bike park demo', sports: ['MTB','Enduro MTB'], level: 'Medio', cupo: '10 plazas · 4 libres', price: 'Plan comunitario', organizer: 'MTB Riders', tribe: 'MTB Riders', spot: 'Bike park', requirements: 'Casco y protecciones', material: 'Bici revisada y agua', verified: true, semaforo: 'amarillo' },
+    { id: 'e9', title: 'Sesión de escalada', type: 'formacion', date: 'Junio 2026 · demo', location: 'Rocódromo', sports: ['Escalada','Búlder'], level: 'Todos', cupo: '16 plazas · 9 libres', price: 'Plan comunitario', organizer: 'Vertical Crew', tribe: 'Vertical Zone', spot: 'Rocódromo', requirements: 'Normas del centro', material: 'Pies de gato y magnesio si procede', verified: true, semaforo: 'verde' },
+    { id: 'e10', title: 'Jornada de snorkel', type: 'aventura', date: 'Julio 2026 · demo', location: 'Playa deportiva', sports: ['Snorkel costero'], level: 'Iniciación', cupo: '12 plazas · 5 libres', price: 'Plan comunitario', organizer: 'Sea Tribe', tribe: 'Sea Tribe', spot: 'Zona de buceo', requirements: 'Buen nado básico', material: 'Máscara, tubo, aletas y boya si procede', verified: true, semaforo: 'verde' },
+    { id: 'e11', title: 'Plan de coasteering', type: 'aventura', date: 'Julio 2026 · demo', location: 'Acantilado costero', sports: ['Coasteering'], level: 'Avanzado', cupo: '8 plazas · 2 libres', price: 'Plan comunitario', organizer: 'Coasteering Squad', tribe: 'Coasteering World', spot: 'Acantilado costero', requirements: 'Experiencia previa y condiciones favorables', material: 'Neopreno, casco y calzado adherente', verified: true, semaforo: 'rojo' },
+    { id: 'e12', title: 'Ruta senderista', type: 'aventura', date: 'Julio 2026 · demo', location: 'Sendero de montaña', sports: ['Senderismo'], level: 'Iniciación', cupo: '20 plazas · 12 libres', price: 'Plan comunitario', organizer: 'Beginner Friendly Outdoor', tribe: 'Beginner Friendly Outdoor', spot: 'Sendero de montaña', requirements: 'Agua, protección solar y ritmo suave', material: 'Calzado cómodo', verified: true, semaforo: 'verde' },
+    { id: 'e13', title: 'Clinic de apnea', type: 'clinica', date: 'Julio 2026 · demo', location: 'Piscina / costa', sports: ['Apnea','Freediving'], level: 'Básico-intermedio', cupo: '8 plazas · 3 libres', price: 'Plan comunitario', organizer: 'Freediving Circle', tribe: 'Freediving Circle', spot: 'Zona de buceo', requirements: 'Compañero mínimo y entorno controlado', material: 'Máscara, aletas y boya si procede', verified: true, semaforo: 'amarillo' },
+    { id: 'e14', title: 'Evento de parkour', type: 'taller', date: 'Agosto 2026 · demo', location: 'Parque urbano', sports: ['Parkour'], level: 'Todos', cupo: '18 plazas · 10 libres', price: 'Plan comunitario', organizer: 'Urban Parkour Team', tribe: 'Urban Action', spot: 'Parque urbano', requirements: 'Calentamiento y progresión', material: 'Zapatilla estable', verified: true, semaforo: 'amarillo' },
+    { id: 'e15', title: 'Reto HYROX', type: 'carrera', date: 'Agosto 2026 · demo', location: 'Box urbano', sports: ['HYROX','Cross training'], level: 'Medio', cupo: '24 plazas · 13 libres', price: 'Plan comunitario', organizer: 'HYROX Partner', tribe: 'OCR / HYROX Lab', spot: 'Parque urbano', requirements: 'Base de fuerza y carrera', material: 'Zapatillas y ropa técnica', verified: true, semaforo: 'amarillo' },
+    { id: 'e16', title: 'Plan de vía ferrata', type: 'aventura', date: 'Septiembre 2026 · demo', location: 'Zona vertical', sports: ['Vía ferrata'], level: 'Medio', cupo: '6 plazas · 2 libres', price: 'Plan comunitario', organizer: 'Pro Guides Network', tribe: 'Vertical Zone', spot: 'Zona de escalada', requirements: 'Material homologado y guía si procede', material: 'Casco, arnés y disipador', verified: true, semaforo: 'rojo' },
+    { id: 'e17', title: 'Quedada de fotografía de naturaleza', type: 'taller', date: 'Septiembre 2026 · demo', location: 'Reserva natural', sports: ['Fotografía de naturaleza','Senderismo'], level: 'Todos', cupo: '15 plazas · 8 libres', price: 'Plan comunitario', organizer: 'Wild Photo Explorer', tribe: 'Nature Photographers', spot: 'Zona de orientación', requirements: 'Respeto ambiental', material: 'Cámara o móvil y agua', verified: true, semaforo: 'verde' },
+    { id: 'e18', title: 'Surfari weekend', type: 'expedicion', date: 'Octubre 2026 · demo', location: 'Costa atlántica', sports: ['Surf','Surfari'], level: 'Medio', cupo: '10 plazas · 5 libres', price: 'Plan comunitario', organizer: 'Surfari Tribe', tribe: 'Surfari Tribe', spot: 'Spot de surf', requirements: 'Nivel acorde al swell', material: 'Tabla, leash y neopreno si procede', verified: true, semaforo: 'amarillo' },
+    { id: 'e19', title: 'Trail nocturno', type: 'aventura', date: 'Octubre 2026 · demo', location: 'Sendero nocturno', sports: ['Trail running','Orientación'], level: 'Intermedio', cupo: '12 plazas · 4 libres', price: 'Plan comunitario', organizer: 'Trail Night Runner', tribe: 'Trail Night Club', spot: 'Zona de orientación', requirements: 'Frontal, teléfono y ritmo controlado', material: 'Frontal, manta térmica y agua', verified: true, semaforo: 'amarillo' },
+    { id: 'e20', title: 'Ruta gravel', type: 'aventura', date: 'Noviembre 2026 · demo', location: 'Ruta gravel', sports: ['Gravel','Bikepacking'], level: 'Medio', cupo: '16 plazas · 7 libres', price: 'Plan comunitario', organizer: 'Multiaventura Circle', tribe: 'Multiaventura NOMADX', spot: 'Ruta gravel', requirements: 'Autonomía, luces y track revisado', material: 'Kit reparación y agua', verified: true, semaforo: 'amarillo' }
+  );
+
+  BADGES_DATA.push(
+    { cat: 'entorno', icon: '🪂', name: 'Air Explorer', desc: 'Actividad registrada en disciplinas de aire', req: 'Registrar deportes aéreos con Safety Radar', benefit: 'Señal de afinidad aérea' },
+    { cat: 'entorno', icon: '🌊', name: 'Sea Explorer', desc: 'Historial activo en mar, costa o agua', req: 'Completar entradas de agua en Logbook', benefit: 'Mejora matching acuático' },
+    { cat: 'entorno', icon: '🏔️', name: 'Mountain Soul', desc: 'Perfil fuerte en montaña y trail', req: 'Registrar rutas y desnivel', benefit: 'Afinidad con tribus de montaña' },
+    { cat: 'entorno', icon: '🧗', name: 'Vertical Mind', desc: 'Progresión en roca, cuerda o verticalidad', req: 'Entradas de escalada, ferrata o cuerda', benefit: 'Contexto para partners técnicos' },
+    { cat: 'experiencia', icon: '🔥', name: 'Endurance Beast', desc: 'Constancia en resistencia y larga distancia', req: 'Retos de trail, triatlón o ultra', benefit: 'Recomendaciones endurance' },
+    { cat: 'experiencia', icon: '🧭', name: 'Multiaventura', desc: 'Variedad real entre varias familias deportivas', req: 'Registrar 5 entornos distintos', benefit: 'Matching híbrido más rico' },
+    { cat: 'hitos', icon: '🌱', name: 'First Adventure', desc: 'Primera aventura registrada', req: 'Crear la primera entrada de Logbook', benefit: 'Desbloquea onboarding social' },
+    { cat: 'seguridad', icon: '⚡', name: 'Extreme Mindset', desc: 'Respeto por actividades de alta exposición', req: 'Completar avisos de riesgo en planes rojos o negros', benefit: 'Cultura de seguridad visible' },
+    { cat: 'seguridad', icon: '🌿', name: 'Nature Respect', desc: 'Comportamiento responsable en naturaleza', req: 'Reportes de mínimo impacto', benefit: 'Mejora reputación comunitaria' },
+    { cat: 'progresion', icon: '🥾', name: 'Trail Starter', desc: 'Inicio sólido en senderismo o trail', req: '3 rutas registradas', benefit: 'Recomendaciones beginner friendly' },
+    { cat: 'entorno', icon: '💧', name: 'Water Spirit', desc: 'Vínculo con agua, snorkel, kayak o natación', req: 'Registrar actividad acuática', benefit: 'Afinidad con Sea Tribe' },
+    { cat: 'seguridad', icon: '🪢', name: 'Rope Mindset', desc: 'Criterio en cuerda y exposición', req: 'Planes de cuerda con checklist', benefit: 'Señal técnica para partners' },
+    { cat: 'entorno', icon: '🧊', name: 'Cold Warrior', desc: 'Nieve, frío o inmersión fría', req: 'Registrar actividad de frío', benefit: 'Acceso a recomendaciones de temporada' },
+    { cat: 'hitos', icon: '🌙', name: 'Night Explorer', desc: 'Aventuras nocturnas planificadas', req: 'Registrar una salida nocturna', benefit: 'Matching con planes nocturnos' },
+    { cat: 'rol', icon: '🤝', name: 'Team Builder', desc: 'Crea comunidad y planes recurrentes', req: 'Organizar planes con buena valoración', benefit: 'Más confianza en quedadas' },
+    { cat: 'progresion', icon: '📈', name: 'Technical Progress', desc: 'Mejora técnica documentada', req: 'Registrar aprendizajes concretos', benefit: 'Historial de progresión claro' },
+    { cat: 'experiencia', icon: '📍', name: 'Local Spotter', desc: 'Documenta spots de forma útil y prudente', req: 'Reportar condiciones sin revelar accesos sensibles', benefit: 'Confianza de mapa comunitario' },
+    { cat: 'hitos', icon: '🌍', name: 'Global Nomad', desc: 'Actividad en varias zonas o países', req: 'Logbook en 3 regiones distintas', benefit: 'Afinidad con comunidad global' }
+  );
+
+  STATE.counters = { vistos: 24, matches: 18, guardados: 8 };
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1325,6 +1439,8 @@ function renderMatchCard() {
   const m = MATCH_CARDS[STATE.currentMatchIdx];
   const badgesHTML = m.badges.map(b => `<span class="badge badge-white">${b}</span>`).join('');
   const tagsHTML = m.sports.map(s => `<span class="badge badge-cyan">${s}</span>`).join('');
+  const secondaryHTML = (m.secondary || []).map(s => `<span class="badge badge-white">${s}</span>`).join('');
+  const tribeHTML = (m.tribes || []).map(t => `<span class="badge badge-green">${t}</span>`).join('');
 
   el.innerHTML = `
     <div class="match-card-top" style="background:${m.gradient}">
@@ -1354,11 +1470,28 @@ function renderMatchCard() {
         <div class="match-info-key">Distancia</div>
         <div class="match-info-val">${m.dist}</div>
       </div>
+      <div>
+        <div class="match-info-key">Tipo</div>
+        <div class="match-info-val">${m.profileType || 'Perfil deportivo'}</div>
+      </div>
+      <div>
+        <div class="match-info-key">Riesgo habitual</div>
+        <div class="match-info-val">${m.risk || 'variable'}</div>
+      </div>
+      <div>
+        <div class="match-info-key">Disponibilidad</div>
+        <div class="match-info-val">${m.availability || 'Flexible'}</div>
+      </div>
+      <div>
+        <div class="match-info-key">Plan activo</div>
+        <div class="match-info-val">${m.planActive || m.objective}</div>
+      </div>
     </div>
-    <div style="padding:0 2rem 1rem;display:flex;flex-wrap:wrap;gap:.4rem">${tagsHTML}</div>
+    <div style="padding:0 2rem 1rem;display:flex;flex-wrap:wrap;gap:.4rem">${tagsHTML}${secondaryHTML}${tribeHTML}</div>
     <div class="match-actions">
       <button class="match-btn mb-skip" onclick="matchAction('skip')">✕ Pasar</button>
       <button class="match-btn mb-save" onclick="matchAction('save')">★ Guardar</button>
+      <button class="match-btn mb-save" onclick="showToast('ADN demo de ${m.name} abierto')">Ver ADN</button>
       <button class="match-btn mb-connect" onclick="matchAction('connect')">⚡ Conectar</button>
     </div>
   `;
@@ -1485,6 +1618,10 @@ function renderFeed() {
       <div class="post-body">
         <p class="post-text">${p.text}</p>
         <div class="post-sport-tags">${p.sports.map(s => `<span class="post-sport-tag">${s}</span>`).join('')}</div>
+        <div class="post-meta-row">
+          <span>Riesgo: ${p.risk || 'variable'}</span>
+          <span>Tribu: ${p.tribe || p.role}</span>
+        </div>
       </div>
       <div class="post-footer">
         <button class="post-action-btn" onclick="toggleLike('${p.id}', this)" aria-label="Me gusta">
@@ -1497,7 +1634,7 @@ function renderFeed() {
           ↗️ Compartir
         </button>
         <button class="post-action-btn" onclick="showToast('Post guardado ⭐')" aria-label="Guardar">
-          🔖
+          🔖 <span>${p.saves || 0}</span>
         </button>
       </div>
     </article>
@@ -1538,12 +1675,21 @@ function initTribus() {
       <div class="tribu-body">
         <p class="tribu-desc">${t.desc}</p>
         <div class="tribu-sports">${t.sports.map(s => `<span class="badge badge-white">${s}</span>`).join('')}</div>
+        <div class="tribu-mini-grid">
+          <span>Riesgo: ${t.risk || 'variable'}</span>
+          <span>Planes: ${t.plans || Math.max(1, Math.round(t.members / 480))}</span>
+          <span>Actividad: ${t.activity || t.nextEvent}</span>
+        </div>
+        <div class="tribu-sports">${(t.badges || ['Comunidad activa']).map(s => `<span class="badge badge-green">${s}</span>`).join('')}</div>
         <div class="tribu-event">${t.nextEvent}</div>
         <div class="tribu-footer">
           <span class="tribu-level">${t.level}</span>
-          <button class="tribu-join-btn${joined ? ' joined' : ''}" onclick="toggleTribu('${t.id}', this)">
-            ${joined ? '✓ Unido' : 'Unirse'}
-          </button>
+          <div class="tribu-actions">
+            <button class="tribu-view-btn" onclick="showToast('Vista demo de ${t.name}')">Ver tribu</button>
+            <button class="tribu-join-btn${joined ? ' joined' : ''}" onclick="toggleTribu('${t.id}', this)">
+              ${joined ? '✓ Unido' : 'Unirme'}
+            </button>
+          </div>
         </div>
       </div>
     </article>`;
@@ -1632,6 +1778,22 @@ function selectSpot(spotId) {
         <div class="sdp-item-key">Requisitos</div>
         <div class="sdp-item-val" style="font-weight:400;font-size:.85rem;color:var(--text-secondary)">${spot.requirements}</div>
       </div>
+      <div>
+        <div class="sdp-item-key">Permisos</div>
+        <div class="sdp-item-val">${spot.permissions || 'Revisar normativa local'}</div>
+      </div>
+      <div>
+        <div class="sdp-item-key">Acceso</div>
+        <div class="sdp-item-val">${spot.access || 'Variable'}</div>
+      </div>
+      <div>
+        <div class="sdp-item-key">Planes activos</div>
+        <div class="sdp-item-val">${spot.plans || 0}</div>
+      </div>
+      <div>
+        <div class="sdp-item-key">Condiciones demo</div>
+        <div class="sdp-item-val">${spot.conditions || 'Pendiente de reporte comunitario'}</div>
+      </div>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem">
       ${spot.sports.map(s => `<span class="badge badge-cyan">${s}</span>`).join('')}
@@ -1640,6 +1802,7 @@ function selectSpot(spotId) {
       <button class="btn btn-primary btn-sm" onclick="showToast('Spot guardado en tu mapa ⭐')">Guardar Spot</button>
       <button class="btn btn-ghost btn-sm" style="margin-left:.5rem" onclick="showToast('Reportando condiciones del spot...')">Reportar condiciones</button>
     </div>
+    <p class="spot-safety-note">Los spots técnicos requieren formación, condiciones adecuadas, permisos cuando proceda y respeto ambiental.</p>
   `;
 }
 
@@ -1687,14 +1850,24 @@ function initEvents() {
           </div>
         </div>
         <div class="event-sports">${e.sports.map(s => `<span class="badge badge-cyan">${s}</span>`).join('')}</div>
+        <div class="event-demo-grid">
+          <span>Tribu: ${e.tribe || e.organizer}</span>
+          <span>Spot: ${e.spot || e.location}</span>
+          <span>Requisitos: ${e.requirements || 'Nivel acorde y Safety Radar revisado'}</span>
+          <span>Material: ${e.material || 'Material general de la disciplina'}</span>
+        </div>
       </div>
       <div class="event-footer">
         <div>
           <div class="event-price${e.price === 'Gratis' ? ' free' : ''}">${e.price}</div>
         </div>
-        <button class="event-join-btn${joined ? ' joined' : ''}" onclick="toggleEvent('${e.id}', this)">
-          ${joined ? '✓ Apuntado' : 'Apuntarme'}
-        </button>
+        <div class="event-actions">
+          <button class="event-secondary-btn" onclick="showToast('Requisitos demo de ${e.title}')">Ver requisitos</button>
+          <button class="event-secondary-btn" onclick="showToast('Plan guardado ⭐')">Guardar</button>
+          <button class="event-join-btn${joined ? ' joined' : ''}" onclick="toggleEvent('${e.id}', this)">
+            ${joined ? '✓ Unido' : 'Unirme'}
+          </button>
+        </div>
       </div>
     </article>`;
   }).join('');
@@ -1756,6 +1929,8 @@ function initInsignias() {
                 <div>
                   <div class="badge-card-name">${b.name}</div>
                   <div class="badge-card-desc">${b.desc}</div>
+                  ${b.req ? `<div class="badge-card-extra"><strong>Requisito:</strong> ${b.req}</div>` : ''}
+                  ${b.benefit ? `<div class="badge-card-extra"><strong>Beneficio:</strong> ${b.benefit}</div>` : ''}
                 </div>
               </div>
             `).join('')}
@@ -1799,6 +1974,18 @@ function initPro() {
       <div class="pro-type-desc">${p.desc}</div>
     </div>
   `).join('');
+}
+
+function initLogbookActions() {
+  document.querySelectorAll('.log-entry-card').forEach((card) => {
+    if (card.querySelector('.log-actions')) return;
+    card.insertAdjacentHTML('beforeend', `
+      <div class="log-actions">
+        <button class="log-action-btn" onclick="showToast('Registro demo abierto')">Ver registro</button>
+        <button class="log-action-btn" onclick="showToast('Entrada compartida en el feed demo')">Compartir en feed</button>
+      </div>
+    `);
+  });
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1850,6 +2037,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEvents();
   initInsignias();
   initPro();
+  initLogbookActions();
   initReveal();
   initModal();
 
