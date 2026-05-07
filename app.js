@@ -702,7 +702,12 @@ const STATE = {
   currentMatchIdx: 0,
   counters: { vistos: 24, matches: 8, guardados: 5 },
   savedMatchIds: new Set(JSON.parse(localStorage.getItem('nmx_matches_saved') || '[]')),
+  connectedMatchIds: new Set(JSON.parse(localStorage.getItem('nmx_matches_connected') || '[]')),
+  generatedMatchCount: Number(localStorage.getItem('nmx_generated_match_count') || '0'),
   savedSports: new Set(JSON.parse(localStorage.getItem('nmx_sports_saved') || '[]')),
+  savedSpots: new Set(JSON.parse(localStorage.getItem('nmx_spots_saved') || '[]')),
+  savedPosts: new Set(JSON.parse(localStorage.getItem('nmx_posts_saved') || '[]')),
+  savedPlans: new Set(JSON.parse(localStorage.getItem('nmx_plans_saved') || '[]')),
   joinedTribus: new Set(JSON.parse(localStorage.getItem('nmx_tribus_joined') || '[]')),
   joinedEvents: new Set(JSON.parse(localStorage.getItem('nmx_events_joined') || '[]')),
   feedFilter: 'all',
@@ -731,11 +736,179 @@ function showToast(msg) {
 }
 
 function closeSportModal() {
-  document.getElementById('sport-modal').classList.remove('open');
+  const modal = document.getElementById('sport-modal');
+  if (modal) modal.classList.remove('open');
 }
 
 function saveState(key, set) {
   localStorage.setItem(key, JSON.stringify([...set]));
+}
+
+function setStoredNumber(key, value) {
+  localStorage.setItem(key, String(value));
+}
+
+function escapeHTML(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function badgeList(items = [], className = 'badge-white') {
+  return items.filter(Boolean).map(item => `<span class="badge ${className}">${escapeHTML(item)}</span>`).join('');
+}
+
+function openDemoPanel(title, bodyHTML, actionsHTML = '') {
+  const modal = document.getElementById('sport-modal');
+  const content = document.getElementById('modal-content');
+  if (!modal || !content) return;
+  content.innerHTML = `
+    <div class="modal-sport-name">${title}</div>
+    <div class="modal-demo-body">${bodyHTML}</div>
+    ${actionsHTML ? `<div class="modal-action-row">${actionsHTML}</div>` : ''}
+  `;
+  modal.classList.add('open');
+  modal.querySelector('.modal-close')?.focus();
+}
+
+const MATCH_SEED_PROFILES = [
+  ['Marina Trail','Deportista outdoor','Apnea|Coasteering|Trail running','Psicobloc|Snorkel costero','Mar y costa','Avanzado','rojo','Fines de semana','Costa mediterránea','Safety First|Sea Explorer','Sea Tribe|Coasteering World','Plan de coasteering','Busca gente constante para planes de costa, agua y roca.'],
+  ['Vertical Crew','Grupo deportivo','Escalada|Via ferrata|Rappel','Highline|Boulder','Roca y vertical','Avanzado','rojo','Tardes y sábados','Modo global','Vertical Mind|Team Builder','Vertical Zone|Pro Guides Network','Sesión de escalada','Crew para roca, ferratas y planes con checklist claro.'],
+  ['MTB Flow','Comunidad MTB','MTB|Enduro MTB|Gravel','Bikepacking|Downhill','Montaña y ruedas','Medio-alto','amarillo','Domingos','Radio 80 km','Mountain Soul|Endurance Beast','MTB Riders|Trail & Mountain','Quedada MTB','Ruedas, senderos y flow sin postureo.'],
+  ['Outdoor Runner','Perfil runner','Trail running|Fast hiking|Senderismo','Orientación|Fotografía de naturaleza','Montaña','Intermedio','amarillo','Mañanas','Modo global','Trail Starter|Nature Respect','Trail & Mountain|Trail Night Club','Salida trail costera','Perfil para entrenos progresivos y rutas con buen ritmo.'],
+  ['Freedive Club','Club deportivo','Apnea|Freediving|Snorkel costero','Buceo recreativo|Fotografía submarina','Mar','Técnico','rojo','Viernes y domingo','Costa','Water Spirit|Safety First','Freediving Circle|Sea Tribe','Clinic de apnea','Club pequeño para apnea recreativa y cultura de compañero.'],
+  ['Climbing Partner','Partner deportivo','Escalada|Búlder|Via ferrata','Rápel|Psicobloc','Roca','Intermedio','rojo','Entre semana','Modo global','Vertical Mind|Technical Progress','Vertical Zone','Sesión indoor + roca','Busca compañero para progresar sin saltarse pasos.'],
+  ['Adventure Family','Grupo familiar','Senderismo|Kayak recreativo|Snorkel','Geocaching|Yoga outdoor','Naturaleza','Iniciación','verde','Fines de semana','Radio 40 km','First Adventure|Nature Respect','Adventure Families|Beginner Friendly Outdoor','Multiaventura familiar','Familias que quieren planes bonitos, seguros y sencillos.'],
+  ['Pro Guide Verified','Profesional verificado','Barranquismo|Via ferrata|Senderismo','Rápel|Seguridad outdoor','Montaña y barranco','Profesional','rojo','Calendario público','Modo global','Pro verificado|Safety First','Pro Guides Network|Vertical Rescue Mindset','Plan de vía ferrata','Guía con enfoque técnico, requisitos claros y reputación visible.'],
+  ['Air Sports Crew','Crew aéreo','Parapente|Paramotor|Ala delta','Speed flying|Túnel de viento','Aire','Avanzado','rojo','Ventanas de meteo','Modo global','Air Explorer|Safety First','Air Sports|Paragliding Network','Ventana de vuelo','Comunidad de vuelo libre con meteo y cultura de seguridad.'],
+  ['Sea Adventure Partner','Partner acuático','Kayak de mar|SUP|Snorkel','Coasteering|Surf','Mar y costa','Intermedio','amarillo','Amaneceres','Costa','Sea Explorer|Water Spirit','Sea Tribe|Kayak Explorers','Kayak sunrise','Planes de mar temprano, ritmo tranquilo y buen criterio.'],
+  ['Snow & Ice Rider','Rider nieve','Snowboard|Splitboard|Esquí de montaña','Raquetas|Freeride','Nieve','Avanzado','rojo','Temporada invierno','Pirineos / global','Cold Warrior|Mountain Soul','Snow & Ice','Snow trip','Busca crew para nieve, frío y partes revisados.'],
+  ['Urban Parkour Team','Equipo urbano','Parkour|Freerunning|Calistenia','OCR urbana|Tricking','Urbano','Medio','amarillo','Tardes','Ciudad','Team Builder|Technical Progress','Urban Action','Evento de parkour','Equipo urbano con progresión, movilidad y respeto del espacio.'],
+  ['Functional Athlete','Atleta funcional','Crossfit|HYROX|Entrenamiento funcional','OCR|Movilidad','Fitness','Medio-alto','amarillo','Entre semana','Modo global','Endurance Beast|Technical Progress','Functional Athletes|OCR / HYROX Lab','Reto HYROX','Rendimiento medible sin perder movilidad ni recuperación.'],
+  ['Cave Explorer','Explorador técnico','Espeleología|Rápel|Barranquismo','Cave diving|Orientación','Cueva y cuerda','Técnico','rojo','Planificado','Modo global','Vertical Mind|Safety First','Cave Explorers|Vertical Rescue Mindset','Salida de espeleología','Exploración subterránea con permisos, equipo y paciencia.'],
+  ['Endurance Beast','Perfil resistencia','Ultratrail|Triatlón|Gravel','Everesting|Fastpacking','Resistencia','Avanzado','rojo','Madrugadas','Modo global','Endurance Beast|Global Nomad','Trail & Mountain|OCR / HYROX Lab','Reto de resistencia','Para quien acumula horas, desnivel y cabeza.'],
+  ['Kayak Explorer','Explorador kayak','Kayak de mar|Packraft|Travesía en kayak','Snorkel|Fotografía marina','Agua','Intermedio','amarillo','Amanecer','Costa / lagos','Sea Explorer|Nature Respect','Kayak Explorers|Sea Tribe','Kayak sunrise','Travesías limpias, costa tranquila y lectura del viento.'],
+  ['Paragliding Mate','Compañero de vuelo','Parapente|Paramotor|Vuelo de montaña','Ala delta|Speed flying','Aire','Avanzado','rojo','Según meteo','Modo global','Air Explorer|Global Nomad','Paragliding Network|Air Sports','Ventana de vuelo','Busca compañeros para analizar meteo y volar con cabeza.'],
+  ['Coasteering Squad','Squad costa','Coasteering|Cliff Jumping|Snorkel','Psicobloc|Kayak de mar','Costa y roca','Avanzado','rojo','Fines de semana','Costa','Sea Explorer|Extreme Mindset','Coasteering World|Cliff & Coast','Plan de coasteering','Roca, agua, sal y checklist antes de entrar.'],
+  ['Trail Night Runner','Runner nocturno','Trail nocturno|Orientación|Fast hiking','Senderismo|Fotografía nocturna','Montaña','Intermedio','amarillo','Noches','Modo global','Night Explorer|Safety First','Trail Night Club','Trail nocturno','Frontal, ritmo de grupo y navegación sin prisas.'],
+  ['Wild Photo Explorer','Creador outdoor','Fotografía de naturaleza|Senderismo|Observación de fauna','Kayak|Trail','Naturaleza','Todos','verde','Flexible','Modo global','Creador outdoor|Nature Respect','Nature Photographers|Outdoor Creators','Quedada fotográfica','Busca historias de naturaleza sin revelar spots sensibles.'],
+  ['HYROX Partner','Partner fitness','HYROX|Crossfit|OCR','Running|Movilidad','Fitness','Medio-alto','amarillo','Entre semana','Modo global','Endurance Beast|Technical Progress','OCR / HYROX Lab|Functional Athletes','Reto HYROX','Entrenos híbridos con fuerza, carrera y control.'],
+  ['Rope Jump Crew','Crew salto','Rope jumping|Puenting|Canyon swing','Highline|Rápel','Vacío y cuerda','Experto','negro','Convocatorias','Modo global','Extreme Mindset|Safety First','Extreme Jumpers|Rope Jump Crew','Plan de cuerda','Solo cultura experta, autorización y entorno controlado.'],
+  ['Surfari Nomad','Viajero surf','Surf|Longboard surf|Surfari','Bodyboard|Fotografía marina','Océano','Medio','amarillo','Temporadas','Global','Sea Explorer|Global Nomad','Surfari Tribe|Sea Tribe','Surfari weekend','Olas, viajes deportivos y comunidad sin spam.'],
+  ['Multiaventura Circle','Círculo híbrido','Senderismo|Kayak|Escalada','MTB|Coasteering','Híbrido','Todos','amarillo','Fines de semana','Modo global','Multiaventura|Team Builder','Multiaventura NOMADX|Adventure Families','Ruta combinada','Para quienes mezclan mar, montaña, roca y grupo.'],
+  ['Vertical Rescue Team','Equipo técnico','Rescate vertical|Rápel|Espeleología','Primeros auxilios|Via ferrata','Vertical','Profesional','rojo','Formaciones','Modo global','Safety First|Pro verificado','Vertical Rescue Mindset|Pro Guides Network','Taller de rescate','Cultura de prevención y respuesta, sin improvisar.'],
+  ['Gravel Explorer','Rider gravel','Gravel|Bikepacking|Orientación','Trail running|Fotografía','Ruedas','Medio','amarillo','Domingos','Radio 120 km','Mountain Soul|Global Nomad','MTB Riders|Trail & Mountain','Ruta gravel','Tracks largos, autonomía y paradas bonitas.'],
+  ['Wingfoil Rider','Rider foil','Wingfoil|E-foil|SUP','Kitesurf|Windfoil','Mar y viento','Avanzado','rojo','Según viento','Costa','Water Spirit|Sea Explorer','Sea Tribe|Surfari Tribe','Sesión de wingfoil','Viento, foil y progreso con condiciones favorables.'],
+  ['Apnea Buddy','Compañero apnea','Apnea|Freediving|Snorkel costero','Natación en aguas abiertas|Buceo recreativo','Subacuático','Intermedio','rojo','Mañanas','Costa','Water Spirit|Safety First','Freediving Circle|Sea Tribe','Sesión de apnea','Compañero mínimo, calma y progresión sin ego.'],
+  ['Barranco Crew','Crew barranco','Barranquismo|Canyoning|Rápel en cascada','Toboganes naturales|Orientación','Barranco','Técnico','rojo','Temporada caudal','Modo global','Vertical Mind|Safety First','Cave Explorers|Vertical Zone','Jornada de barranquismo','Grupo técnico para caudal, material y permisos revisados.'],
+  ['Snowboard Nomad','Rider nieve','Snowboard|Splitboard|Freeride','Snowkite|Raquetas','Nieve','Medio-alto','rojo','Invierno','Montaña','Cold Warrior|Mountain Soul','Snow & Ice','Snow trip','Nieve, frío, partes y respeto por la montaña.'],
+  ['Climbing Mentor','Mentor escalada','Escalada|Búlder|Escalada deportiva','Via ferrata|Técnica de cuerda','Roca','Avanzado','rojo','Tardes','Modo global','Technical Progress|Vertical Mind','Vertical Zone|Pro Guides Network','Mentoría de escalada','Ayuda a progresar con técnica, no con prisa.'],
+  ['Trail Beginner Friendly','Perfil iniciación','Senderismo|Trail suave|Marcha nórdica','Movilidad|Fotografía','Montaña','Iniciación','verde','Fines de semana','Radio 30 km','First Adventure|Trail Starter','Beginner Friendly Outdoor|Trail & Mountain','Ruta verde','Primeras rutas con grupo amable y ritmo humano.'],
+  ['Extreme Jump Partner','Partner extremo','Puenting|Rope jumping|Cliff diving','BASE jump|Highline','Vacío','Experto','negro','Convocatorias','Modo global','Extreme Mindset|Safety First','Extreme Jumpers|Rope Jump Crew','Plan técnico validado','Alta exposición solo con expertos, permisos y supervisión.'],
+  ['Nature Filmmaker','Creador audiovisual','Fotografía de naturaleza|Vídeo outdoor|Senderismo','Kayak|Trail running','Naturaleza','Todos','verde','Flexible','Modo global','Creador outdoor|Nature Respect','Outdoor Creators|Nature Photographers','Cobertura de plan','Cuenta aventuras sin convertir spots en escaparate.'],
+  ['Family Outdoor Group','Grupo familiar','Kayak recreativo|Senderismo familiar|Snorkel','Geocaching|Yoga','Familia','Iniciación','verde','Domingos','Local / global','First Adventure|Team Builder','Adventure Families|Family Adventure Club','Multiaventura familiar','Aventura tranquila para familias y primeras veces.'],
+  ['Cave & Rope Team','Equipo cueva-cuerda','Espeleología|Rápel|Barranquismo seco','Orientación|Rescate vertical','Cueva y vertical','Técnico','rojo','Planificado','Modo global','Vertical Mind|Safety First','Cave Explorers|Vertical Rescue Mindset','Técnica de cuerda','Cuerda, cueva y criterio antes de entrar.'],
+  ['Paramotor Mate','Compañero paramotor','Paramotor|Paratrike|Vuelo de montaña','Parapente|Fotografía aérea','Aire','Avanzado','rojo','Según meteo','Modo global','Air Explorer|Global Nomad','Air Sports|Paragliding Network','Vuelo panorámico','Busca ventanas buenas y compañeros con checklist.'],
+  ['Kayak Sunrise Club','Club amanecer','Kayak de mar|SUP|Snorkel','Fotografía marina|Natación suave','Mar','Iniciación-media','amarillo','Amanecer','Costa','Sea Explorer|Nature Respect','Kayak Explorers|Sea Tribe','Kayak sunrise','Madrugar, remar suave y volver con calma.'],
+  ['OCR Beast Mode','Equipo OCR','OCR|HYROX|Cross training','Trail running|Fuerza funcional','Fitness','Medio-alto','amarillo','Entre semana','Modo global','Endurance Beast|Team Builder','OCR / HYROX Lab|Functional Athletes','Entreno OCR','Obstáculos, fuerza y resistencia con cabeza.'],
+  ['Coastal Adventure Crew','Crew costa','Coasteering|Kayak de mar|Cliff jumping','Snorkel|Surf','Costa','Avanzado','rojo','Fines de semana','Costa','Sea Explorer|Extreme Mindset','Cliff & Coast|Coasteering World','Aventura costera','Costa, sal y planes con condiciones revisadas.']
+];
+
+const MATCH_RANDOM_NAMES = ['Marina','Alex','Nora','Leo','Vega','Bruno','Lara','Hugo','Aitana','Nil','Kai','Alma','Eric','Noa','Adrian','Zoe','Gael','Carla','Iker','Luna'];
+const MATCH_RANDOM_STYLES = ['Trail','Flow','Vertical','Ocean','Wild','Air','Mountain','Rope','Cave','Coast','Runner','Rider','Explorer','Nomad','Peak','Wave','Endurance'];
+const MATCH_RANDOM_DISCIPLINES = ['Apnea','Coasteering','Trail running','MTB','Escalada','Barranquismo','Espeleología','Surf','Wingfoil','Kayak','Parapente','Paramotor','Crossfit','HYROX','Snowboard','Senderismo','Vía ferrata','Rope jumping','Fotografía de naturaleza','Buceo recreativo'];
+const MATCH_RANDOM_TRIBES = ['Sea Tribe','Vertical Zone','Trail & Mountain','MTB Riders','Air Sports','Cave Explorers','Outdoor Creators','Adventure Families','Extreme Jumpers','Freediving Circle'];
+const MATCH_RANDOM_BADGES = ['Safety First','Sea Explorer','Mountain Soul','Vertical Mind','Endurance Beast','Nature Respect','Air Explorer','Team Builder','First Adventure','Global Nomad'];
+
+function makeMatchProfile(seed, index) {
+  const [name, profileType, sports, secondary, env, level, risk, availability, dist, badges, tribes, planActive, bio] = seed;
+  const sportsList = sports.split('|');
+  const riskGradient = risk === 'negro' ? '#26080f,#050506' : risk === 'rojo' ? '#2a0f12,#10121d' : risk === 'verde' ? '#0d2a1a,#09131f' : '#1f1a0d,#0c1824';
+  return {
+    id: `mx${index + 1}`,
+    name,
+    role: `${profileType} · ${tribes.split('|')[0]}`,
+    profileType,
+    emoji: env.includes('Aire') ? '🪂' : env.includes('Mar') || env.includes('Agua') || env.includes('Costa') ? '🌊' : env.includes('Fitness') ? '💪' : env.includes('Nieve') ? '❄️' : env.includes('Familia') ? '👥' : '🧭',
+    gradient: `linear-gradient(135deg,${riskGradient})`,
+    sports: sportsList,
+    secondary: secondary.split('|'),
+    level,
+    env,
+    risk,
+    availability,
+    dist,
+    objective: planActive,
+    planActive,
+    badges: badges.split('|'),
+    tribes: tribes.split('|'),
+    bio,
+    compat: Math.min(99, 72 + ((index * 7) % 28))
+  };
+}
+
+function ensureMatchPoolMinimum() {
+  const existing = new Set(MATCH_CARDS.map(m => normalizeText(m.name)));
+  MATCH_SEED_PROFILES.forEach((seed, index) => {
+    if (!existing.has(normalizeText(seed[0]))) {
+      MATCH_CARDS.push(makeMatchProfile(seed, index));
+      existing.add(normalizeText(seed[0]));
+    }
+  });
+}
+
+function generateRandomMatch() {
+  const i = STATE.generatedMatchCount++;
+  setStoredNumber('nmx_generated_match_count', STATE.generatedMatchCount);
+  const name = `${MATCH_RANDOM_NAMES[i % MATCH_RANDOM_NAMES.length]} ${MATCH_RANDOM_STYLES[(i * 3) % MATCH_RANDOM_STYLES.length]}`;
+  const primary = [
+    MATCH_RANDOM_DISCIPLINES[(i * 2) % MATCH_RANDOM_DISCIPLINES.length],
+    MATCH_RANDOM_DISCIPLINES[(i * 2 + 5) % MATCH_RANDOM_DISCIPLINES.length],
+    MATCH_RANDOM_DISCIPLINES[(i * 2 + 9) % MATCH_RANDOM_DISCIPLINES.length]
+  ];
+  const secondary = [
+    MATCH_RANDOM_DISCIPLINES[(i * 4 + 1) % MATCH_RANDOM_DISCIPLINES.length],
+    MATCH_RANDOM_DISCIPLINES[(i * 4 + 7) % MATCH_RANDOM_DISCIPLINES.length]
+  ];
+  const tribes = [MATCH_RANDOM_TRIBES[i % MATCH_RANDOM_TRIBES.length], MATCH_RANDOM_TRIBES[(i + 3) % MATCH_RANDOM_TRIBES.length]];
+  const badges = [MATCH_RANDOM_BADGES[i % MATCH_RANDOM_BADGES.length], MATCH_RANDOM_BADGES[(i + 4) % MATCH_RANDOM_BADGES.length]];
+  const risks = ['verde','amarillo','rojo','negro'];
+  const risk = risks[(i + primary.join('').length) % risks.length];
+  return {
+    id: `gen-${Date.now()}-${i}`,
+    name,
+    role: `Perfil generado · ${tribes[0]}`,
+    profileType: i % 5 === 0 ? 'Crew deportivo' : i % 3 === 0 ? 'Partner de entrenamiento' : 'Perfil deportivo',
+    emoji: primary.some(s => /parapente|paramotor/i.test(s)) ? '🪂' : primary.some(s => /apnea|surf|kayak|buceo|wingfoil/i.test(s)) ? '🌊' : primary.some(s => /crossfit|hyrox/i.test(s)) ? '💪' : '🧭',
+    gradient: `linear-gradient(135deg,${risk === 'negro' ? '#25040a,#050506' : risk === 'rojo' ? '#2a0f12,#0b1020' : '#0d1f2d,#101826'})`,
+    sports: primary,
+    secondary,
+    level: i % 4 === 0 ? 'Avanzado' : i % 4 === 1 ? 'Intermedio' : i % 4 === 2 ? 'Técnico' : 'Iniciación-media',
+    env: primary.some(s => /apnea|surf|kayak|buceo|wingfoil/i.test(s)) ? 'Mar y agua' : primary.some(s => /parapente|paramotor/i.test(s)) ? 'Aire' : primary.some(s => /crossfit|hyrox/i.test(s)) ? 'Fitness' : 'Montaña y outdoor',
+    risk,
+    availability: ['Fines de semana','Entre semana','Amaneceres','Según meteo','Flexible'][i % 5],
+    dist: ['Modo global','Radio 40 km','Radio 80 km','Costa / montaña','Plan remoto'][i % 5],
+    objective: ['Crear plan','Entrenar juntos','Explorar spots','Progresar con seguridad','Unirse a tribu'][i % 5],
+    planActive: ['Plan compatible esta semana','Quedada abierta','Entreno técnico','Salida de comunidad','Plan por confirmar'][i % 5],
+    badges,
+    tribes,
+    bio: `Perfil generado por NOMADX a partir de afinidad entre ${primary[0]}, ${primary[1]} y ${tribes[0]}.`,
+    compat: 72 + ((i * 11) % 28)
+  };
+}
+
+function generateMoreMatches(count = 8) {
+  for (let i = 0; i < count; i++) MATCH_CARDS.push(generateRandomMatch());
+  showToast(`${count} perfiles compatibles generados`);
+  renderMatchCard();
+  renderSavedMatches();
+}
+
+function getMatchById(profileId) {
+  return MATCH_CARDS.find(m => m.id === profileId) || MATCH_CARDS[STATE.currentMatchIdx] || MATCH_CARDS[0];
 }
 
 function slugify(value) {
@@ -1050,6 +1223,79 @@ function normalizeNomadxDemoData() {
   STATE.counters = { vistos: 24, matches: 18, guardados: 8 };
 }
 
+function pushUniqueByName(target, items) {
+  const existing = new Set(target.map(item => normalizeText(item.name || item.title || item.id)));
+  items.forEach(item => {
+    const key = normalizeText(item.name || item.title || item.id);
+    if (!existing.has(key)) {
+      target.push(item);
+      existing.add(key);
+    }
+  });
+}
+
+function ensureNomadxDepthData() {
+  ensureMatchPoolMinimum();
+  pushUniqueByName(SPOTS, [
+    { id: 'sp21', name: 'Cala para snorkel', icon: '🤿', env: 'Mar · costa', sports: ['Snorkel costero','Apnea','Fotografía marina'], level: 'Iniciación-media', risk: 'amarillo', season: 'Verano y días de mar estable', requirements: 'Buen nado, boya visible y respeto del fondo', permissions: 'Normativa local y zona de baño', access: 'Medio', plans: 6, conditions: 'Visibilidad demo media', desc: 'Spot genérico para snorkel responsable, registro de condiciones y planes suaves de agua.' },
+    { id: 'sp22', name: 'Mirador de trail', icon: '🌄', env: 'Montaña · trail', sports: ['Trail running','Senderismo','Fotografía de naturaleza'], level: 'Medio', risk: 'amarillo', season: 'Todo el año', requirements: 'Agua, calzado y meteo revisada', permissions: 'Sendero público responsable', access: 'Medio', plans: 9, conditions: 'Terreno seco demo', desc: 'Punto de paso para rutas, retos de desnivel, fotografía y entradas de Logbook.' },
+    { id: 'sp23', name: 'Zona de SUP', icon: '🏄', env: 'Agua tranquila', sports: ['Paddle surf','SUP yoga','Natación suave'], level: 'Iniciación', risk: 'verde', season: 'Primavera-Verano', requirements: 'Chaleco si procede, viento revisado y zona segura', permissions: 'Revisar normativa local', access: 'Fácil', plans: 7, conditions: 'Agua tranquila demo', desc: 'Spot genérico para planes de agua accesible, recuperación y comunidad beginner friendly.' },
+    { id: 'sp24', name: 'Área de entrenamiento funcional outdoor', icon: '💪', env: 'Fitness · urbano', sports: ['Entrenamiento funcional','Calistenia','HYROX'], level: 'Todos', risk: 'verde', season: 'Todo el año', requirements: 'Calentamiento, progresión y convivencia de uso', permissions: 'Uso comunitario', access: 'Fácil', plans: 12, conditions: 'Zona seca demo', desc: 'Área demo para entrenos, preparación física y retos funcionales conectados al ADN deportivo.' }
+  ]);
+  pushUniqueByName(EVENTS, [
+    { id: 'e21', title: 'Entreno OCR', type: 'taller', date: 'Noviembre 2026 · demo', location: 'Parque urbano', sports: ['OCR','Cross training'], level: 'Medio', cupo: '18 plazas · 8 libres', price: 'Plan comunitario', organizer: 'OCR Beast Mode', tribe: 'OCR / HYROX Lab', spot: 'Área de entrenamiento funcional outdoor', requirements: 'Base física general y movilidad', material: 'Zapatillas, guantes opcionales y agua', verified: true, semaforo: 'amarillo' },
+    { id: 'e22', title: 'Jornada de barranquismo', type: 'aventura', date: 'Noviembre 2026 · demo', location: 'Barranco técnico', sports: ['Barranquismo','Canyoning'], level: 'Técnico', cupo: '6 plazas · 1 libre', price: 'Plan comunitario', organizer: 'Barranco Crew', tribe: 'Cave Explorers', spot: 'Barranco técnico', requirements: 'Experiencia previa, caudal revisado y material adecuado', material: 'Neopreno, casco, arnés y cuerda según organización', verified: true, semaforo: 'rojo' },
+    { id: 'e23', title: 'Sesión de wingfoil', type: 'aventura', date: 'Diciembre 2026 · demo', location: 'Playa deportiva', sports: ['Wingfoil','Windfoil'], level: 'Avanzado', cupo: '8 plazas · 3 libres', price: 'Plan comunitario', organizer: 'Wingfoil Rider', tribe: 'Sea Tribe', spot: 'Playa deportiva', requirements: 'Viento favorable, material revisado y zona autorizada', material: 'Tabla, wing, leash, chaleco y neopreno si procede', verified: true, semaforo: 'rojo' },
+    { id: 'e24', title: 'Quedada de movilidad y recuperación', type: 'taller', date: 'Diciembre 2026 · demo', location: 'Área outdoor', sports: ['Movilidad','Yoga','Recuperación activa'], level: 'Todos', cupo: '22 plazas · 15 libres', price: 'Plan comunitario', organizer: 'Functional Athletes', tribe: 'Functional Athletes', spot: 'Área de entrenamiento funcional outdoor', requirements: 'Esterilla opcional y ropa cómoda', material: 'Esterilla, agua y ropa cómoda', verified: true, semaforo: 'verde' }
+  ]);
+  pushUniqueByName(PRO_TYPES, [
+    { icon: '📋', name: 'Gestión de eventos Pro', desc: 'Fichas técnicas, requisitos, documentación previa, cupos, lista de espera y check-in de participantes.' },
+    { icon: '🛡️', name: 'Plantillas Safety Radar', desc: 'Briefings, permisos, material general, comunicación, plan de emergencia e informes post-actividad.' },
+    { icon: '📣', name: 'Promoción por afinidad', desc: 'Eventos destacados según reputación, actividad y verificación, no por spam ni promesas absolutas.' },
+    { icon: '📸', name: 'Profesionales de contenido', desc: 'Galería profesional, packs de contenido, colaboración con planes y página pública verificada.' }
+  ]);
+}
+
+function getHeroMatchId() {
+  ensureMatchPoolMinimum();
+  return (MATCH_CARDS[STATE.currentMatchIdx] || MATCH_CARDS[0])?.id;
+}
+
+function initHeroLiveCards() {
+  const card = document.querySelector('.match-phone-card');
+  if (!card) return;
+  ensureMatchPoolMinimum();
+  const heroProfiles = MATCH_CARDS.filter(m => ['Marina Trail','Vertical Crew','MTB Flow','Air Sports Crew','Freedive Club'].includes(m.name));
+  let idx = 0;
+  const paint = () => {
+    const m = heroProfiles[idx % heroProfiles.length] || MATCH_CARDS[0];
+    if (!m) return;
+    card.dataset.profileId = m.id;
+    const avatar = card.querySelector('.match-phone-avatar');
+    const name = card.querySelector('.match-phone-name');
+    const role = card.querySelector('.match-phone-role');
+    const tags = card.querySelector('.match-phone-tags');
+    const compat = card.querySelector('.match-compat-num');
+    if (avatar) avatar.textContent = m.emoji;
+    if (name) name.textContent = m.name;
+    if (role) role.textContent = `${(m.tribes || [m.role])[0]} · ${m.level}`;
+    if (tags) tags.innerHTML = [...m.sports.slice(0, 2), ...(m.secondary || []).slice(0, 2)].map(s => `<span>${escapeHTML(s)}</span>`).join('');
+    if (compat) compat.textContent = `${m.compat}%`;
+    idx++;
+  };
+  paint();
+  if (!document.querySelector('.hero-live-microcards')) {
+    card.insertAdjacentHTML('afterend', `
+      <div class="hero-live-microcards">
+        <button onclick="openConnectModal(getHeroMatchId())"><strong>Match recomendado</strong><span>Perfil compatible ahora</span></button>
+        <button onclick="openEventRequirements('e21')"><strong>Plan activo</strong><span>Entreno OCR · plazas abiertas</span></button>
+        <button onclick="openDemoPanel('Safety Radar', '<p class=&quot;modal-demo-text&quot;>Radar verde/amarillo activo: revisa meteo, material, permisos y compañero mínimo antes de un plan técnico.</p>', '<button class=&quot;btn btn-primary&quot; onclick=&quot;closeSportModal()&quot;>Entendido</button>')"><strong>Safety Radar</strong><span>Señales de seguridad listas</span></button>
+      </div>
+    `);
+  }
+  window.setInterval(paint, 4200);
+}
+
 /* ═══════════════════════════════════════════════════════════
    HEADER: SCROLL + HAMBURGER
    ═══════════════════════════════════════════════════════════ */
@@ -1262,11 +1508,11 @@ function renderCatalog() {
   const visibleLimit = STATE.catalogFull ? filtered.length : STATE.catalogVisible;
   const shown = filtered.slice(0, visibleLimit);
 
-  document.querySelectorAll('[data-total-disciplines]').forEach(el => {
-    el.textContent = `${SPORTS_DATA.length}`;
+  document.querySelectorAll('[data-total-disciplines-claim]').forEach(el => {
+    el.textContent = SPORTS_DATA.length >= 600 ? '600+' : `${SPORTS_DATA.length}`;
   });
 
-  if (countEl) countEl.textContent = `Mostrando ${shown.length} de ${filtered.length} disciplinas · Catálogo NOMADX: ${SPORTS_DATA.length}+ clasificadas por entorno, riesgo y tipo`;
+  if (countEl) countEl.textContent = `Mostrando ${shown.length} de ${filtered.length} disciplinas · Catálogo NOMADX: ${SPORTS_DATA.length} entradas reales`;
 
   if (countEl) {
     countEl.textContent = `Mostrando ${shown.length} de ${filtered.length} disciplinas · Catálogo NOMADX: ${SPORTS_DATA.length} entradas reales desde lista maestra`;
@@ -1416,37 +1662,36 @@ function toggleSaveSport(sportId) {
    MATCHING
    ═══════════════════════════════════════════════════════════ */
 function initMatching() {
-  renderMatchCard();
+  ensureMatchPoolMinimum();
   updateCounters();
+  renderMatchCard();
   renderSavedMatches();
 }
 
 function renderMatchCard() {
   const el = document.getElementById('match-card-display');
   if (!el) return;
-
-  const matches = MATCH_CARDS.filter(m => !STATE.savedMatchIds.has(m.id) || true);
-  if (STATE.currentMatchIdx >= MATCH_CARDS.length) {
-    el.innerHTML = `<div style="padding:3rem;text-align:center">
-      <div style="font-size:3rem;margin-bottom:1rem">🎉</div>
-      <div style="font-family:var(--font-heading);font-size:1.4rem;font-weight:800;color:var(--text-primary);margin-bottom:.5rem">¡Has visto todos los perfiles!</div>
-      <div style="font-size:.9rem;color:var(--text-muted);margin-bottom:1.5rem">Hay más por descubrir. Amplía los filtros o vuelve mañana.</div>
-      <button class="btn btn-primary" onclick="resetMatching()">Reiniciar matching</button>
-    </div>`;
-    return;
+  ensureMatchPoolMinimum();
+  if (MATCH_CARDS.length - STATE.currentMatchIdx < 6) {
+    for (let i = 0; i < 6; i++) MATCH_CARDS.push(generateRandomMatch());
   }
 
-  const m = MATCH_CARDS[STATE.currentMatchIdx];
-  const badgesHTML = m.badges.map(b => `<span class="badge badge-white">${b}</span>`).join('');
-  const tagsHTML = m.sports.map(s => `<span class="badge badge-cyan">${s}</span>`).join('');
-  const secondaryHTML = (m.secondary || []).map(s => `<span class="badge badge-white">${s}</span>`).join('');
-  const tribeHTML = (m.tribes || []).map(t => `<span class="badge badge-green">${t}</span>`).join('');
+  const m = MATCH_CARDS[STATE.currentMatchIdx] || MATCH_CARDS[0];
+  if (!m) return;
+  const isSaved = STATE.savedMatchIds.has(m.id);
+  const isConnected = STATE.connectedMatchIds.has(m.id);
+  const badgesHTML = badgeList(m.badges, 'badge-white');
+  const tagsHTML = badgeList(m.sports, 'badge-cyan');
+  const secondaryHTML = badgeList(m.secondary || [], 'badge-white');
+  const tribeHTML = badgeList(m.tribes || [], 'badge-green');
+  const nextMatches = MATCH_CARDS.slice(STATE.currentMatchIdx + 1, STATE.currentMatchIdx + 5);
+  const visibleMatches = MATCH_CARDS.slice(STATE.currentMatchIdx, STATE.currentMatchIdx + 7);
 
   el.innerHTML = `
     <div class="match-card-top" style="background:${m.gradient}">
       <div class="match-avatar-lg" style="background:${m.gradient}">${m.emoji}</div>
-      <div class="match-name">${m.name}</div>
-      <div class="match-role">${m.role}</div>
+      <div class="match-name">${escapeHTML(m.name)}</div>
+      <div class="match-role">${escapeHTML(m.role)}</div>
       <div class="match-tags-row">${badgesHTML}</div>
       <div class="match-compat-big">
         <div class="match-compat-pct">${m.compat}%</div>
@@ -1454,78 +1699,167 @@ function renderMatchCard() {
       </div>
     </div>
     <div class="match-info-grid">
-      <div>
-        <div class="match-info-key">Deportes</div>
-        <div class="match-info-val">${m.sports.slice(0,2).join(', ')}</div>
-      </div>
-      <div>
-        <div class="match-info-key">Nivel</div>
-        <div class="match-info-val">${m.level}</div>
-      </div>
-      <div>
-        <div class="match-info-key">Entorno</div>
-        <div class="match-info-val">${m.env}</div>
-      </div>
-      <div>
-        <div class="match-info-key">Distancia</div>
-        <div class="match-info-val">${m.dist}</div>
-      </div>
-      <div>
-        <div class="match-info-key">Tipo</div>
-        <div class="match-info-val">${m.profileType || 'Perfil deportivo'}</div>
-      </div>
-      <div>
-        <div class="match-info-key">Riesgo habitual</div>
-        <div class="match-info-val">${m.risk || 'variable'}</div>
-      </div>
-      <div>
-        <div class="match-info-key">Disponibilidad</div>
-        <div class="match-info-val">${m.availability || 'Flexible'}</div>
-      </div>
-      <div>
-        <div class="match-info-key">Plan activo</div>
-        <div class="match-info-val">${m.planActive || m.objective}</div>
-      </div>
+      <div><div class="match-info-key">Deportes</div><div class="match-info-val">${escapeHTML(m.sports.slice(0, 2).join(', '))}</div></div>
+      <div><div class="match-info-key">Nivel</div><div class="match-info-val">${escapeHTML(m.level)}</div></div>
+      <div><div class="match-info-key">Entorno</div><div class="match-info-val">${escapeHTML(m.env)}</div></div>
+      <div><div class="match-info-key">Distancia</div><div class="match-info-val">${escapeHTML(m.dist)}</div></div>
+      <div><div class="match-info-key">Tipo</div><div class="match-info-val">${escapeHTML(m.profileType || 'Perfil deportivo')}</div></div>
+      <div><div class="match-info-key">Riesgo habitual</div><div class="match-info-val">${escapeHTML(m.risk || 'variable')}</div></div>
+      <div><div class="match-info-key">Disponibilidad</div><div class="match-info-val">${escapeHTML(m.availability || 'Flexible')}</div></div>
+      <div><div class="match-info-key">Plan activo</div><div class="match-info-val">${escapeHTML(m.planActive || m.objective || 'Plan compatible')}</div></div>
     </div>
-    <div style="padding:0 2rem 1rem;display:flex;flex-wrap:wrap;gap:.4rem">${tagsHTML}${secondaryHTML}${tribeHTML}</div>
+    <p class="match-bio">${escapeHTML(m.bio || 'Perfil deportivo compatible con tu ADN NOMADX.')}</p>
+    <div class="match-chip-cloud">${tagsHTML}${secondaryHTML}${tribeHTML}</div>
+    <div class="next-match-strip" aria-label="Siguientes matches sugeridos">
+      ${nextMatches.map(n => `
+        <button class="next-match-pill" onclick="jumpToMatch('${n.id}')" aria-label="Ver match ${escapeHTML(n.name)}">
+          <span>${n.emoji}</span><strong>${escapeHTML(n.name)}</strong><em>${n.compat}%</em>
+        </button>
+      `).join('')}
+    </div>
+    <div class="match-visible-grid" aria-label="Perfiles compatibles visibles">
+      ${visibleMatches.map(profile => `
+        <article class="match-mini-profile${profile.id === m.id ? ' is-active' : ''}">
+          <button class="match-mini-main" onclick="jumpToMatch('${profile.id}')" aria-label="Abrir perfil ${escapeHTML(profile.name)}">
+            <span class="match-mini-avatar" style="background:${profile.gradient}">${profile.emoji}</span>
+            <span>
+              <strong>${escapeHTML(profile.name)}</strong>
+              <small>${escapeHTML(profile.env)} · ${profile.compat}%</small>
+            </span>
+          </button>
+          <button class="match-mini-connect" onclick="openConnectModal('${profile.id}')" aria-label="Conectar con ${escapeHTML(profile.name)}">Conectar</button>
+        </article>
+      `).join('')}
+    </div>
     <div class="match-actions">
-      <button class="match-btn mb-skip" onclick="matchAction('skip')">✕ Pasar</button>
-      <button class="match-btn mb-save" onclick="matchAction('save')">★ Guardar</button>
-      <button class="match-btn mb-save" onclick="showToast('ADN demo de ${m.name} abierto')">Ver ADN</button>
-      <button class="match-btn mb-connect" onclick="matchAction('connect')">⚡ Conectar</button>
+      <button class="match-btn mb-skip" onclick="matchAction('skip', '${m.id}')">✕ Pasar</button>
+      <button class="match-btn mb-save${isSaved ? ' is-saved' : ''}" onclick="toggleSaveMatch('${m.id}', this)">${isSaved ? '★ Guardado' : '★ Guardar'}</button>
+      <button class="match-btn mb-save" onclick="openAdnModal('${m.id}')">Ver ADN</button>
+      <button class="match-btn mb-connect${isConnected ? ' is-connected' : ''}" onclick="openConnectModal('${m.id}')">${isConnected ? '✓ Conectado' : '⚡ Conectar'}</button>
     </div>
+    <button class="match-generate-btn" onclick="generateMoreMatches(8)">Generar más matches</button>
   `;
 }
 
-function matchAction(action) {
-  const card = document.querySelector('.match-card');
-  if (!card) return;
-
-  const m = MATCH_CARDS[STATE.currentMatchIdx];
-  STATE.counters.vistos++;
-
-  if (action === 'connect') {
-    STATE.counters.matches++;
-    STATE.savedMatchIds.add(m.id);
-    saveState('nmx_matches_saved', STATE.savedMatchIds);
-    showToast(`¡Match deportivo con ${m.name}! 🔥`);
-  } else if (action === 'save') {
-    STATE.counters.guardados++;
-    STATE.savedMatchIds.add(m.id);
-    saveState('nmx_matches_saved', STATE.savedMatchIds);
-    showToast(`${m.name} guardado en favoritos ⭐`);
-  } else {
-    showToast('Perfil descartado');
+function jumpToMatch(profileId) {
+  const index = MATCH_CARDS.findIndex(m => m.id === profileId);
+  if (index >= 0) {
+    STATE.currentMatchIdx = index;
+    renderMatchCard();
+    showToast('Perfil cargado en el matching');
   }
+}
 
+function matchAction(action, profileId) {
+  const m = getMatchById(profileId);
+  if (!m) return;
+  if (action === 'connect') return openConnectModal(m.id);
+  if (action === 'save') return toggleSaveMatch(m.id);
+
+  STATE.counters.vistos = Math.max(STATE.counters.vistos + 1, STATE.currentMatchIdx + 1);
   updateCounters();
-  renderSavedMatches();
-
-  card.classList.add('removing');
+  showToast('Perfil descartado');
+  const card = document.querySelector('.match-card');
+  if (card) card.classList.add('removing');
   setTimeout(() => {
     STATE.currentMatchIdx++;
     renderMatchCard();
-  }, 400);
+  }, 240);
+}
+
+function toggleSaveMatch(profileId, btn) {
+  const m = getMatchById(profileId);
+  if (!m) return;
+  if (STATE.savedMatchIds.has(m.id)) {
+    STATE.savedMatchIds.delete(m.id);
+    showToast(`${m.name} eliminado de guardados`);
+  } else {
+    STATE.savedMatchIds.add(m.id);
+    showToast(`${m.name} guardado en matches favoritos`);
+  }
+  saveState('nmx_matches_saved', STATE.savedMatchIds);
+  updateCounters();
+  renderSavedMatches();
+  if (btn) {
+    const saved = STATE.savedMatchIds.has(m.id);
+    btn.classList.toggle('is-saved', saved);
+    btn.textContent = saved ? '★ Guardado' : '★ Guardar';
+  }
+  renderMatchCard();
+}
+
+function openConnectModal(profileId) {
+  const m = getMatchById(profileId);
+  if (!m) return;
+  const commonSports = m.sports.slice(0, 3);
+  const commonTribes = (m.tribes || []).slice(0, 2);
+  const body = `
+    <div class="match-modal-hero" style="background:${m.gradient}">
+      <div class="match-avatar-lg">${m.emoji}</div>
+      <div>
+        <div class="match-modal-name">${escapeHTML(m.name)}</div>
+        <div class="match-modal-role">${escapeHTML(m.profileType || m.role)}</div>
+      </div>
+      <div class="match-modal-compat">${m.compat}%</div>
+    </div>
+    <div class="modal-info-grid">
+      <div><strong>Por qué encaja</strong><span>Comparte entorno ${escapeHTML(m.env)}, nivel ${escapeHTML(m.level)} y plan activo compatible.</span></div>
+      <div><strong>Plan sugerido</strong><span>${escapeHTML(m.planActive || m.objective || 'Crear plan conjunto')}</span></div>
+      <div><strong>Deportes en común</strong><span>${escapeHTML(commonSports.join(', '))}</span></div>
+      <div><strong>Tribus en común</strong><span>${escapeHTML(commonTribes.join(', ') || 'Multiaventura NOMADX')}</span></div>
+    </div>
+    <label class="match-message-label" for="match-message">Mensaje editable</label>
+    <textarea id="match-message" class="match-message-box">Hola ${escapeHTML(m.name)}, tenemos buena afinidad en ${escapeHTML(commonSports[0] || 'aventura')}. ¿Te apetece revisar un plan compatible esta semana?</textarea>
+  `;
+  const actions = `
+    <button class="btn btn-primary" onclick="sendMatchRequest('${m.id}')">Enviar solicitud</button>
+    <button class="btn btn-secondary" onclick="toggleSaveMatch('${m.id}')">Guardar match</button>
+    <button class="btn btn-ghost" onclick="openAdnModal('${m.id}')">Ver ADN</button>
+    <button class="btn btn-ghost" onclick="closeSportModal()">Cerrar</button>
+  `;
+  openDemoPanel(`Conectar con ${escapeHTML(m.name)}`, body, actions);
+}
+
+function sendMatchRequest(profileId) {
+  const m = getMatchById(profileId);
+  if (!m) return;
+  STATE.connectedMatchIds.add(m.id);
+  STATE.savedMatchIds.add(m.id);
+  saveState('nmx_matches_connected', STATE.connectedMatchIds);
+  saveState('nmx_matches_saved', STATE.savedMatchIds);
+  STATE.counters.vistos = Math.max(STATE.counters.vistos + 1, STATE.currentMatchIdx + 1);
+  updateCounters();
+  renderSavedMatches();
+  renderMatchCard();
+  closeSportModal();
+  showToast(`Solicitud enviada a ${m.name}`);
+}
+
+function openAdnModal(profileId) {
+  const m = getMatchById(profileId);
+  if (!m) return;
+  const body = `
+    <div class="modal-info-grid">
+      <div><strong>Deportes principales</strong><span>${escapeHTML(m.sports.join(', '))}</span></div>
+      <div><strong>Disciplinas secundarias</strong><span>${escapeHTML((m.secondary || []).join(', ') || 'Por descubrir')}</span></div>
+      <div><strong>Estilo deportivo</strong><span>${escapeHTML(m.profileType || 'Perfil deportivo')}</span></div>
+      <div><strong>Nivel técnico</strong><span>${escapeHTML(m.level)}</span></div>
+      <div><strong>Entorno favorito</strong><span>${escapeHTML(m.env)}</span></div>
+      <div><strong>Riesgo habitual</strong><span>${escapeHTML(m.risk || 'variable')}</span></div>
+      <div><strong>Disponibilidad</strong><span>${escapeHTML(m.availability || 'Flexible')}</span></div>
+      <div><strong>Compatibilidad contigo</strong><span>${m.compat}% por deporte, tribu, entorno y disponibilidad.</span></div>
+    </div>
+    <div class="modal-section-title">Insignias</div>
+    <div class="modal-related">${badgeList(m.badges, 'badge-gold')}</div>
+    <div class="modal-section-title">Posibles planes juntos</div>
+    <div class="modal-related">${badgeList([m.planActive || m.objective, ...(m.tribes || []).slice(0, 2)], 'badge-cyan')}</div>
+  `;
+  const actions = `
+    <button class="btn btn-primary" onclick="openConnectModal('${m.id}')">Conectar</button>
+    <button class="btn btn-secondary" onclick="toggleSaveMatch('${m.id}')">Guardar</button>
+    <button class="btn btn-ghost" onclick="closeSportModal()">Cerrar</button>
+  `;
+  openDemoPanel(`ADN deportivo · ${escapeHTML(m.name)}`, body, actions);
 }
 
 function resetMatching() {
@@ -1534,6 +1868,8 @@ function resetMatching() {
 }
 
 function updateCounters() {
+  STATE.counters.guardados = Math.max(STATE.savedMatchIds.size, STATE.counters.guardados || 0);
+  STATE.counters.matches = Math.max(STATE.connectedMatchIds.size, STATE.counters.matches || 0);
   ['vistos','matches','guardados'].forEach(key => {
     const el = document.getElementById(`counter-${key}`);
     if (el) el.textContent = STATE.counters[key];
@@ -1543,32 +1879,19 @@ function updateCounters() {
 function renderSavedMatches() {
   const el = document.getElementById('saved-matches-list');
   if (!el) return;
-  const saved = MATCH_CARDS.filter(m => STATE.savedMatchIds.has(m.id));
-  if (saved.length === 0) {
-    el.innerHTML = MATCH_CARDS.slice(0, 2).map(m => `
-      <div class="saved-match-item">
-        <div class="smi-avatar" style="background:${m.gradient}">${m.emoji}</div>
-        <div>
-          <div class="smi-name">${m.name}</div>
-          <div style="font-size:.7rem;color:var(--text-muted)">Sugerido · demo</div>
-        </div>
-        <div class="smi-compat">${m.compat}%</div>
-      </div>
-    `).join('');
-    return;
-  }
-  el.innerHTML = saved.map(m => `
-    <div class="saved-match-item">
+  const saved = MATCH_CARDS.filter(m => STATE.savedMatchIds.has(m.id)).slice(0, 8);
+  const list = saved.length ? saved : MATCH_CARDS.slice(0, 4);
+  el.innerHTML = list.map(m => `
+    <button class="saved-match-item" onclick="openAdnModal('${m.id}')" aria-label="Abrir ADN de ${escapeHTML(m.name)}">
       <div class="smi-avatar" style="background:${m.gradient}">${m.emoji}</div>
       <div>
-        <div class="smi-name">${m.name}</div>
-        <div style="font-size:.7rem;color:var(--text-muted)">${m.role.split('·')[0].trim()}</div>
+        <div class="smi-name">${escapeHTML(m.name)}</div>
+        <div style="font-size:.7rem;color:var(--text-muted)">${STATE.connectedMatchIds.has(m.id) ? 'Conectado' : STATE.savedMatchIds.has(m.id) ? 'Guardado' : 'Sugerido'}</div>
       </div>
       <div class="smi-compat">${m.compat}%</div>
-    </div>
+    </button>
   `).join('');
 }
-
 /* ═══════════════════════════════════════════════════════════
    FEED
    ═══════════════════════════════════════════════════════════ */
@@ -1627,13 +1950,13 @@ function renderFeed() {
         <button class="post-action-btn" onclick="toggleLike('${p.id}', this)" aria-label="Me gusta">
           ❤️ <span>${p.likes}</span>
         </button>
-        <button class="post-action-btn" aria-label="Comentar">
+        <button class="post-action-btn" onclick="openPostModal('${p.id}')" aria-label="Comentar">
           💬 <span>${p.comments}</span>
         </button>
-        <button class="post-action-btn" onclick="showToast('Post compartido 🔗')" aria-label="Compartir">
+        <button class="post-action-btn" onclick="sharePost('${p.id}')" aria-label="Compartir">
           ↗️ Compartir
         </button>
-        <button class="post-action-btn" onclick="showToast('Post guardado ⭐')" aria-label="Guardar">
+        <button class="post-action-btn${STATE.savedPosts.has(p.id) ? ' saved' : ''}" onclick="togglePostSave('${p.id}', this)" aria-label="Guardar">
           🔖 <span>${p.saves || 0}</span>
         </button>
       </div>
@@ -1652,6 +1975,61 @@ function toggleLike(postId, btn) {
     post.likes--;
   }
   if (countEl) countEl.textContent = post.likes;
+}
+
+function getPostById(postId) {
+  return FEED_POSTS.find(p => p.id === postId);
+}
+
+function openPostModal(postId) {
+  const post = getPostById(postId);
+  if (!post) return;
+  const body = `
+    <div class="modal-info-grid">
+      <div><strong>Usuario</strong><span>${escapeHTML(post.user)} · ${escapeHTML(post.role)}</span></div>
+      <div><strong>Disciplina</strong><span>${escapeHTML(post.sports.join(', '))}</span></div>
+      <div><strong>Tipo</strong><span>${escapeHTML(post.type)}</span></div>
+      <div><strong>Tribu relacionada</strong><span>${escapeHTML(post.tribe || post.role)}</span></div>
+      <div><strong>Riesgo</strong><span>${escapeHTML(post.risk || 'variable')}</span></div>
+      <div><strong>Interacciones</strong><span>${post.likes} likes · ${post.comments} comentarios · ${post.saves || 0} guardados</span></div>
+    </div>
+    <p class="modal-demo-text">${escapeHTML(post.text)}</p>
+    <div class="modal-related">${badgeList(post.sports, 'badge-cyan')}</div>
+  `;
+  const actions = `
+    <button class="btn btn-primary" onclick="showToast('Comentario añadido al hilo demo')">Comentar</button>
+    <button class="btn btn-secondary" onclick="togglePostSave('${post.id}')">Guardar</button>
+    <button class="btn btn-ghost" onclick="sharePost('${post.id}')">Compartir</button>
+    <button class="btn btn-ghost" onclick="closeSportModal()">Cerrar</button>
+  `;
+  openDemoPanel(`Publicación · ${escapeHTML(post.user)}`, body, actions);
+}
+
+function sharePost(postId) {
+  const post = getPostById(postId);
+  showToast(`Publicación ${post ? `de ${post.user}` : ''} preparada para compartir`);
+}
+
+function togglePostSave(postId, btn) {
+  const post = getPostById(postId);
+  if (!post) return;
+  if (STATE.savedPosts.has(postId)) {
+    STATE.savedPosts.delete(postId);
+    post.saves = Math.max(0, (post.saves || 0) - 1);
+    showToast('Post eliminado de guardados');
+  } else {
+    STATE.savedPosts.add(postId);
+    post.saves = (post.saves || 0) + 1;
+    showToast('Post guardado en tu feed NOMADX');
+  }
+  saveState('nmx_posts_saved', STATE.savedPosts);
+  if (btn) {
+    btn.classList.toggle('saved', STATE.savedPosts.has(postId));
+    const span = btn.querySelector('span');
+    if (span) span.textContent = post.saves || 0;
+  } else {
+    renderFeed();
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1685,7 +2063,7 @@ function initTribus() {
         <div class="tribu-footer">
           <span class="tribu-level">${t.level}</span>
           <div class="tribu-actions">
-            <button class="tribu-view-btn" onclick="showToast('Vista demo de ${t.name}')">Ver tribu</button>
+            <button class="tribu-view-btn" onclick="openTribuModal('${t.id}')">Ver tribu</button>
             <button class="tribu-join-btn${joined ? ' joined' : ''}" onclick="toggleTribu('${t.id}', this)">
               ${joined ? '✓ Unido' : 'Unirme'}
             </button>
@@ -1700,10 +2078,53 @@ function toggleTribu(tribuId, btn) {
   if (STATE.joinedTribus.has(tribuId)) return; // no desjoin en prototipo
   STATE.joinedTribus.add(tribuId);
   saveState('nmx_tribus_joined', STATE.joinedTribus);
-  btn.classList.add('joined');
-  btn.textContent = '✓ Unido';
+  if (btn) {
+    btn.classList.add('joined');
+    btn.textContent = '✓ Unido';
+  }
   const tribu = TRIBUS.find(t => t.id === tribuId);
   showToast(`¡Te has unido a ${tribu?.name}! 🎉`);
+}
+
+function openTribuModal(tribuId) {
+  const tribu = TRIBUS.find(t => t.id === tribuId);
+  if (!tribu) return;
+  const relatedProfiles = MATCH_CARDS
+    .filter(m => (m.tribes || []).includes(tribu.name) || m.sports.some(s => tribu.sports.includes(s)))
+    .slice(0, 4);
+  const relatedPlans = EVENTS
+    .filter(e => e.tribe === tribu.name || e.sports.some(s => tribu.sports.includes(s)))
+    .slice(0, 4);
+  const relatedPosts = FEED_POSTS
+    .filter(p => p.tribe === tribu.name || p.sports.some(s => tribu.sports.includes(s)))
+    .slice(0, 3);
+
+  const body = `
+    <p class="modal-demo-text">${escapeHTML(tribu.desc)}</p>
+    <div class="modal-info-grid">
+      <div><strong>Miembros</strong><span>${tribu.members.toLocaleString('es')}</span></div>
+      <div><strong>Nivel medio</strong><span>${escapeHTML(tribu.level)}</span></div>
+      <div><strong>Riesgo medio</strong><span>${escapeHTML(tribu.risk || 'variable')}</span></div>
+      <div><strong>Planes activos</strong><span>${tribu.plans || Math.max(1, Math.round(tribu.members / 480))}</span></div>
+      <div><strong>Actividad reciente</strong><span>${escapeHTML(tribu.activity || tribu.nextEvent)}</span></div>
+      <div><strong>Safety Radar</strong><span>Revisar nivel, meteorología, permisos y compañero mínimo según disciplina.</span></div>
+    </div>
+    <div class="modal-section-title">Deportes principales</div>
+    <div class="modal-related">${badgeList(tribu.sports, 'badge-cyan')}</div>
+    <div class="modal-section-title">Perfiles destacados</div>
+    <div class="modal-related">${badgeList(relatedProfiles.map(p => `${p.name} · ${p.compat}%`), 'badge-white') || '<span>Perfiles afines pendientes de cargar</span>'}</div>
+    <div class="modal-section-title">Planes activos</div>
+    <div class="modal-related">${badgeList(relatedPlans.map(p => p.title), 'badge-green') || '<span>Sin planes activos ahora mismo</span>'}</div>
+    <div class="modal-section-title">Últimos posts</div>
+    <div class="modal-related">${badgeList(relatedPosts.map(p => p.type), 'badge-gold') || '<span>Actividad reciente de comunidad</span>'}</div>
+    <p class="spot-safety-note">Normas básicas: respeto, nada de spam, no publicar ubicaciones sensibles y priorizar seguridad, permisos y cuidado del entorno.</p>
+  `;
+  const actions = `
+    <button class="btn btn-primary" onclick="toggleTribu('${tribu.id}', document.querySelector('#tribu-${tribu.id} .tribu-join-btn'))">Unirme</button>
+    <button class="btn btn-secondary" onclick="showToast('Tribu guardada en tu ADN social')">Guardar tribu</button>
+    <button class="btn btn-ghost" onclick="closeSportModal()">Cerrar</button>
+  `;
+  openDemoPanel(`Tribu · ${escapeHTML(tribu.name)}`, body, actions);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1799,11 +2220,56 @@ function selectSpot(spotId) {
       ${spot.sports.map(s => `<span class="badge badge-cyan">${s}</span>`).join('')}
     </div>
     <div style="margin-top:1rem">
-      <button class="btn btn-primary btn-sm" onclick="showToast('Spot guardado en tu mapa ⭐')">Guardar Spot</button>
-      <button class="btn btn-ghost btn-sm" style="margin-left:.5rem" onclick="showToast('Reportando condiciones del spot...')">Reportar condiciones</button>
+      <button class="btn btn-primary btn-sm" onclick="toggleSaveMapSpot('${spot.id}', this)">${STATE.savedSpots.has(spot.id) ? 'Guardado' : 'Guardar spot'}</button>
+      <button class="btn btn-ghost btn-sm" style="margin-left:.5rem" onclick="openSpotModal('${spot.id}')">Ver spot</button>
     </div>
     <p class="spot-safety-note">Los spots técnicos requieren formación, condiciones adecuadas, permisos cuando proceda y respeto ambiental.</p>
   `;
+}
+
+function openSpotModal(spotId) {
+  const spot = SPOTS.find(s => s.id === spotId);
+  if (!spot) return;
+  const body = `
+    <p class="modal-demo-text">${escapeHTML(spot.desc)}</p>
+    <div class="modal-info-grid">
+      <div><strong>Entorno</strong><span>${escapeHTML(spot.env)}</span></div>
+      <div><strong>Disciplinas compatibles</strong><span>${escapeHTML(spot.sports.join(', '))}</span></div>
+      <div><strong>Riesgo</strong><span>${escapeHTML(spot.risk)}</span></div>
+      <div><strong>Temporada</strong><span>${escapeHTML(spot.season)}</span></div>
+      <div><strong>Verificación</strong><span>${escapeHTML(spot.verified || 'Comunidad')}</span></div>
+      <div><strong>Permisos</strong><span>${escapeHTML(spot.permissions || 'Revisar normativa local')}</span></div>
+      <div><strong>Acceso</strong><span>${escapeHTML(spot.access || 'Variable')}</span></div>
+      <div><strong>Nivel técnico</strong><span>${escapeHTML(spot.level)}</span></div>
+      <div><strong>Planes activos</strong><span>${spot.plans || 0}</span></div>
+      <div><strong>Condiciones</strong><span>${escapeHTML(spot.conditions || 'Pendiente de reporte comunitario')}</span></div>
+    </div>
+    <p class="spot-safety-note">Los spots técnicos requieren formación, condiciones adecuadas, permisos cuando proceda y respeto ambiental.</p>
+  `;
+  const actions = `
+    <button class="btn btn-primary" onclick="toggleSaveMapSpot('${spot.id}')">Guardar spot</button>
+    <button class="btn btn-secondary" onclick="showToast('Reporte de condiciones preparado')">Reportar condiciones</button>
+    <button class="btn btn-ghost" onclick="closeSportModal()">Cerrar</button>
+  `;
+  openDemoPanel(`Spot · ${escapeHTML(spot.name)}`, body, actions);
+}
+
+function toggleSaveMapSpot(spotId, btn) {
+  const spot = SPOTS.find(s => s.id === spotId);
+  if (!spot) return;
+  if (STATE.savedSpots.has(spotId)) {
+    STATE.savedSpots.delete(spotId);
+    showToast('Spot eliminado de guardados');
+  } else {
+    STATE.savedSpots.add(spotId);
+    showToast(`${spot.name} guardado en tu mapa NOMADX`);
+  }
+  saveState('nmx_spots_saved', STATE.savedSpots);
+  if (btn) {
+    const saved = STATE.savedSpots.has(spotId);
+    btn.textContent = saved ? 'Guardado' : 'Guardar spot';
+    btn.classList.toggle('saved', saved);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1862,8 +2328,8 @@ function initEvents() {
           <div class="event-price${e.price === 'Gratis' ? ' free' : ''}">${e.price}</div>
         </div>
         <div class="event-actions">
-          <button class="event-secondary-btn" onclick="showToast('Requisitos demo de ${e.title}')">Ver requisitos</button>
-          <button class="event-secondary-btn" onclick="showToast('Plan guardado ⭐')">Guardar</button>
+          <button class="event-secondary-btn" onclick="openEventRequirements('${e.id}')">Ver requisitos</button>
+          <button class="event-secondary-btn${STATE.savedPlans.has(e.id) ? ' saved' : ''}" onclick="togglePlanSave('${e.id}', this)">${STATE.savedPlans.has(e.id) ? 'Guardado' : 'Guardar'}</button>
           <button class="event-join-btn${joined ? ' joined' : ''}" onclick="toggleEvent('${e.id}', this)">
             ${joined ? '✓ Unido' : 'Unirme'}
           </button>
@@ -1877,10 +2343,59 @@ function toggleEvent(eventId, btn) {
   if (STATE.joinedEvents.has(eventId)) return;
   STATE.joinedEvents.add(eventId);
   saveState('nmx_events_joined', STATE.joinedEvents);
-  btn.classList.add('joined');
-  btn.textContent = '✓ Apuntado';
+  if (btn) {
+    btn.classList.add('joined');
+    btn.textContent = '✓ Apuntado';
+  }
   const ev = EVENTS.find(e => e.id === eventId);
   showToast(`¡Apuntado a "${ev?.title}"! Te avisaremos por email 📧`);
+}
+
+function openEventRequirements(eventId) {
+  const event = EVENTS.find(e => e.id === eventId);
+  if (!event) return;
+  const body = `
+    <p class="modal-demo-text">${escapeHTML(event.title)} es un plan comunitario dentro de NOMADX, no una reserva comercial.</p>
+    <div class="modal-info-grid">
+      <div><strong>Disciplina</strong><span>${escapeHTML(event.sports.join(', '))}</span></div>
+      <div><strong>Fecha</strong><span>${escapeHTML(event.date)}</span></div>
+      <div><strong>Cupos</strong><span>${escapeHTML(event.cupo)}</span></div>
+      <div><strong>Nivel</strong><span>${escapeHTML(event.level)}</span></div>
+      <div><strong>Riesgo</strong><span>${escapeHTML(event.semaforo)}</span></div>
+      <div><strong>Organizador</strong><span>${escapeHTML(event.organizer)}</span></div>
+      <div><strong>Requisitos</strong><span>${escapeHTML(event.requirements || 'Nivel acorde, material general y Safety Radar revisado')}</span></div>
+      <div><strong>Estado de seguridad</strong><span>Safety Radar ${escapeHTML(event.semaforo)} · revisar condiciones antes de salir.</span></div>
+      <div><strong>Tribu asociada</strong><span>${escapeHTML(event.tribe || event.organizer)}</span></div>
+      <div><strong>Spot relacionado</strong><span>${escapeHTML(event.spot || event.location)}</span></div>
+      <div><strong>Material general</strong><span>${escapeHTML(event.material || 'Material general de la disciplina')}</span></div>
+    </div>
+  `;
+  const actions = `
+    <button class="btn btn-primary" onclick="toggleEvent('${event.id}', document.querySelector('#event-${event.id} .event-join-btn'))">Unirme</button>
+    <button class="btn btn-secondary" onclick="togglePlanSave('${event.id}')">Guardar</button>
+    <button class="btn btn-ghost" onclick="closeSportModal()">Cerrar</button>
+  `;
+  openDemoPanel(`Requisitos · ${escapeHTML(event.title)}`, body, actions);
+}
+
+function togglePlanSave(eventId, btn) {
+  const event = EVENTS.find(e => e.id === eventId);
+  if (!event) return;
+  if (STATE.savedPlans.has(eventId)) {
+    STATE.savedPlans.delete(eventId);
+    showToast('Plan eliminado de guardados');
+  } else {
+    STATE.savedPlans.add(eventId);
+    showToast(`${event.title} guardado en tus planes`);
+  }
+  saveState('nmx_plans_saved', STATE.savedPlans);
+  if (btn) {
+    const saved = STATE.savedPlans.has(eventId);
+    btn.classList.toggle('saved', saved);
+    btn.textContent = saved ? 'Guardado' : 'Guardar';
+  } else {
+    initEvents();
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1977,15 +2492,83 @@ function initPro() {
 }
 
 function initLogbookActions() {
+  const grid = document.querySelector('.logbook-grid');
+  if (grid && !document.querySelector('.logbook-toolbar')) {
+    grid.insertAdjacentHTML('beforebegin', `
+      <div class="logbook-toolbar">
+        <div class="logbook-filters" aria-label="Filtros de Logbook">
+          <button class="log-filter active" onclick="filterLogbook('all', this)">Todo</button>
+          <button class="log-filter" onclick="filterLogbook('agua', this)">Agua</button>
+          <button class="log-filter" onclick="filterLogbook('montana', this)">Montaña</button>
+          <button class="log-filter" onclick="filterLogbook('rojo', this)">Riesgo alto</button>
+          <button class="log-filter" onclick="filterLogbook('reciente', this)">Reciente</button>
+        </div>
+        <div class="logbook-stats">
+          <span><strong>16</strong> actividades</span>
+          <span><strong>42 h</strong> acumuladas</span>
+          <span><strong>Montaña + agua</strong> dominante</span>
+          <span><strong>9</strong> insignias</span>
+          <span><strong>amarillo</strong> riesgo medio</span>
+        </div>
+      </div>
+    `);
+  }
   document.querySelectorAll('.log-entry-card').forEach((card) => {
     if (card.querySelector('.log-actions')) return;
+    const title = card.querySelector('h3')?.textContent?.trim() || 'Registro NOMADX';
+    const text = card.querySelector('p')?.textContent?.trim() || 'Entrada de Logbook';
+    const meta = [...card.querySelectorAll('.log-meta span')].map(s => s.textContent.trim()).join(' · ');
+    const key = normalizeText(`${title} ${text} ${meta}`);
+    const env = /kayak|surf|buceo|snorkel|apnea|coasteering|baño/i.test(key) ? 'agua' :
+      /mtb|gravel|trail|sender|ferrata|snow|escalada|fotografia/i.test(key) ? 'montana' : 'fitness';
+    const risk = /rojo|negro|ferrata|buceo|coasteering|apnea/i.test(key) ? 'rojo' : /verde|yoga|funcional/i.test(key) ? 'verde' : 'amarillo';
+    card.dataset.env = env;
+    card.dataset.risk = risk;
     card.insertAdjacentHTML('beforeend', `
       <div class="log-actions">
-        <button class="log-action-btn" onclick="showToast('Registro demo abierto')">Ver registro</button>
-        <button class="log-action-btn" onclick="showToast('Entrada compartida en el feed demo')">Compartir en feed</button>
+        <button class="log-action-btn" onclick="openLogbookRecord('${escapeHTML(title)}', '${escapeHTML(text)}', '${escapeHTML(meta)}')">Ver registro</button>
+        <button class="log-action-btn" onclick="shareLogbookEntry('${escapeHTML(title)}')">Compartir en feed</button>
+        <button class="log-action-btn" onclick="duplicateLogTemplate('${escapeHTML(title)}')">Duplicar como plantilla</button>
       </div>
     `);
   });
+}
+
+function filterLogbook(filter, btn) {
+  document.querySelectorAll('.log-filter').forEach(b => b.classList.remove('active'));
+  btn?.classList.add('active');
+  document.querySelectorAll('.log-entry-card').forEach(card => {
+    const visible = filter === 'all' ||
+      (filter === 'reciente' && [...card.parentElement.children].indexOf(card) < 6) ||
+      card.dataset.env === filter ||
+      card.dataset.risk === filter;
+    card.style.display = visible ? '' : 'none';
+  });
+}
+
+function openLogbookRecord(title, text, meta) {
+  const body = `
+    <p class="modal-demo-text">${text}</p>
+    <div class="modal-info-grid">
+      <div><strong>Disciplina</strong><span>${title}</span></div>
+      <div><strong>Datos registrados</strong><span>${meta || 'duración, condiciones, material y aprendizaje'}</span></div>
+      <div><strong>Compañeros</strong><span>2 perfiles NOMADX compatibles</span></div>
+      <div><strong>Aprendizaje</strong><span>Se guarda como señal para ADN deportivo, reputación y futuras recomendaciones.</span></div>
+    </div>
+  `;
+  openDemoPanel(`Logbook · ${title}`, body, `
+    <button class="btn btn-primary" onclick="shareLogbookEntry('${title}')">Compartir en feed</button>
+    <button class="btn btn-secondary" onclick="duplicateLogTemplate('${title}')">Duplicar plantilla</button>
+    <button class="btn btn-ghost" onclick="closeSportModal()">Cerrar</button>
+  `);
+}
+
+function shareLogbookEntry(title) {
+  showToast(`"${title}" compartido en el feed de aventuras`);
+}
+
+function duplicateLogTemplate(title) {
+  showToast(`Plantilla creada desde "${title}"`);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2028,9 +2611,11 @@ function initModal() {
    ═══════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   normalizeNomadxDemoData();
+  ensureNomadxDepthData();
   initHeader();
   initCatalog();
   initMatching();
+  initHeroLiveCards();
   initFeed();
   initTribus();
   initSpots();

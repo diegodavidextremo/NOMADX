@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NOMADX | Red social deportiva para aventura, spots, planes y logbook</title>
-  <meta name="description" content="NOMADX es un prototipo avanzado de plataforma social deportiva para conectar deportistas, descubrir spots, crear planes, registrar aventuras y construir reputación por ADN deportivo.">
+  <meta name="description" content="NOMADX es una plataforma social deportiva para conectar deportistas, descubrir spots, crear planes, registrar aventuras y construir reputación por ADN deportivo.">
   <meta property="og:title" content="NOMADX | Red social deportiva para aventura, spots, planes y logbook">
-  <meta property="og:description" content="Conecta por afinidad deportiva, descubre spots, crea planes, registra aventuras y construye reputación por ADN deportivo.">
+  <meta property="og:description" content="NOMADX es una plataforma social deportiva para conectar deportistas, descubrir spots, crear planes, registrar aventuras y construir reputación por ADN deportivo.">
   <meta property="og:image" content="assets/icons/icon-512.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nomadx.app">
@@ -101,7 +101,7 @@
         </div>
         <div class="hero-stats">
           <div>
-            <div class="hero-stat-num" data-total-disciplines>600+</div>
+            <div class="hero-stat-num" data-total-disciplines-claim>600+</div>
             <div class="hero-stat-label">Disciplinas NOMADX</div>
           </div>
           <div>
@@ -143,9 +143,9 @@
                 <span class="match-compat-label">Compatibilidad deportiva</span>
               </div>
               <div class="match-phone-actions">
-                <button class="mpa-btn mpa-skip" onclick="showToast('Perfil descartado')">✕</button>
-                <button class="mpa-btn mpa-connect" onclick="showToast('¡Match deportivo guardado! 🔥')">Conectar</button>
-                <button class="mpa-btn mpa-save" onclick="showToast('Guardado en favoritos ⭐')">★</button>
+                <button class="mpa-btn mpa-skip" onclick="matchAction('skip', getHeroMatchId())">✕</button>
+                <button class="mpa-btn mpa-connect" onclick="openConnectModal(getHeroMatchId())">Conectar</button>
+                <button class="mpa-btn mpa-save" onclick="toggleSaveMatch(getHeroMatchId(), this)">★</button>
               </div>
             </div>
           </div>
@@ -400,7 +400,7 @@
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label">Catálogo maestro</span>
-      <h2 class="section-title" id="catalogo-title"><span data-total-disciplines>600+</span> disciplinas,<br><span>actividades y experiencias</span></h2>
+      <h2 class="section-title" id="catalogo-title"><span data-total-disciplines-claim>600+</span> disciplinas,<br><span>actividades y experiencias</span></h2>
       <p class="section-subtitle">Catálogo real conectado al ADN deportivo, matching, feed, tribus, spots, planes, Logbook, reputación y Safety Radar. Busca por nombre o alias, filtra por entorno, riesgo y tipo, y guarda lo que forma parte de tu identidad deportiva.</p>
     </div>
 
@@ -970,6 +970,24 @@
         <span class="badge badge-green">🎯 Publicidad segmentada</span>
         <span class="badge badge-purple">🤝 Colaboraciones creators</span>
         <span class="badge badge-orange">📍 Spots y rutas destacadas</span>
+        <span class="badge badge-cyan">👥 Gestión de grupos</span>
+        <span class="badge badge-green">📋 Fichas técnicas de eventos</span>
+        <span class="badge badge-gold">📝 Formularios personalizables</span>
+        <span class="badge badge-purple">✅ Check-in de participantes</span>
+        <span class="badge badge-orange">📨 Mensajes automatizados</span>
+        <span class="badge badge-cyan">🛡️ Plantillas Safety Radar</span>
+        <span class="badge badge-green">📦 Exportación de listados</span>
+        <span class="badge badge-gold">📸 Packs de contenido</span>
+        <span class="badge badge-purple">🔐 Verificación documental</span>
+        <span class="badge badge-orange">📣 Promoción por afinidad</span>
+      </div>
+      <div class="pro-examples-grid">
+        <article><strong>Guía de vía ferrata</strong><span>Publica requisitos de nivel, material general, cupos y briefing.</span></article>
+        <article><strong>Instructor de apnea</strong><span>Crea curso con lista de espera, documentación previa y Safety Radar.</span></article>
+        <article><strong>Club MTB</strong><span>Organiza quedada con check-in, historial de asistentes y grupo privado.</span></article>
+        <article><strong>Marca outdoor</strong><span>Lanza reto con embajadores y reputación por actividad real.</span></article>
+        <article><strong>Creador deportivo</strong><span>Sube experiencia, galería profesional y conecta con deportistas afines.</span></article>
+        <article><strong>Fotógrafo outdoor</strong><span>Ofrece cobertura para planes destacados sin convertir el feed en spam.</span></article>
       </div>
     </div>
   </div>
@@ -1083,6 +1101,15 @@
           <div><span>Fitness</span><strong style="width:62%"></strong></div>
           <div><span>Recuperación</span><strong style="width:39%"></strong></div>
         </div>
+        <div class="intelligence-dashboard" aria-label="Dashboard de equilibrio NOMADX">
+          <span>Mar <strong>32%</strong></span>
+          <span>Montaña <strong>24%</strong></span>
+          <span>Aire <strong>16%</strong></span>
+          <span>Roca <strong>14%</strong></span>
+          <span>Fitness <strong>10%</strong></span>
+          <span>Recuperación <strong>4%</strong></span>
+        </div>
+        <p class="intelligence-note">NOMADX Intelligence no decide por ti. Ordena señales de tu ADN deportivo para ayudarte a elegir mejor. Más aventura no significa más caos. Significa mejores decisiones.</p>
       </div>
       <div class="intelligence-grid">
         <article class="int-card"><span>01</span><h3>Compañeros recomendados</h3><p>3 perfiles con compatibilidad superior al 90% por nivel, entorno y disponibilidad.</p></article>
@@ -1093,6 +1120,10 @@
         <article class="int-card"><span>06</span><h3>Alertas por riesgo</h3><p>Safety Radar recomienda revisar meteo, compañero mínimo, material y plan de comunicación.</p></article>
         <article class="int-card"><span>07</span><h3>Resumen de Logbook</h3><p>Tu historial muestra más actividad de montaña que de agua este mes.</p></article>
         <article class="int-card"><span>08</span><h3>Variedad deportiva</h3><p>Indicador equilibrado entre mar, montaña, fitness, aire y recuperación.</p></article>
+        <article class="int-card"><span>09</span><h3>Riesgo acumulado</h3><p>Detecta semanas con demasiadas actividades rojas y sugiere bajar exposición.</p></article>
+        <article class="int-card"><span>10</span><h3>Descanso recomendado</h3><p>Conecta Logbook, intensidad y recuperación para proponer una sesión suave.</p></article>
+        <article class="int-card"><span>11</span><h3>Progresión técnica</h3><p>Relaciona disciplinas afines para avanzar sin saltar pasos de seguridad.</p></article>
+        <article class="int-card"><span>12</span><h3>Disciplina sueño</h3><p>Guarda objetivos como wingsuit, cave diving o ultra para construir una ruta gradual.</p></article>
       </div>
     </div>
   </div>
@@ -1232,6 +1263,18 @@
       <details><summary>¿Qué diferencia hay entre plan, evento, tribu y spot?</summary><p>Un plan es una quedada concreta; un evento puede tener organización mayor; una tribu es comunidad; un spot es lugar o entorno asociado a disciplinas.</p></details>
       <details><summary>¿Qué pasa si una actividad es de riesgo negro?</summary><p>Se muestra como actividad extrema y se refuerza el aviso de que no debe realizarse sin formación específica, permisos cuando proceda, planificación, supervisión y entorno controlado.</p></details>
       <details><summary>¿Cómo se validan guías o profesionales en NOMADX Pro?</summary><p>La propuesta contempla verificación documental, titulaciones, experiencia, reseñas verificadas, reputación profesional y actividad dentro de la comunidad.</p></details>
+      <details><summary>¿Puedo descubrir deportes que aún no practico?</summary><p>Sí. Puedes guardar disciplinas sueño, comparar nivel, ver tribus afines y recibir sugerencias de progresión sin saltarte pasos técnicos.</p></details>
+      <details><summary>¿Cómo se generan los matches?</summary><p>Con señales de ADN deportivo: disciplinas, aliases del catálogo, entorno, nivel, riesgo, disponibilidad, tribus, reputación y planes activos.</p></details>
+      <details><summary>¿Puedo rechazar un match?</summary><p>Sí. Pasar un perfil solo lo aparta visualmente del carrusel y ayuda a refinar la demo de compatibilidad.</p></details>
+      <details><summary>¿Puedo guardar perfiles sin conectar?</summary><p>Sí. Guardar permite conservar perfiles, tribus o planes para revisarlos después sin enviar solicitud.</p></details>
+      <details><summary>¿Qué pasa si una actividad requiere guía profesional?</summary><p>El producto debe indicarlo con requisitos, Safety Radar y perfiles Pro verificados cuando corresponda, sin convertir NOMADX en una agencia de reservas.</p></details>
+      <details><summary>¿Puedo usar NOMADX como creador de contenido?</summary><p>Sí. La plataforma contempla Logbook visual, posts outdoor, tribus de creadores, reputación saludable y colaboración con planes destacados.</p></details>
+      <details><summary>¿Pueden usarlo familias?</summary><p>Sí. Las familias pueden filtrar por riesgo bajo, planes beginner friendly, spots accesibles, tribus familiares y actividades suaves.</p></details>
+      <details><summary>¿Qué son los badges profesionales?</summary><p>Insignias ligadas a verificación, documentación, experiencia, reputación, actividad de comunidad y calidad de organización.</p></details>
+      <details><summary>¿Cómo se evita el postureo?</summary><p>Dando más peso a Logbook, seguridad, constancia, aportes útiles, reputación comunitaria y respeto ambiental que a la apariencia.</p></details>
+      <details><summary>¿Cómo se reporta un spot peligroso?</summary><p>El mapa contempla reportes comunitarios de condiciones, accesos, permisos y riesgo, siempre sin publicar instrucciones operativas sensibles.</p></details>
+      <details><summary>¿Qué es una disciplina sueño?</summary><p>Una práctica que quieres probar en el futuro. NOMADX puede ayudarte a guardar el objetivo y construir una progresión realista.</p></details>
+      <details><summary>¿Qué es NOMADX Intelligence?</summary><p>Una capa de lectura de señales deportivas que recomienda compañeros, tribus, planes, spots, descanso, progresión y seguridad de forma comprensible.</p></details>
     </div>
   </div>
 </section>
