@@ -738,6 +738,7 @@ function showToast(msg) {
 function closeSportModal() {
   const modal = document.getElementById('sport-modal');
   if (modal) modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
 }
 
 function saveState(key, set) {
@@ -771,6 +772,7 @@ function openDemoPanel(title, bodyHTML, actionsHTML = '') {
     ${actionsHTML ? `<div class="modal-action-row">${actionsHTML}</div>` : ''}
   `;
   modal.classList.add('open');
+  document.body.classList.add('modal-open');
   modal.querySelector('.modal-close')?.focus();
 }
 
@@ -1304,23 +1306,32 @@ function initHeader() {
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
 
+  const setMenuOpen = (open) => {
+    if (!hamburger || !mobileMenu) return;
+    mobileMenu.classList.toggle('open', open);
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('menu-open', open);
+  };
+
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 30);
+    if (mobileMenu?.classList.contains('open')) setMenuOpen(false);
   }, { passive: true });
 
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('open');
-      hamburger.classList.toggle('open', open);
-      hamburger.setAttribute('aria-expanded', open);
+      setMenuOpen(!mobileMenu.classList.contains('open'));
     });
 
     mobileMenu.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', false);
+        setMenuOpen(false);
       });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) setMenuOpen(false);
     });
   }
 }
@@ -1637,6 +1648,7 @@ function openSportModal(sportId) {
   `;
 
   document.getElementById('sport-modal').classList.add('open');
+  document.body.classList.add('modal-open');
 }
 
 function toggleSaveSport(sportId) {

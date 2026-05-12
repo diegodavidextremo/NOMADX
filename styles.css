@@ -725,3 +725,115 @@ footer{background:var(--bg-card);border-top:1px solid var(--border);padding:3rem
   .tribu-footer{align-items:flex-start;flex-direction:column}
   .tribu-actions,.event-actions{justify-content:flex-start;width:100%}
 }
+
+/* Responsive multiplataforma 2026: mobile, Android, iOS, tablets y pantalla dividida */
+*,*::before,*::after{box-sizing:border-box}
+html{overflow-x:hidden;scroll-padding-top:82px}
+body{min-width:0;overflow-x:clip}
+body.menu-open,body.modal-open{overflow:hidden;touch-action:none}
+img,svg,video,canvas{max-width:100%;height:auto}
+section,[id]{scroll-margin-top:88px}
+.container{width:min(100% - clamp(1rem,4vw,3rem),1240px);padding-inline:0}
+.btn,.match-btn,.event-join-btn,.event-secondary-btn,.post-action-btn,.tribu-primary-btn,.tribu-secondary-btn,.tribu-view-btn,.tribu-join-btn,.spot-card button,.cat-filter,.catalog-pill,.filter-chip,.feed-tab,.log-filter,.log-action-btn,.mpa-btn,.next-match-pill,.nav-hamburger,.match-generate-btn,.match-mini-main,.match-mini-connect,.modal-action-row button{min-height:44px}
+.btn,.match-btn,.event-join-btn,.event-secondary-btn,.post-action-btn,.tribu-primary-btn,.tribu-secondary-btn,.match-generate-btn{white-space:normal;overflow-wrap:anywhere}
+.hero-inner,.section-grid,.catalog-shell,.matching-layout,.feed-layout,.tribus-grid,.spots-layout,.events-grid,.logbook-grid,.badge-grid,.pro-grid,.pricing-grid,.faq-grid{min-width:0}
+.match-deck{width:min(100%,386px);max-width:100%;justify-self:center}
+.match-card{width:100%}
+.hero-title,.section-title,.modal-sport-name,.discipline-name,.tribu-title,.event-title,.post-title{overflow-wrap:anywhere;hyphens:auto}
+.hero-actions,.discipline-actions,.match-actions,.event-actions,.tribu-actions,.modal-action-row{display:flex;flex-wrap:wrap;gap:.75rem}
+.hero-actions .btn,.discipline-actions .btn,.match-actions button,.event-actions button,.tribu-actions button,.modal-action-row button{flex:1 1 180px}
+.catalog-card-grid,.catalog-fallback,.tribus-grid,.events-grid,.logbook-grid,.badges-grid,.intelligence-grid,.pro-examples-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.feed-grid,.spots-list,.map-spots-visual,.match-visible-grid,.next-match-strip{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.catalog-categories,.catalog-filter-panel,.filter-options,.feed-tabs,.tribe-filter-panel,.spot-filter-panel,.event-filter-panel,.logbook-filters{max-width:100%}
+.catalog-categories,.filter-options,.feed-tabs,.tribe-filter-panel,.spot-filter-panel,.event-filter-panel,.logbook-filters{width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;contain:inline-size;overscroll-behavior-inline:contain}
+.catalog-categories::-webkit-scrollbar,.filter-options::-webkit-scrollbar,.feed-tabs::-webkit-scrollbar,.tribe-filter-panel::-webkit-scrollbar,.spot-filter-panel::-webkit-scrollbar,.event-filter-panel::-webkit-scrollbar,.logbook-filters::-webkit-scrollbar{display:none}
+.catalog-count{white-space:normal;text-align:left}
+.sport-detail-modal,#sport-modal{padding:calc(.75rem + env(safe-area-inset-top)) clamp(.75rem,3vw,1.25rem) calc(.75rem + env(safe-area-inset-bottom))}
+.sport-detail-card,.modal-card{width:min(100%,760px);max-height:min(88vh,88dvh);overflow-y:auto;overscroll-behavior:contain}
+.modal-close,.sport-detail-close{min-width:44px;min-height:44px}
+
+@supports (height:100dvh){
+  #hero{min-height:min(100dvh,920px)}
+  #mobile-menu{max-height:calc(100dvh - 70px)}
+}
+
+@media (max-width:1180px){
+  .hero-inner{grid-template-columns:minmax(0,1fr) minmax(280px,380px);gap:2rem}
+  .hero-title{font-size:clamp(3.4rem,10vw,7rem)}
+  .phone-frame{width:min(100%,260px)}
+  .spots-layout{grid-template-columns:1fr}
+  .map-spots-visual{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .steps-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+@media (max-width:900px){
+  html{scroll-padding-top:74px}
+  section,[id]{scroll-margin-top:78px}
+  .nav-inner{height:64px}
+  #mobile-menu{top:64px;max-height:calc(100dvh - 64px);overflow-y:auto;padding-bottom:calc(1rem + env(safe-area-inset-bottom))}
+  #mobile-menu a{min-height:44px;display:flex;align-items:center}
+  #hero{padding:86px 0 46px;min-height:auto}
+  .hero-inner{grid-template-columns:1fr;gap:1.6rem}
+  .hero-copy{text-align:left}
+  .hero-title{font-size:clamp(3rem,17vw,5.4rem);line-height:.86}
+  .hero-subtitle{font-size:clamp(1rem,4vw,1.25rem)}
+  .hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+  .stat-item{min-width:0}
+  .hero-actions .btn{width:100%}
+  .hero-mockup{justify-content:center}
+  .phone-frame{width:min(100%,300px)}
+  .floating-card{position:relative;inset:auto;margin:.65rem auto 0;width:min(100%,320px)}
+  .catalog-controls,.catalog-filter-row{display:grid;grid-template-columns:1fr;gap:.8rem}
+  .catalog-search-wrap{min-width:0;width:100%}
+  .catalog-categories,.filter-options,.feed-tabs,.tribe-filter-panel,.spot-filter-panel,.event-filter-panel,.logbook-filters{display:flex;flex-wrap:nowrap;justify-content:flex-start;padding-bottom:.35rem}
+  .cat-filter,.filter-chip,.feed-tab,.log-filter{flex:0 0 auto}
+  .matching-layout,.adn-layout,.intelligence-layout,.pro-layout{grid-template-columns:1fr}
+  .match-layout{grid-template-columns:minmax(0,1fr)!important;overflow:hidden}
+  .match-card,.post-card,.tribu-card,.event-card,.logbook-card{min-width:0}
+  .match-deck{width:100%!important;max-width:100%!important;min-height:auto}
+  .match-stack-bg,.match-stack-bg2{display:none}
+  .sdp-grid,.modal-info-grid{grid-template-columns:1fr}
+  .section{padding-block:clamp(3.25rem,9vw,5rem)}
+}
+
+@media (max-width:640px){
+  .container{width:min(100% - 1rem,1240px)}
+  .hero-title{font-size:clamp(2.65rem,19vw,4.25rem)}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .stat-value{font-size:clamp(1.45rem,8vw,2.2rem)}
+  .hero-actions,.discipline-actions,.match-actions,.event-actions,.tribu-actions,.modal-action-row{flex-direction:column}
+  .hero-actions .btn,.discipline-actions .btn,.match-actions button,.event-actions button,.tribu-actions button,.modal-action-row button{width:100%;flex-basis:auto}
+  .phone-frame{padding:.8rem;border-radius:28px}
+  .phone-content{border-radius:22px;padding:.85rem}
+  .match-bio,.match-chip-cloud,.next-match-strip,.match-visible-grid{padding-left:1rem;padding-right:1rem}
+  .match-generate-btn{width:calc(100% - 2rem);margin-left:1rem;margin-right:1rem}
+  .catalog-card-grid,.catalog-fallback,.feed-grid,.tribus-grid,.events-grid,.logbook-grid,.badges-grid,.intelligence-grid,.pro-examples-grid,.map-spots-visual{grid-template-columns:1fr}
+  .discipline-card,.post-card,.tribu-card,.event-card,.logbook-card,.int-card,.pro-examples-grid article{padding:1rem}
+  .discipline-head,.match-modal-hero{grid-template-columns:1fr;align-items:flex-start}
+  .discipline-icon{display:none}
+  .sport-detail-card,.modal-card{border-radius:20px;padding:1.1rem;max-height:86dvh}
+  .modal-badges,.discipline-capabilities,.chips,.badge-row{gap:.4rem}
+  .intelligence-balance div{grid-template-columns:1fr;gap:.35rem}
+  .footer-grid,.footer-links{grid-template-columns:1fr}
+}
+
+@media (max-width:420px){
+  .hero-stats{grid-template-columns:1fr}
+  .nav-logo-text{max-width:170px}
+  .nav-logo-text span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cat-filter,.filter-chip,.feed-tab,.log-filter{font-size:.68rem;padding:.52rem .72rem}
+}
+
+@media (max-height:500px) and (orientation:landscape){
+  #hero{padding:76px 0 30px}
+  .hero-title{font-size:clamp(2.4rem,10vw,4rem)}
+  .hero-subtitle{font-size:1rem}
+  .hero-mockup{align-items:flex-start}
+  .phone-frame{max-height:calc(100dvh - 92px);overflow:auto}
+  .section{padding-block:2.75rem}
+  #mobile-menu a{padding:.55rem 1rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
